@@ -1,21 +1,27 @@
+defaults: &defaults
+  working_directory: ~/conquery/frontend
+  executor:
+    name: node/default
+
+
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
 jobs:
   test:
-    executor:
-      name: node/default
+    <<: *defaults
     steps:
-      - checkout
+      - checkout:
+          path: ~/conquery
       - node/with-cache:
           steps:
             - run: yarn install
             - run: yarn test
   lint:
-    executor:
-      name: node/default
+    <<: *defaults
     steps:
-      - checkout
+      - checkout:
+          path: ~/conquery
       - node/with-cache:
           steps:
             - run: yarn install
