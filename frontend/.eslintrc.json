@@ -13,9 +13,9 @@
       "error",
       {
         "semi": true,
-        "trailingComma": "all",
+        "trailingComma": "none",
         "singleQuote": false,
-        "arrowParens": "always"
+        "arrowParens": "avoid"
       }
     ]
   }
