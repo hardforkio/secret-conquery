@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: ~/frontend
+  working_directory: ~/conquery/frontend
   executor:
     name: node/default
 
@@ -11,7 +11,8 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - checkout
+      - checkout:
+          path: ~/conquery
       - node/with-cache:
           steps:
             - run: yarn install
@@ -19,7 +20,8 @@ jobs:
   lint:
     <<: *defaults
     steps:
-      - checkout
+      - checkout:
+          path: ~/conquery
       - node/with-cache:
           steps:
             - run: yarn install
