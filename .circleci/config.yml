@@ -1,31 +1,39 @@
 defaults: &defaults
-  working_directory: ~/conquery/frontend
+  working_directory: ~/project/frontend
   executor:
     name: node/default
 
 
 version: 2.1
 orbs:
-  node: circleci/node@1.1.6
+  node: circleci/node@3.0.1
 jobs:
   test:
     <<: *defaults
     steps:
       - checkout:
-          path: ~/conquery
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn test
+          path: ~/project
+      - run:
+          name: install python
+          command: sudo apt update && sudo apt install python-minimal
+      - node/install-packages:
+          pkg-manager: yarn
+          app-dir: ~/project/frontend
+          cache-path: ~/project/frontend/node_modules
+      - run: yarn test
   lint:
     <<: *defaults
     steps:
       - checkout:
-          path: ~/conquery
-      - node/with-cache:
-          steps:
-            - run: yarn install
-            - run: yarn lint
+          path: ~/project
+      - run:
+          name: install python
+          command: sudo apt update && sudo apt install python-minimal
+      - node/install-packages:
+          pkg-manager: yarn
+          app-dir: ~/project/frontend
+          cache-path: ~/project/frontend/node_modules
+      - run: yarn lint
 
 workflows:
   build-and-test:
