@@ -7,7 +7,7 @@ import { StateT } from "app-types";
 import {
   selectActiveFormValues,
   selectActiveFormName,
-  selectActiveFormType,
+  selectActiveFormType
 } from "./stateSelectors";
 import { postFormConfig, patchFormConfig, getFormConfig } from "../api/api";
 import Label from "../form-components/Label";
@@ -82,14 +82,14 @@ const FormConfigSaver: React.FC<PropsT> = ({ datasetId }) => {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const formValues = useSelector<StateT, Record<string, any>>((state) =>
+  const formValues = useSelector<StateT, Record<string, any>>(state =>
     selectActiveFormValues(state)
   );
   const previousFormValues = usePrevious(formValues);
-  const activeFormName = useSelector<StateT, string>((state) =>
+  const activeFormName = useSelector<StateT, string>(state =>
     selectActiveFormName(state)
   );
-  const activeFormType = useSelector<StateT, string | null>((state) =>
+  const activeFormType = useSelector<StateT, string | null>(state =>
     selectActiveFormType(state)
   );
 
@@ -124,7 +124,7 @@ const FormConfigSaver: React.FC<PropsT> = ({ datasetId }) => {
       if (formConfigId) {
         await patchFormConfig(datasetId, formConfigId, {
           label: configName,
-          values: formValues,
+          values: formValues
         });
 
         setIsDirty(false);
@@ -133,7 +133,7 @@ const FormConfigSaver: React.FC<PropsT> = ({ datasetId }) => {
         const result = await postFormConfig(datasetId, {
           label: configName,
           formType: activeFormType,
-          values: formValues,
+          values: formValues
         });
 
         setFormConfigId(result.id);

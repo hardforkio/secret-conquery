@@ -1,6 +1,8 @@
 import { createActionTypes } from "./actionTypes";
 
-export const createQueryNodeEditorActions = (type: string): Object => {
+export const createQueryNodeEditorActions = (
+  type: string
+): Record<string, any> => {
   const {
     SET_DETAILS_VIEW_ACTIVE,
     SET_INPUT_TABLE_VIEW_ACTIVE,

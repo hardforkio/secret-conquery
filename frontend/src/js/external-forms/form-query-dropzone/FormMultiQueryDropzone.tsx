@@ -9,8 +9,8 @@ import DropzoneList from "../form-components/DropzoneList";
 import FormQueryResult from "./FormQueryResult";
 
 type PropsT = FieldPropsType & {
-  dropzoneChildren: (args: ChildArgs) => React.ReactNode,
-  label: string
+  dropzoneChildren: (args: ChildArgs) => React.ReactNode;
+  label: string;
 };
 
 export default ({ input, label, dropzoneChildren }: PropsT) => {

@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import IconButton from "../../button/IconButton";
 
 interface PropsT {
-  queryResult?: Object;
+  queryResult?: Record<string, any>;
   className?: string;
   onDelete?: () => void;
 }

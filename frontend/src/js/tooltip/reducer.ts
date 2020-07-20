@@ -14,7 +14,7 @@ export type AdditionalInfosType = {
   description: string | null;
   isFolder: boolean;
   matchingEntries: number | null;
-  dateRange: Object | null;
+  dateRange: Record<string, any> | null;
   infos: InfoType[] | null;
 };
 
@@ -58,7 +58,7 @@ const setAdditionalInfos = (state, action) => {
 
 const tooltip = (
   state: TooltipStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): TooltipStateT => {
   switch (action.type) {
     case DISPLAY_ADDITIONAL_INFOS:

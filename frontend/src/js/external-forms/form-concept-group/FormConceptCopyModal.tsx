@@ -39,7 +39,7 @@ const SxInputCheckbox = styled(InputCheckbox)`
 
 type PropsT = {
   targetFieldname: string;
-  onAccept: (selectedNodes: Object[]) => void;
+  onAccept: (selectedNodes: Record<string, any>[]) => void;
   onClose: () => void;
 };
 
@@ -77,7 +77,7 @@ const FormConceptCopyModal = ({
     }, {});
 
     setValuesChecked(initiallyChecked);
-  }, [selectedOption]);
+  }, [formValues, selectedOption]);
 
   const allConceptsSelected = Object.keys(valuesChecked).every(
     key => valuesChecked[key]

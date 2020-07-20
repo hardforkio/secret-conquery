@@ -16,7 +16,7 @@ const initialState: UserStateT = {
 
 const startup = (
   state: UserStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): UserStateT => {
   switch (action.type) {
     case LOAD_ME_START:

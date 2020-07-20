@@ -49,7 +49,7 @@ const SmallTabNavigationButton: FC<PropsT> = ({
   value,
   children,
   isSelected,
-  onClick,
+  onClick
 }) => {
   const theme = useTheme();
   const borderColor = valueToColor(theme, value);

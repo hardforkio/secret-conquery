@@ -21,7 +21,7 @@ const Root = styled("div")`
 `;
 
 const FormsContainer: FC<PropsT> = ({ datasetId }) => {
-  const formConfig = useSelector<StateT, FormType | null>((state) =>
+  const formConfig = useSelector<StateT, FormType | null>(state =>
     selectFormConfig(state)
   );
 

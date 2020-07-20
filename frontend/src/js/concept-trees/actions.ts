@@ -99,7 +99,10 @@ export const searchTreesStart = (query: string) => ({
   type: SEARCH_TREES_START,
   payload: { query }
 });
-export const searchTreesSuccess = (query: string, result: Object) => ({
+export const searchTreesSuccess = (
+  query: string,
+  result: Record<string, any>
+) => ({
   type: SEARCH_TREES_SUCCESS,
   payload: { query, result }
 });

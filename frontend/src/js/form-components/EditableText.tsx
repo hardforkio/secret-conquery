@@ -30,7 +30,7 @@ const Text = styled("p")`
   align-items: flex-start;
 `;
 
-const EditableText: React.FC<PropsT> = (props) => {
+const EditableText: React.FC<PropsT> = props => {
   return props.editing ? (
     <EditableTextForm
       className={props.className}

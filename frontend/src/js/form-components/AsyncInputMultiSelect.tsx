@@ -5,15 +5,15 @@ import type { SelectOptionsT } from "../api/types";
 import InputMultiSelect from "./InputMultiSelect";
 
 type PropsType = FieldPropsType & {
-  label: string,
-  isLoading: boolean,
-  options: SelectOptionsT,
-  disabled?: boolean | null,
-  startLoadingThreshold: number,
-  tooltip?: string,
-  onLoad: Function,
-  onDropFile: Function,
-  allowDropFile?: boolean | null
+  label: string;
+  isLoading: boolean;
+  options: SelectOptionsT;
+  disabled?: boolean | null;
+  startLoadingThreshold: number;
+  tooltip?: string;
+  onLoad: Function;
+  onDropFile: Function;
+  allowDropFile?: boolean | null;
 };
 
 const AsyncInputMultiSelect = ({

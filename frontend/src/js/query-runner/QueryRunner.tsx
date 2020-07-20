@@ -12,7 +12,7 @@ import QueryRunnerInfo from "./QueryRunnerInfo";
 import QueryRunnerButton from "./QueryRunnerButton";
 
 type PropsType = {
-  queryRunner?: Object;
+  queryRunner?: Record<string, any>;
   isQueryRunning: boolean;
   isButtonEnabled: boolean;
   buttonTooltipKey?: string | null;

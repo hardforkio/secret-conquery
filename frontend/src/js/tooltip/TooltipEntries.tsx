@@ -9,7 +9,7 @@ import FaIcon from "../icon/FaIcon";
 type PropsType = {
   className?: string;
   matchingEntries?: number | null;
-  dateRange?: Object | null;
+  dateRange?: Record<string, any> | null;
 };
 
 const Root = styled("div")``;

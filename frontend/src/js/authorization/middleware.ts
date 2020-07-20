@@ -4,7 +4,7 @@ import { isLoginDisabled } from "../environment";
 export function createUnauthorizedErrorMiddleware() {
   const loginDisabled = isLoginDisabled();
 
-  return (store: Object) => (next: Function) => (action: any) => {
+  return (store: Record<string, any>) => (next: Function) => (action: any) => {
     if (!loginDisabled && action.payload && action.payload.status === 401)
       store.dispatch(push("/login"));
 

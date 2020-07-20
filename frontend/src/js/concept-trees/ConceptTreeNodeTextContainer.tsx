@@ -14,24 +14,25 @@ import ConceptTreeNodeText from "./ConceptTreeNodeText";
 
 type PropsType = {
   node: AdditionalInfoHoverableNodeType & {
-    label: string,
-    description?: string,
-    matchingEntries?: number
-  },
-  open: boolean,
-  depth: number,
-  active?: boolean,
-  onTextClick?: Function,
-  createQueryElement: () => DraggedNodeType,
-  connectDragSource: Function,
-  search?: SearchT,
-  isStructFolder?: boolean
+    label: string;
+    description?: string;
+    matchingEntries?: number;
+  };
+  open: boolean;
+  depth: number;
+  active?: boolean;
+  onTextClick?: Function;
+  createQueryElement: () => DraggedNodeType;
+  connectDragSource: Function;
+  search?: SearchT;
+  isStructFolder?: boolean;
 };
 
 function getResultCount(search, node) {
   return search.result &&
     search.result[node.id] > 0 &&
-    (node.children && node.children.some(child => search.result[child] > 0))
+    node.children &&
+    node.children.some(child => search.result[child] > 0)
     ? search.result[node.id]
     : null;
 }

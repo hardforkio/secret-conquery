@@ -141,10 +141,10 @@ export class Sema {
       resumeFn,
       capacity = 10
     }: {
-      initFn?: () => any,
-      pauseFn?: () => void,
-      resumeFn?: () => void,
-      capacity?: number
+      initFn?: () => any;
+      pauseFn?: () => void;
+      resumeFn?: () => void;
+      capacity?: number;
     } = {}
   ) {
     if (isFn(pauseFn) !== isFn(resumeFn)) {
@@ -180,7 +180,7 @@ export class Sema {
   }
 
   async acquire(): Promise<any> {
-    let token = this.free.pop();
+    const token = this.free.pop();
 
     if (token !== void 0) {
       return token;
@@ -219,8 +219,8 @@ export function RateLimit(
     timeUnit = 1000,
     uniformDistribution = false
   }: {
-    timeUnit?: number,
-    uniformDistribution?: boolean
+    timeUnit?: number;
+    uniformDistribution?: boolean;
   } = {}
 ) {
   const sema = new Sema(uniformDistribution ? 1 : rps);

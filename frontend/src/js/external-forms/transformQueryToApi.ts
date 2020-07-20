@@ -46,7 +46,9 @@ function transformFieldsToApi(fields, form) {
   }, {});
 }
 
-const transformQueryToApi = (formConfig: FormType) => (form: Object) => {
+const transformQueryToApi = (formConfig: FormType) => (
+  form: Record<string, any>
+) => {
   return {
     type: formConfig.type,
     ...transformFieldsToApi(formConfig.fields, form)

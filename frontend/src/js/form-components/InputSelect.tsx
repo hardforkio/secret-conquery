@@ -15,7 +15,7 @@ type PropsType = FieldPropsType & {
   options: SelectOptionsT;
   disabled?: boolean;
   small?: boolean;
-  selectProps?: Object;
+  selectProps?: Record<string, any>;
   tooltip?: string;
 };
 

@@ -67,7 +67,7 @@ export type PropsType = {
   showTables: boolean;
   isExcludeTimestampsPossible: boolean;
   datasetId: number;
-  suggestions: Object | null;
+  suggestions: Record<string, any> | null;
   whitelistedTables?: string[];
   blacklistedTables?: string[];
 

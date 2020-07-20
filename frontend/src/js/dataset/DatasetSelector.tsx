@@ -17,7 +17,7 @@ const Root = styled("div")`
 `;
 
 type PropsType = {
-  selectedDatasetId: String;
+  selectedDatasetId: string;
   datasets: DatasetType[];
   error: string;
   loadDatasets: Function;

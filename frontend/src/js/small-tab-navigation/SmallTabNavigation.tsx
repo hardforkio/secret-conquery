@@ -24,11 +24,11 @@ const SmallTabNavigation: FC<PropsT> = ({
   className,
   options,
   selectedTab,
-  onSelectTab,
+  onSelectTab
 }) => {
   return (
     <Root className={className}>
-      {options.map((option) => (
+      {options.map(option => (
         <SmallTabNavigationButton
           key={option.value}
           value={option.value}

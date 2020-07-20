@@ -339,7 +339,7 @@ const initialState = {
 // }
 const timebasedQuery = (
   state: TimebasedQueryStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): TimebasedQueryStateT => {
   switch (action.type) {
     case DROP_TIMEBASED_NODE:

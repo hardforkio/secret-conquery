@@ -75,10 +75,10 @@ const findParentConcepts = (concepts: ConceptT[]): ConceptT[] => {
 };
 
 interface ConceptsByIds {
-  concepts: (ConceptT & { id: ConceptIdT })[],
-  root: ConceptIdT,
-  tables: TableT[],
-  selects?: SelectorT[]
+  concepts: (ConceptT & { id: ConceptIdT })[];
+  root: ConceptIdT;
+  tables: TableT[];
+  selects?: SelectorT[];
 }
 
 export const getConceptsByIdsWithTablesAndSelects = (

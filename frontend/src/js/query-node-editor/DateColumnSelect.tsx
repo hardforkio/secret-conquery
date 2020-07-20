@@ -6,8 +6,8 @@ import InputSelect from "../form-components/InputSelect";
 import type { SelectedDateColumnT } from "../standard-query-editor/types";
 
 type PropsT = {
-  dateColumn: SelectedDateColumnT,
-  onSelectDateColumn: (dateColum: string) => void
+  dateColumn: SelectedDateColumnT;
+  onSelectDateColumn: (dateColum: string) => void;
 };
 
 export default ({ dateColumn, onSelectDateColumn }: PropsT) => {

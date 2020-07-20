@@ -32,7 +32,10 @@ export const buildPanesReducer = tabs => {
     }
   };
 
-  return (state: PanesStateT = initialState, action: Object): PanesStateT => {
+  return (
+    state: PanesStateT = initialState,
+    action: Record<string, any>
+  ): PanesStateT => {
     switch (action.type) {
       case CLICK_PANE_TAB:
         const { paneType, tab } = action.payload;

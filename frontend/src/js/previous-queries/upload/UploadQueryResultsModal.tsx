@@ -48,8 +48,8 @@ const SxDropzoneWithFileInput = styled(DropzoneWithFileInput)`
 
 type PropsT = {
   loading: boolean;
-  success: Object | null;
-  error: Object | null;
+  success: Record<string, any> | null;
+  error: Record<string, any> | null;
   onClose: Function;
   onUpload: Function;
 };

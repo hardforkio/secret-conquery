@@ -20,11 +20,11 @@ let browserHistory;
 const initialState = {};
 
 // Render the App including Hot Module Replacement
-const renderRoot = (tabs: Object, theme: Theme) => {
+const renderRoot = (tabs: Record<string, any>, theme: Theme) => {
   browserHistory =
     browserHistory ||
     createBrowserHistory({
-      basename: basename(),
+      basename: basename()
     });
   store = store || makeStore(initialState, browserHistory, tabs);
 
@@ -38,7 +38,7 @@ const renderRoot = (tabs: Object, theme: Theme) => {
 
 export default function conquery(
   environment: Environment,
-  tabs: Object,
+  tabs: Record<string, any>,
   theme: Theme // React-Emotion theme, will at some point completely replace sass
 ) {
   initializeEnvironment(environment);

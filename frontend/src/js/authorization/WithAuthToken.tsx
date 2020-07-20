@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 type PropsType = {
   children: React.ReactNode;
   location: {
-    search: Object;
+    search: Record<string, any>;
   };
 };
 

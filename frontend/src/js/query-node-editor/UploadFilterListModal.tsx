@@ -31,8 +31,8 @@ const CenteredIcon = styled(FaIcon)`
 
 type PropsType = {
   loading: boolean;
-  resolved: Object;
-  error: Object;
+  resolved: Record<string, any>;
+  error: Record<string, any>;
   onClose: Function;
 };
 

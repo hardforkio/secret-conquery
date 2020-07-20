@@ -7,12 +7,12 @@ import { toggleAdditionalInfos, displayAdditionalInfos } from "./actions";
 import HoverableBase from "./HoverableBase";
 
 export type AdditionalInfoHoverableNodeType = {
-  label: string,
-  description: string,
-  children?: Array<string>,
-  matchingEntries: number,
-  dateRange: DateRangeT,
-  additionalInfos: InfoT[]
+  label: string;
+  description: string;
+  children?: Array<string>;
+  matchingEntries: number;
+  dateRange: DateRangeT;
+  additionalInfos: InfoT[];
 };
 
 // Whitelist the data we pass (especially: don't pass all children)
@@ -55,10 +55,7 @@ const AdditionalInfoHoverable = (Component: any) => {
     }
   });
 
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(HoverableBase(Component));
+  return connect(mapStateToProps, mapDispatchToProps)(HoverableBase(Component));
 };
 
 export default AdditionalInfoHoverable;

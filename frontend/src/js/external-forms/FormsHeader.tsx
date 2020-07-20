@@ -17,7 +17,7 @@ const Root = styled("div")`
 `;
 
 const FormsHeader: React.FC = () => {
-  const activeFormType = useSelector<StateT, string | null>((state) =>
+  const activeFormType = useSelector<StateT, string | null>(state =>
     selectActiveFormType(state)
   );
 

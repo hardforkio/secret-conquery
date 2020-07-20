@@ -16,28 +16,28 @@ const FormConfigsFilter: FC = () => {
   const OPTIONS = [
     {
       value: "all",
-      label: T.translate("previousQueriesFilter.all") as string,
+      label: T.translate("previousQueriesFilter.all") as string
     },
     {
       value: "activeForm",
-      label: T.translate("formConfigsFilter.activeForm") as string,
+      label: T.translate("formConfigsFilter.activeForm") as string
     },
     {
       value: "own",
-      label: T.translate("previousQueriesFilter.own") as string,
+      label: T.translate("previousQueriesFilter.own") as string
     },
     {
       value: "system",
-      label: T.translate("previousQueriesFilter.system") as string,
+      label: T.translate("previousQueriesFilter.system") as string
     },
     {
       value: "shared",
-      label: T.translate("previousQueriesFilter.shared") as string,
-    },
+      label: T.translate("previousQueriesFilter.shared") as string
+    }
   ];
 
   const selectedFilter = useSelector<StateT, string>(
-    (state) => state.formConfigsFilter
+    state => state.formConfigsFilter
   );
   const dispatch = useDispatch();
   const setFilter = (filter: string) => dispatch(setFormConfigsFilter(filter));
@@ -47,7 +47,7 @@ const FormConfigsFilter: FC = () => {
       className="form-configs-filter"
       options={OPTIONS}
       selectedTab={selectedFilter}
-      onSelectTab={(tab) => setFilter(tab)}
+      onSelectTab={tab => setFilter(tab)}
     />
   );
 };

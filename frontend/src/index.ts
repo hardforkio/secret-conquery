@@ -37,7 +37,7 @@ const environment = {
     : isProduction
     ? ""
     : MOCK_API_URL,
-  disableLogin,
+  disableLogin
 };
 
 const tabs = [StandardQueryEditorTab, TimebasedQueryEditorTab, FormsTab];

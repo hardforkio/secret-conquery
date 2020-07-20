@@ -41,7 +41,7 @@ const StyledVerticalToggleButton = styled(VerticalToggleButton)`
 `;
 
 type PropsType = {
-  node: Object;
+  node: Record<string, any>;
   position: "left" | "right";
   isIndexResult: boolean;
   onRemove: Function;

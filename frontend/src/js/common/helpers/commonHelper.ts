@@ -8,7 +8,7 @@ export const compose = (...fns: Function[]) =>
     v => v
   );
 
-export const objectWithoutKey = (key: string) => (obj: Object) => {
+export const objectWithoutKey = (key: string) => (obj: Record<string, any>) => {
   if (!obj.hasOwnProperty(key)) return obj;
 
   const { [key]: deleted, ...rest } = obj;
@@ -69,7 +69,7 @@ export const toUpperCaseUnderscore = (str: string) => {
 export const isObject = (item: any) =>
   item && typeof item === "object" && !Array.isArray(item);
 
-export const mergeDeep = (...elements: Object[]) => {
+export const mergeDeep = (...elements: Record<string, any>[]) => {
   return elements.filter(isObject).reduce((aggregate, current) => {
     const nonObjectKeys = Object.keys(current).filter(
       key => !isObject(current[key])

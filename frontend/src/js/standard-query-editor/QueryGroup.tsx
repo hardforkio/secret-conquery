@@ -10,7 +10,7 @@ import type { QueryGroupType } from "./types";
 type PropsType = {
   group: QueryGroupType;
   andIdx: number;
-  onDropNode: (node: Object) => void;
+  onDropNode: (node: Record<string, any>) => void;
   onDropFile: Function;
   onDeleteNode: Function;
   onEditClick: Function;

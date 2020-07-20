@@ -19,12 +19,12 @@ const StyledEditableText = styled(EditableText)`
 
 const labelContainsAnySearch = (label: string, searches: string[]) =>
   searches.some(
-    (search) => label.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    search => label.toLowerCase().indexOf(search.toLowerCase()) !== -1
   );
 
 const useIsHighlightedLabel = (label: string) => {
   const previousQueriesSearch = useSelector<StateT, string[]>(
-    (state) => state.previousQueriesSearch
+    state => state.previousQueriesSearch
   );
 
   return labelContainsAnySearch(label, previousQueriesSearch);
@@ -47,7 +47,7 @@ const PreviousQueriesLabel: FC<PropsT> = ({
   selectTextOnMount,
   label,
   onSubmit,
-  onToggleEdit,
+  onToggleEdit
 }) => {
   const isHighlightedLabel = useIsHighlightedLabel(label);
 

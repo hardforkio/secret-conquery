@@ -10,9 +10,9 @@ import Dropzone from "../../form-components/Dropzone";
 import Label from "../../form-components/Label";
 
 type PropsT = FieldPropsType & {
-  label: string,
-  dropzoneText: string,
-  className?: string
+  label: string;
+  dropzoneText: string;
+  className?: string;
 };
 
 export default (props: PropsT) => {

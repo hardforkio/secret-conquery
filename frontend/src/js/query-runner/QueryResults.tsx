@@ -41,7 +41,7 @@ type PropsType = {
   datasetId: string;
   resultCount: number;
   resultUrl: string;
-  userCanDownloadResult: Boolean;
+  userCanDownloadResult: boolean;
 };
 
 const QueryResults = (props: PropsType) => {

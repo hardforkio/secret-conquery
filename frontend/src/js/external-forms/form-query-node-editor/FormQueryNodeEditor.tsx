@@ -72,7 +72,9 @@ const mapStateToProps = (state, ownProps) => {
     suggestions,
     currencyConfig: state.startup.config.currency,
 
-    onToggleTimestamps: () => {},
+    onToggleTimestamps: () => {
+      return void 0;
+    },
     onCloseModal: () => ownProps.onCloseModal(andIdx, orIdx),
     onUpdateLabel: label => ownProps.onUpdateLabel(andIdx, orIdx, label),
     onDropConcept: concept => ownProps.onDropConcept(andIdx, orIdx, concept),

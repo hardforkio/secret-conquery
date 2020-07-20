@@ -203,7 +203,7 @@ const Field = ({ field, ...commonProps }: PropsType) => {
             blacklistedTables: field.blacklistedConnectors,
             whitelistedTables: field.whitelistedConnectors,
             defaults: field.defaults,
-            isValidConcept: (item: Object) =>
+            isValidConcept: (item: Record<string, any>) =>
               !nodeIsInvalid(
                 item,
                 field.blacklistedConceptIds,

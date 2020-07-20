@@ -31,8 +31,8 @@ const FormsNavigation: FC = () => {
     {
       [formName: string]: Form;
     }
-  >((state) => selectAvailableForms(state));
-  const activeForm = useSelector<StateT, string | null>((state) =>
+  >(state => selectAvailableForms(state));
+  const activeForm = useSelector<StateT, string | null>(state =>
     selectActiveFormType(state)
   );
 
@@ -41,9 +41,9 @@ const FormsNavigation: FC = () => {
   const onItemClick = (form: string) => dispatch(setExternalForm(form));
 
   const locale = getLocale();
-  const options = Object.values(availableForms).map((formType) => ({
+  const options = Object.values(availableForms).map(formType => ({
     label: formType.headline[locale],
-    value: formType.type,
+    value: formType.type
   }));
 
   return (
@@ -53,12 +53,12 @@ const FormsNavigation: FC = () => {
         options={options}
         input={{
           value: activeForm,
-          onChange: (value: string) => onItemClick(value),
+          onChange: (value: string) => onItemClick(value)
         }}
         selectProps={{
           clearable: false,
           autosize: true,
-          searchable: false,
+          searchable: false
         }}
       />
     </Root>
