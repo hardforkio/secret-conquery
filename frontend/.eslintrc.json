@@ -1,6 +1,22 @@
 {
-  "extends": "react-app",
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "react-app",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
   "rules": {
-    "jsx-a11y/accessible-emoji": "off"
+    "jsx-a11y/accessible-emoji": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": true,
+        "trailingComma": "all",
+        "singleQuote": false,
+        "arrowParens": "always"
+      }
+    ]
   }
 }
