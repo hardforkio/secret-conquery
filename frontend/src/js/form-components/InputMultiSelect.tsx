@@ -124,11 +124,14 @@ const InputMultiSelect = (props: PropsType) => {
               ownProps.setValue(visibleOptions);
             }}
           >
-            {T.translate("inputMultiSelect.insertAll")}
+            {
+              /* eslint-disable */
+              T.translate("inputMultiSelect.insertAll")}
           </TransparentButton>
         </Row>
-        <// @ts-ignore
+        < // @ts-ignore
         components.MenuList
+          /* eslint-enable */
           {...ownProps}
         >
           {children}

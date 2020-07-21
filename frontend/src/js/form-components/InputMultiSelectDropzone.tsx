@@ -27,6 +27,7 @@ const TopRight = styled("p")`
   color: ${({
     // @ts-ignore
     theme
+    // @ts-ignore
   }) => theme.font.gray};
   position: absolute;
   top: -15px;
@@ -69,9 +70,11 @@ export default DropTarget(
   }
 
   return (
+    /* eslint-disable */
     <Root>
-      <// @ts-ignore
+      < // @ts-ignore
       InnerZone
+        /* eslint-enable */
         connectDropTarget={connectDropTarget}
         canDrop={canDrop}
         isOver={isOver}

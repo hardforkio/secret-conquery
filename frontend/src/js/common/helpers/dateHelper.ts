@@ -59,8 +59,8 @@ export const parseStdDate = (dateString: string) => {
 const DATE_PATTERN = {
   raw: /(^\d{8})$/,
   year: /^[yj][.]*(\d{4})$/,
-  quarter_year: /^[q]([1-4]).(\d{4})$/,
-  month_year: /^[m](1[0-2]|[1-9]).(\d{4})$/
+  quarterYear: /^[q]([1-4]).(\d{4})$/,
+  monthYear: /^[m](1[0-2]|[1-9]).(\d{4})$/
 };
 
 // @ts-ignore
@@ -99,7 +99,7 @@ function handleYear(what, value) {
 
 // @ts-ignore
 function handleQuarter(what, value) {
-  const match = DATE_PATTERN.quarter_year.exec(value);
+  const match = DATE_PATTERN.quarterYear.exec(value);
 
   // @ts-ignore
   const quarter = parseInt(match[1]);
@@ -114,7 +114,7 @@ function handleQuarter(what, value) {
 
 // @ts-ignore
 function handleMonth(what, value) {
-  const match = DATE_PATTERN.month_year.exec(value);
+  const match = DATE_PATTERN.monthYear.exec(value);
 
   // @ts-ignore
   const month = parseInt(match[1]);
@@ -160,9 +160,9 @@ export const testRegexes = (
       return handleRaw(what, value, displayDateFormat);
     case DATE_PATTERN.year.test(value):
       return handleYear(what, value);
-    case DATE_PATTERN.quarter_year.test(value):
+    case DATE_PATTERN.quarterYear.test(value):
       return handleQuarter(what, value);
-    case DATE_PATTERN.month_year.test(value):
+    case DATE_PATTERN.monthYear.test(value):
       return handleMonth(what, value);
     default:
       return { min: null, max: null };

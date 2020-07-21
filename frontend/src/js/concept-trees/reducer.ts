@@ -169,12 +169,14 @@ const setLoadTreesSuccess = (
   const { concepts, version } = action.payload.data;
 
   // Assign default select filter values
-  // @ts-ignore
+  /* eslint-disable */
   for (const concept of Object.values(concepts))
+    // @ts-ignore
     for (const table of concept.tables || [])
       for (const filter of table.filters || [])
         if (filter.defaultValue) filter.value = filter.defaultValue;
 
+  /* eslint-enable */
   return {
     ...state,
     loading: false,

@@ -663,7 +663,7 @@ const findPreviousQueries = (state, action) => {
     // @ts-ignore
     .filter(group => group.length > 0);
 
-  return [].concat.apply([], queries);
+  return [].concat(...queries);
 };
 
 // @ts-ignore
