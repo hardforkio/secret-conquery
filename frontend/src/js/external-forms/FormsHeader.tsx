@@ -17,7 +17,7 @@ const Root = styled("div")`
 `;
 
 const FormsHeader: React.FC = () => {
-  const activeFormType = useSelector<StateT, string | null>((state) =>
+  const activeFormType = useSelector<StateT, string | null>(state =>
     selectActiveFormType(state)
   );
 
@@ -35,6 +35,7 @@ const FormsHeader: React.FC = () => {
         regular
         icon="trash-alt"
         onClick={() => onClear(activeFormType)}
+        // @ts-ignore
         title={T.translate("externalForms.common.clear")}
       >
         {T.translate("externalForms.common.clear")}

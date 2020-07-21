@@ -30,7 +30,7 @@ const Root = styled("div")<{
 export type ChildArgs = {
   isOver: boolean;
   canDrop: boolean;
-  itemType: String;
+  itemType: string;
 };
 
 type InnerZonePropsType = {
@@ -50,11 +50,11 @@ export const InnerZone = ({
   isOver,
   canDrop,
   itemType,
-  connectDropTarget,
+  connectDropTarget
 }: InnerZonePropsType) => {
   return (
     <Root
-      ref={(instance) => connectDropTarget(instance)}
+      ref={instance => connectDropTarget(instance)}
       isOver={isOver}
       canDrop={canDrop}
       className={className}
@@ -69,14 +69,15 @@ type PropsType = {
   acceptedDropTypes: string[];
   children?: (args: ChildArgs) => React.ReactNode;
   onDrop: (props: any, monitor: any) => void;
-  target?: Object;
+  target?: Record<string, any>;
 };
 
+// @ts-ignore
 const collect = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),
-  itemType: monitor.getItemType(),
+  itemType: monitor.getItemType()
 });
 
 const Dropzone = ({
@@ -93,6 +94,7 @@ const Dropzone = ({
     collect
   )(InnerZone);
 
+  // @ts-ignore
   return <FinalZone {...restProps} />;
 };
 

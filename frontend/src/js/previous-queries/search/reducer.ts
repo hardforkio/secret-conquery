@@ -9,12 +9,15 @@ const initialState: PreviousQueriesSearchStateT = [];
 
 const previousQueriesSearch = (
   state: PreviousQueriesSearchStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): PreviousQueriesSearchStateT => {
+  // @ts-ignore
   switch (action.type) {
     case UPDATE_PREVIOUS_QUERIES_SEARCH:
+      // @ts-ignore
       return action.payload.values;
     case ADD_TAG_TO_PREVIOUS_QUERIES_SEARCH:
+      // @ts-ignore
       const { tag } = action.payload;
 
       // Only add tag if it doesn't exist

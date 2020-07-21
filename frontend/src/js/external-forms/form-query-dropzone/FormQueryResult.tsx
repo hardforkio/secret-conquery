@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import IconButton from "../../button/IconButton";
 
 interface PropsT {
-  queryResult?: Object;
+  queryResult?: Record<string, any>;
   className?: string;
   onDelete?: () => void;
 }
@@ -24,8 +24,18 @@ const FormQueryResult: FC<PropsT> = ({ queryResult, className, onDelete }) => {
 
   return (
     <Root className={className}>
-      {queryResult.label || queryResult.id}
-      {!!onDelete && <IconButton tiny icon="times" onClick={onDelete} />}
+      {
+        //@ts-ignore
+        queryResult.label || queryResult.id
+      }
+      {!!onDelete && (
+        <IconButton
+          //@ts-ignore
+          tiny
+          icon="times"
+          onClick={onDelete}
+        />
+      )}
     </Root>
   );
 };

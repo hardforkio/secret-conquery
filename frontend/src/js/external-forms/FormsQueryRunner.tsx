@@ -8,24 +8,28 @@ import {
   selectFormConfig,
   selectQueryRunner,
   selectRunningQuery,
-  selectActiveFormType,
+  selectActiveFormType
 } from "./stateSelectors";
 
 import QueryRunner from "../query-runner/QueryRunner";
 
 const { startExternalFormsQuery, stopExternalFormsQuery } = actions;
 
-const isActiveFormValid = (state) => {
+//@ts-ignore
+const isActiveFormValid = state => {
   const activeForm = selectActiveFormType(state);
 
   if (!activeForm) return false;
 
   return (
+    //@ts-ignore
     !isPristine(activeForm, selectReduxFormState)(state) &&
+    //@ts-ignore
     isValid(activeForm, selectReduxFormState)(state)
   );
 };
 
+//@ts-ignore
 const isButtonEnabled = (state, ownProps) => {
   const queryRunner = selectQueryRunner(state);
 
@@ -39,6 +43,7 @@ const isButtonEnabled = (state, ownProps) => {
   );
 };
 
+//@ts-ignore
 const mapStateToProps = (state, ownProps) => ({
   queryRunner: selectQueryRunner(state),
   isButtonEnabled: isButtonEnabled(state, ownProps),
@@ -49,13 +54,17 @@ const mapStateToProps = (state, ownProps) => ({
   query: {
     formName: selectActiveFormType(state),
     form: selectActiveFormType(state)
-      ? getFormValues(selectActiveFormType(state), selectReduxFormState)(state)
-      : {},
+      ? //@ts-ignore
+        getFormValues(selectActiveFormType(state), selectReduxFormState)(state)
+      : {}
   },
-  formQueryTransformation: transformQueryToApi(selectFormConfig(state)),
+  //@ts-ignore
+  formQueryTransformation: transformQueryToApi(selectFormConfig(state))
 });
 
+//@ts-ignore
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  //@ts-ignore
   startQuery: (datasetId, query, version, formQueryTransformation) =>
     dispatch(
       startExternalFormsQuery(
@@ -65,10 +74,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         formQueryTransformation
       )
     ),
+  //@ts-ignore
   stopQuery: (datasetId, queryId) =>
-    dispatch(stopExternalFormsQuery(datasetId, queryId)),
+    dispatch(stopExternalFormsQuery(datasetId, queryId))
 });
 
+//@ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
@@ -81,7 +92,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
       stateProps.formQueryTransformation
     ),
   stopQuery: () =>
-    dispatchProps.stopQuery(ownProps.datasetId, stateProps.queryId),
+    dispatchProps.stopQuery(ownProps.datasetId, stateProps.queryId)
 });
 
 export default connect(

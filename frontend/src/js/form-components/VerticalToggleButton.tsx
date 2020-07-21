@@ -22,11 +22,12 @@ export const Option = styled("span")`
   cursor: pointer;
   transition: ${({ theme }) =>
     `color ${theme.transitionTime}, background-color ${theme.transitionTime}`};
-  color: ${({ theme, active }) => (active ? theme.col.black : theme.col.gray)};
+  color: ${//@ts-ignore
+  ({ theme, active }) => (active ? theme.col.black : theme.col.gray)};
   border-left: 1px solid ${({ theme }) => theme.col.blueGray};
   border-right: 1px solid ${({ theme }) => theme.col.blueGray};
-  background-color: ${({ theme, active }) =>
-    active ? theme.col.blueGrayVeryLight : "white"};
+  background-color: ${//@ts-ignore
+  ({ theme, active }) => (active ? theme.col.blueGrayVeryLight : "white")};
 
   &:first-of-type {
     margin-left: 0; /* first childs left border does not overlap */
@@ -42,7 +43,8 @@ export const Option = styled("span")`
   }
 
   &:hover {
-    background-color: ${({ theme, active }) =>
+    background-color: ${//@ts-ignore
+    ({ theme, active }) =>
       active ? theme.col.blueGrayVeryLight : theme.col.grayVeryLight};
   }
 `;
@@ -53,6 +55,7 @@ const VerticalToggleButton = (props: PropsType) => {
       {props.options.map(({ value, label }, i) => (
         <Option
           key={i}
+          //@ts-ignore
           active={props.activeValue === value}
           onClick={() => {
             if (value !== props.activeValue) props.onToggle(value);

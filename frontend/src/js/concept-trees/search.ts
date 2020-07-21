@@ -37,6 +37,7 @@ export const findConcepts = (
   nodeId: ConceptIdT,
   node: ConceptT,
   query: string,
+  // @ts-ignore
   intermediateResult: { [key: ConceptIdT]: number } = {}
 ) => {
   // !node normall shouldn't happen.
@@ -50,6 +51,7 @@ export const findConcepts = (
   // Early return if there are no children
   if (!node.children) {
     if (isNodeIncluded) {
+      // @ts-ignore
       intermediateResult[nodeId] = 1;
     }
 
@@ -59,20 +61,23 @@ export const findConcepts = (
   // Count node as 1 already, if it matches
   let sum = isNodeIncluded ? 1 : 0;
 
-  for (let child of node.children) {
+  for (const child of node.children) {
     const result = findConcepts(
       trees,
       treeId,
       child,
+      // @ts-ignore
       trees[treeId][child],
       query,
       intermediateResult
     );
 
+    // @ts-ignore
     sum += result[child] || 0;
   }
 
   if (sum !== 0) {
+    // @ts-ignore
     intermediateResult[nodeId] = sum;
   }
 

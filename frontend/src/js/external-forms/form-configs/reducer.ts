@@ -2,7 +2,7 @@ import {
   LOAD_CONFIGS_SUCCESS,
   LOAD_CONFIGS_ERROR,
   PATCH_CONFIG_SUCCESS,
-  DELETE_CONFIG_SUCCESS,
+  DELETE_CONFIG_SUCCESS
 } from "./actionTypes";
 export interface BaseFormConfigT {
   formType: string;
@@ -31,7 +31,7 @@ const initialState: FormConfigsStateT = {
   error: false,
   data: [],
   tags: [],
-  names: [],
+  names: []
 };
 
 const sortConfigs = (configs: FormConfigT[]) => {
@@ -41,19 +41,19 @@ const sortConfigs = (configs: FormConfigT[]) => {
 };
 
 const findConfig = (configs: FormConfigT[], configId: string | number) => {
-  const config = configs.find((c) => c.id === configId);
+  const config = configs.find(c => c.id === configId);
 
   return {
     config,
-    idx: config ? configs.indexOf(config) : -1,
+    idx: config ? configs.indexOf(config) : -1
   };
 };
 
 const findUniqueTags = (configs: FormConfigT[]) => {
   const uniqueTags = new Set<string>();
 
-  configs.forEach((config) => {
-    if (config.tags) config.tags.forEach((tag) => uniqueTags.add(tag));
+  configs.forEach(config => {
+    if (config.tags) config.tags.forEach(tag => uniqueTags.add(tag));
   });
 
   return Array.from(uniqueTags);
@@ -62,13 +62,14 @@ const findUniqueTags = (configs: FormConfigT[]) => {
 const findUniqueNames = (queries: FormConfigT[]) => {
   const uniqueNames = new Set<string>();
 
-  queries.filter((q) => !!q.label).forEach((q) => uniqueNames.add(q.label));
+  queries.filter(q => !!q.label).forEach(q => uniqueNames.add(q.label));
 
   return Array.from(uniqueNames);
 };
 
+// @ts-ignore
 const updateFormConfig = (configs: FormConfigT[], { id, values }) => {
-  const config = configs.find((conf) => conf.id === id);
+  const config = configs.find(conf => conf.id === id);
 
   if (!config) {
     return configs;
@@ -80,9 +81,9 @@ const updateFormConfig = (configs: FormConfigT[], { id, values }) => {
     ...configs.slice(0, idx),
     {
       ...config,
-      ...values,
+      ...values
     },
-    ...configs.slice(idx + 1),
+    ...configs.slice(idx + 1)
   ];
 };
 
@@ -97,7 +98,7 @@ const formConfigs = (
         data: sortConfigs(action.payload.data),
         error: false,
         tags: findUniqueTags(action.payload.data),
-        names: findUniqueNames(action.payload.data),
+        names: findUniqueNames(action.payload.data)
       };
     case PATCH_CONFIG_SUCCESS:
       const data = updateFormConfig(state.data, action.payload);
@@ -107,19 +108,19 @@ const formConfigs = (
         data,
         error: false,
         tags: findUniqueTags(data),
-        names: findUniqueNames(data),
+        names: findUniqueNames(data)
       };
     case DELETE_CONFIG_SUCCESS:
       const { idx } = findConfig(state.data, action.payload.configId);
 
       return {
         ...state,
-        data: [...state.data.slice(0, idx), ...state.data.slice(idx + 1)],
+        data: [...state.data.slice(0, idx), ...state.data.slice(idx + 1)]
       };
     case LOAD_CONFIGS_ERROR:
       return {
         ...state,
-        error: true,
+        error: true
       };
     default:
       return state;

@@ -15,10 +15,10 @@ const Root = styled("div")`
 
 const PreviousQueriesSearchBox: React.FC = () => {
   const search = useSelector<StateT, string[]>(
-    (state) => state.previousQueriesSearch
+    state => state.previousQueriesSearch
   );
   const options = useSelector<StateT, string[]>(
-    (state) => state.previousQueries.names
+    state => state.previousQueries.names
   );
 
   const dispatch = useDispatch();
@@ -32,14 +32,17 @@ const PreviousQueriesSearchBox: React.FC = () => {
         creatable
         isMulti
         name="input"
-        value={search.map((t) => ({ label: t, value: t }))}
-        options={options ? options.map((t) => ({ label: t, value: t })) : []}
-        onChange={(values) =>
-          onSearch(values ? values.map((v) => v.value) : [])
+        value={search.map(t => ({ label: t, value: t }))}
+        options={options ? options.map(t => ({ label: t, value: t })) : []}
+        //@ts-ignore
+        onChange={values =>
+          //@ts-ignore
+          onSearch(values ? values.map(v => v.value) : [])
         }
         placeholder={T.translate("reactSelect.searchPlaceholder")}
         noOptionsMessage={() => T.translate("reactSelect.noResults")}
-        formatCreateLabel={(inputValue) =>
+        //@ts-ignore
+        formatCreateLabel={inputValue =>
           T.translate("common.create") + `: "${inputValue}"`
         }
       />

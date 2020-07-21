@@ -15,13 +15,10 @@ import { getDateLocale } from "../../localization";
 // To save the date in this format in the state
 const DATE_FORMAT = "yyyy-MM-dd";
 
-export const formatDateDistance = (
-  d1: Date,
-  d2: Date,
-  withSuffix: boolean = false
-) => {
+export const formatDateDistance = (d1: Date, d2: Date, withSuffix = false) => {
   const dateLocale = getDateLocale();
 
+  // @ts-ignore
   return formatDistance(d1, d2, { locale: dateLocale, addSuffix: withSuffix });
 };
 
@@ -66,6 +63,7 @@ const DATE_PATTERN = {
   month_year: /^[m](1[0-2]|[1-9]).(\d{4})$/
 };
 
+// @ts-ignore
 function handleRaw(what, value, displayDateFormat) {
   const denseFormat = displayDateFormat.replace(/[-/.]/g, "");
   // Assuming the format consists of 2 M, 2 d, and 2 y
@@ -81,13 +79,16 @@ function handleRaw(what, value, displayDateFormat) {
 
   let date = new Date(parseInt(y), parseInt(m) - 1, parseInt(d));
 
+  // @ts-ignore
   date = isValid(date) ? date : null;
 
   if (what === "min") return { min: date, max: null };
   else return { min: null, max: date };
 }
 
+// @ts-ignore
 function handleYear(what, value) {
+  // @ts-ignore
   const year = parseInt(DATE_PATTERN.year.exec(value)[1]);
 
   const min = new Date(year, 0, 1);
@@ -96,10 +97,13 @@ function handleYear(what, value) {
   return { min, max };
 }
 
+// @ts-ignore
 function handleQuarter(what, value) {
   const match = DATE_PATTERN.quarter_year.exec(value);
 
+  // @ts-ignore
   const quarter = parseInt(match[1]);
+  // @ts-ignore
   const year = parseInt(match[2]);
 
   const min = addQuarters(new Date(year, 0, 1), quarter - 1);
@@ -108,10 +112,13 @@ function handleQuarter(what, value) {
   return { min, max };
 }
 
+// @ts-ignore
 function handleMonth(what, value) {
   const match = DATE_PATTERN.month_year.exec(value);
 
+  // @ts-ignore
   const month = parseInt(match[1]);
+  // @ts-ignore
   const year = parseInt(match[2]);
 
   const min = addMonths(new Date(year, 0, 1), month - 1);

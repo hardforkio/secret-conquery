@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 import T from "i18n-react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import {
@@ -18,16 +19,20 @@ import Labeled from "./Labeled";
 import BaseInput from "./BaseInput";
 
 const Root = styled("div")`
-  text-align: ${({ center }) => (center ? "center" : "left")};
+  text-align: ${//@ts-ignore
+  ({ center }) => (center ? "center" : "left")};
 `;
 const Pickers = styled("div")`
   display: flex;
-  flex-direction: ${({ inline }) => (inline ? "row" : "column")};
-  justify-content: ${({ center }) => (center ? "center" : "flex-start")};
+  flex-direction: ${//@ts-ignore
+  ({ inline }) => (inline ? "row" : "column")};
+  justify-content: ${//@ts-ignore
+  ({ center }) => (center ? "center" : "flex-start")};
 `;
 
 const StyledLabel = styled(Label)`
-  ${({ theme, large }) =>
+  ${//@ts-ignore
+  ({ theme, large }) =>
     large &&
     css`
       font-size: ${theme.font.md};
@@ -43,7 +48,9 @@ const StyledLabeled = styled(Labeled)`
 `;
 
 type PropsType = FieldPropsType & {
+  // @ts-ignore
   label?: React.Node;
+  // @ts-ignore
   labelSuffix?: React.Node;
   className?: string;
   inline?: boolean;
@@ -51,6 +58,7 @@ type PropsType = FieldPropsType & {
   center?: boolean;
 };
 
+// @ts-ignore
 function getDisplayDate(what, value, displayDateFormat) {
   if (!value || !value[what]) return "";
 
@@ -58,10 +66,12 @@ function getDisplayDate(what, value, displayDateFormat) {
 }
 
 const InputDateRange = (props: PropsType) => {
+  // @ts-ignore
   const onSetDate = date => {
     props.input.onChange(date);
   };
 
+  // @ts-ignore
   const onSetWhatDate = (what, value) => {
     props.input.onChange({
       ...props.input.value,
@@ -69,6 +79,7 @@ const InputDateRange = (props: PropsType) => {
     });
   };
 
+  // @ts-ignore
   const onChangeRaw = (what, val, dateFormat) => {
     const potentialDate = parseDate(val, dateFormat);
 
@@ -89,6 +100,7 @@ const InputDateRange = (props: PropsType) => {
     }
   };
 
+  // @ts-ignore
   const applyDate = (what, val, displayDateFormat) => {
     if (parseDate(val, displayDateFormat) === null) {
       onSetWhatDate(what, "");
@@ -111,24 +123,34 @@ const InputDateRange = (props: PropsType) => {
   const max = getDisplayDate("max", value, displayDateFormat);
 
   return (
+    // @ts-ignore
     <Root center={center}>
       {label && (
+        // @ts-ignore
         <StyledLabel large={large}>
           {label}
           <InfoTooltip
+            // @ts-ignore
             text={T.translate("inputDateRange.tooltip.possiblePattern")}
           />
           {labelSuffix && labelSuffix}
         </StyledLabel>
       )}
-      <Pickers inline={inline} center={center}>
+      <Pickers
+        // @ts-ignore
+        inline={inline}
+        center={center}
+      >
         <StyledLabeled label={T.translate("inputDateRange.from")}>
           <BaseInput
             inputType="text"
             value={min}
+            // @ts-ignore
             placeholder={displayDateFormat.toUpperCase()}
             onChange={value => onChangeRaw("min", value, displayDateFormat)}
+            // @ts-ignore
             onBlur={e => applyDate("min", e.target.value, displayDateFormat)}
+            // @ts-ignore
             inputProps={{ tabIndex: 1, autoFocus: true }}
           />
         </StyledLabeled>
@@ -136,9 +158,12 @@ const InputDateRange = (props: PropsType) => {
           <BaseInput
             inputType="text"
             value={max}
+            // @ts-ignore
             placeholder={displayDateFormat.toUpperCase()}
             onChange={value => onChangeRaw("max", value, displayDateFormat)}
+            // @ts-ignore
             onBlur={e => applyDate("max", e.target.value, displayDateFormat)}
+            // @ts-ignore
             inputProps={{ tabIndex: 2 }}
           />
         </StyledLabeled>

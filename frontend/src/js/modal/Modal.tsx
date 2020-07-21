@@ -54,15 +54,17 @@ interface ContentPropsT {
 
 const ModalContentComponent: React.FC<ContentPropsT> = ({
   children,
-  onClose,
+  onClose
 }) => {
+  // @ts-ignore
   ModalContentComponent.handleClickOutside = onClose;
 
   return <Content>{children}</Content>;
 };
 
 const ModalContent = onClickOutside(ModalContentComponent, {
-  handleClickOutside: () => ModalContentComponent.handleClickOutside,
+  // @ts-ignore
+  handleClickOutside: () => ModalContentComponent.handleClickOutside
 });
 // -----------------------------------------------
 
@@ -86,7 +88,7 @@ const Modal: React.FC<PropsT> = ({
   tabIndex,
   doneButton,
   closeIcon,
-  onClose,
+  onClose
 }) => {
   return (
     <Root className={className}>

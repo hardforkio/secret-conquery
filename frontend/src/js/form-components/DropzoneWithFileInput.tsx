@@ -10,7 +10,8 @@ const FileInput = styled("input")`
 `;
 
 const SxDropzone = styled(Dropzone)`
-  cursor: ${({ isInitial }) => (isInitial ? "initial" : "pointer")};
+  cursor: ${//@ts-ignore
+  ({ isInitial }) => (isInitial ? "initial" : "pointer")};
   transition: box-shadow ${({ theme }) => theme.transitionTime};
   position: relative;
 
@@ -22,7 +23,8 @@ const SxDropzone = styled(Dropzone)`
 const TopRight = styled("p")`
   margin: 0;
   font-size: ${({ theme }) => theme.font.tiny};
-  color: ${({ theme }) => theme.font.gray};
+  color: ${//@ts-ignore
+  ({ theme }) => theme.font.gray};
   position: absolute;
   top: 5px;
   right: 10px;
@@ -62,12 +64,14 @@ export default ({
   const dropTypes = [...(acceptedDropTypes || []), NativeTypes.FILE];
 
   function onOpenFileDialog() {
+    // @ts-ignore
     fileInputRef.current.click();
   }
 
   return (
     <SxDropzone
       acceptedDropTypes={dropTypes}
+      // @ts-ignore
       onClick={() => {
         if (disableClick) return;
 
@@ -86,8 +90,10 @@ export default ({
             ref={fileInputRef}
             type="file"
             onChange={e => {
+              // @ts-ignore
               onSelectFile(e.target.files[0]);
 
+              // @ts-ignore
               fileInputRef.current.value = null;
             }}
           />

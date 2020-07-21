@@ -41,7 +41,7 @@ type PropsType = {
   datasetId: string;
   resultCount: number;
   resultUrl: string;
-  userCanDownloadResult: Boolean;
+  userCanDownloadResult: boolean;
 };
 
 const QueryResults = (props: PropsType) => {
@@ -66,6 +66,7 @@ const QueryResults = (props: PropsType) => {
       {ending === "csv" && <SxPreviewButton url={props.resultUrl} />}
       {isDownloadAllowed && ending && (
         <StyledDownloadButton
+          //@ts-ignore
           frame
           primary
           ending={ending}
@@ -79,5 +80,6 @@ const QueryResults = (props: PropsType) => {
 };
 
 export default connect((state, ownProps) => ({
+  //@ts-ignore
   userCanDownloadResult: canDownloadResult(state, ownProps.datasetId)
 }))(QueryResults);

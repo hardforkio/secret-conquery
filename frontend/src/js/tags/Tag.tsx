@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 type PropsType = {
+  //@ts-ignore
   children?: React.Node;
   className?: string;
   isSelected: boolean;
@@ -18,7 +19,8 @@ const Root = styled("p")`
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 1px solid ${({ theme }) => theme.col.grayMediumLight};
 
-  ${({ isClickable, theme }) =>
+  ${//@ts-ignore
+  ({ isClickable, theme }) =>
     isClickable &&
     css`
       cursor: pointer;
@@ -28,7 +30,8 @@ const Root = styled("p")`
       }
     `};
 
-  ${({ isSelected, theme }) =>
+  ${//@ts-ignore
+  ({ isSelected, theme }) =>
     isSelected &&
     css`
       background-color: ${theme.col.blueGrayLight};
@@ -42,6 +45,7 @@ const Tag = (props: PropsType) => {
   return (
     <Root
       className={props.className}
+      //@ts-ignore
       isClickable={!!props.onClick}
       isSelected={!!props.isSelected}
       onClick={props.onClick}

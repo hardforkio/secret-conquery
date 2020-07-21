@@ -31,11 +31,12 @@ const CenteredIcon = styled(FaIcon)`
 
 type PropsType = {
   loading: boolean;
-  resolved: Object;
-  error: Object;
+  resolved: Record<string, any>;
+  error: Record<string, any>;
   onClose: Function;
 };
 
+// @ts-ignore
 const selectResolvedItemsCount = resolved => {
   return resolved &&
     resolved.resolvedFilter &&
@@ -45,6 +46,7 @@ const selectResolvedItemsCount = resolved => {
     : 0;
 };
 
+// @ts-ignore
 const selectUnresolvedItemsCount = resolved => {
   return resolved && resolved.unknownCodes && resolved.unknownCodes.length
     ? resolved.unknownCodes.length
@@ -60,6 +62,7 @@ export default ({ loading, resolved, error, onClose }: PropsType) => {
 
   return (
     <Modal
+      // @ts-ignore
       onClose={onClose}
       doneButton
       headline={T.translate("uploadFilterListModal.headline")}
@@ -88,6 +91,7 @@ export default ({ loading, resolved, error, onClose }: PropsType) => {
                   <ErrorIcon icon="exclamation-circle" />
                   <span
                     dangerouslySetInnerHTML={{
+                      // @ts-ignore
                       __html: T.translate(
                         "uploadConceptListModal.unknownCodes",
                         {
@@ -100,6 +104,7 @@ export default ({ loading, resolved, error, onClose }: PropsType) => {
                 <ScrollableList
                   maxVisibleItems={3}
                   fullWidth
+                  // @ts-ignore
                   items={resolved.unknownCodes}
                 />
               </>

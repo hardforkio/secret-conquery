@@ -30,7 +30,7 @@ const ResetAll = styled(IconButton)`
 `;
 
 type PropsType = {
-  group: Object;
+  group: Record<string, any>;
   andIdx: number;
   onClose: () => void;
   onSetDate: (date: any) => void;
@@ -40,6 +40,7 @@ type PropsType = {
 const QueryGroupModal = (props: PropsType) => {
   if (!props.group) return null;
 
+  // @ts-ignore
   const { dateRange } = props.group;
 
   const minDate = dateRange ? dateRange.min : null;
@@ -56,20 +57,28 @@ const QueryGroupModal = (props: PropsType) => {
       headline={T.translate("queryGroupModal.explanation")}
     >
       <Elements>
-        {props.group.elements.reduce(
-          (parts, concept, i, elements) => [
-            ...parts,
-            <HeadlinePart key={i + "-headline"}>
-              {concept.label || concept.id}
-            </HeadlinePart>,
-            i !== elements.length - 1 ? <span key={i + "-comma"}>, </span> : ""
-          ],
-          [
-            <HeadlinePart key={-1}>
-              {T.translate("queryGroupModal.headlineStart")}
-            </HeadlinePart>
-          ]
-        )}
+        {
+          // @ts-ignore
+          props.group.elements.reduce(
+            // @ts-ignore
+            (parts, concept, i, elements) => [
+              ...parts,
+              <HeadlinePart key={i + "-headline"}>
+                {concept.label || concept.id}
+              </HeadlinePart>,
+              i !== elements.length - 1 ? (
+                <span key={i + "-comma"}>, </span>
+              ) : (
+                ""
+              )
+            ],
+            [
+              <HeadlinePart key={-1}>
+                {T.translate("queryGroupModal.headlineStart")}
+              </HeadlinePart>
+            ]
+          )
+        }
       </Elements>
       <InputDateRange
         large
@@ -93,12 +102,14 @@ const QueryGroupModal = (props: PropsType) => {
   );
 };
 
+// @ts-ignore
 function findGroup(query, andIdx) {
   if (!query[andIdx]) return null;
 
   return query[andIdx];
 }
 
+// @ts-ignore
 const mapStateToProps = state => ({
   group: findGroup(state.queryEditor.query, state.queryGroupModal.andIdx),
   andIdx: state.queryGroupModal.andIdx
@@ -106,15 +117,19 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   onClose: () => dispatch(queryGroupModalClearNode()),
+  // @ts-ignore
   onSetDate: (andIdx, date) => dispatch(queryGroupModalSetDate(andIdx, date)),
+  // @ts-ignore
   onResetAllDates: andIdx => dispatch(queryGroupModalResetAllDates(andIdx))
 });
 
 // Used to enhance the dispatchProps with the andIdx
+// @ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
   ...dispatchProps,
+  // @ts-ignore
   onSetDate: date => dispatchProps.onSetDate(stateProps.andIdx, date),
   onResetAllDates: () => dispatchProps.onResetAllDates(stateProps.andIdx)
 });

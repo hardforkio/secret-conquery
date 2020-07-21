@@ -30,7 +30,8 @@ const Bar = styled("div")`
 `;
 
 const BarProgress = styled("div")`
-  width: ${({ donePercent }) => `${donePercent}%`};
+  width: ${//@ts-ignore
+  ({ donePercent }) => `${donePercent}%`};
   height: 100%;
   background-color: ${({ theme }) => theme.col.blueGrayDark};
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -56,7 +57,10 @@ export default ({ trees }: PropsT) => {
         </Text>
       </Row>
       <Bar>
-        <BarProgress donePercent={donePercent} />
+        <BarProgress
+          //@ts-ignore
+          donePercent={donePercent}
+        />
       </Bar>
     </Root>
   );

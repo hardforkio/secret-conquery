@@ -4,12 +4,14 @@ import {
   LOAD_CONFIGS_ERROR,
   LOAD_CONFIGS_SUCCESS,
   PATCH_CONFIG_SUCCESS,
-  DELETE_CONFIG_SUCCESS,
+  DELETE_CONFIG_SUCCESS
 } from "./actionTypes";
 
 export const loadFormConfigsSuccess = (response: FormConfigT[]) =>
   defaultSuccess(LOAD_CONFIGS_SUCCESS, response);
 export const loadFormConfigsError = (err: Error) =>
+  //@ts-ignore
+
   defaultError(LOAD_CONFIGS_ERROR, err);
 
 export const patchFormConfigSuccess = (

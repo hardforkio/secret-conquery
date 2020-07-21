@@ -33,6 +33,7 @@ const TableView = (props: PropsType) => {
     onLoadFilterSuggestions
   } = props;
 
+  // @ts-ignore
   const table = node.tables[editorState.selectedInputTableIdx];
 
   const displaySelects = !!table.selects && table.selects.length > 0;
@@ -43,9 +44,11 @@ const TableView = (props: PropsType) => {
   return (
     <Column>
       {displaySelects && (
+        // @ts-ignore
         <ContentCell headline={T.translate("queryNodeEditor.selects")}>
           <TableSelects
             selects={table.selects}
+            // @ts-ignore
             onSelectTableSelects={value =>
               onSelectTableSelects(editorState.selectedInputTableIdx, value)
             }
@@ -54,6 +57,7 @@ const TableView = (props: PropsType) => {
       )}
       {displayDateColumnOptions && (
         <ContentCell
+          // @ts-ignore
           headline={T.translate("queryNodeEditor.selectValidityDate")}
         >
           <DateColumnSelect
@@ -65,15 +69,19 @@ const TableView = (props: PropsType) => {
         </ContentCell>
       )}
       {displayFilters && (
+        // @ts-ignore
         <MaximizedCell headline={T.translate("queryNodeEditor.filters")}>
           <TableFilters
             key={editorState.selectedInputTableIdx}
             filters={table.filters}
             context={{
+              // @ts-ignore
               datasetId,
+              // @ts-ignore
               treeId: node.tree,
               tableId: table.id
             }}
+            // @ts-ignore
             onSetFilterValue={(filterIdx, value) =>
               onSetFilterValue(
                 editorState.selectedInputTableIdx,
@@ -81,6 +89,7 @@ const TableView = (props: PropsType) => {
                 value
               )
             }
+            // @ts-ignore
             onSwitchFilterMode={(filterIdx, mode) =>
               onSwitchFilterMode(
                 editorState.selectedInputTableIdx,
@@ -88,9 +97,11 @@ const TableView = (props: PropsType) => {
                 mode
               )
             }
+            // @ts-ignore
             onLoadFilterSuggestions={(filterIdx, filterId, prefix) =>
               onLoadFilterSuggestions(
                 datasetId,
+                // @ts-ignore
                 node.tree,
                 table.id,
                 filterId,
@@ -101,9 +112,11 @@ const TableView = (props: PropsType) => {
             }
             suggestions={
               !!props.suggestions &&
+              // @ts-ignore
               props.suggestions[editorState.selectedInputTableIdx]
             }
             onShowDescription={editorState.onShowDescription}
+            // @ts-ignore
             currencyConfig={props.currencyConfig}
           />
         </MaximizedCell>

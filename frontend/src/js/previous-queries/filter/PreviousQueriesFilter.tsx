@@ -16,24 +16,24 @@ const PreviousQueriesFilter: FC = () => {
   const OPTIONS = [
     {
       value: "all",
-      label: T.translate("previousQueriesFilter.all") as string,
+      label: T.translate("previousQueriesFilter.all") as string
     },
     {
       value: "own",
-      label: T.translate("previousQueriesFilter.own") as string,
+      label: T.translate("previousQueriesFilter.own") as string
     },
     {
       value: "system",
-      label: T.translate("previousQueriesFilter.system") as string,
+      label: T.translate("previousQueriesFilter.system") as string
     },
     {
       value: "shared",
-      label: T.translate("previousQueriesFilter.shared") as string,
-    },
+      label: T.translate("previousQueriesFilter.shared") as string
+    }
   ];
 
   const selectedFilter = useSelector<StateT, string>(
-    (state) => state.previousQueriesFilter
+    state => state.previousQueriesFilter
   );
   const dispatch = useDispatch();
   const setFilter = (filter: string) =>
@@ -44,7 +44,7 @@ const PreviousQueriesFilter: FC = () => {
       className="previous-queries-filter"
       options={OPTIONS}
       selectedTab={selectedFilter}
-      onSelectTab={(tab) => setFilter(tab)}
+      onSelectTab={tab => setFilter(tab)}
     />
   );
 };

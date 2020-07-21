@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+//@ts-ignore
 import type { Dispatch } from "redux-thunk";
 
 import QueryRunner from "../query-runner/QueryRunner";
@@ -7,16 +8,20 @@ import { validateQueryLength, validateQueryDates } from "../model/query";
 
 import actions from "../app/actions";
 
+//@ts-ignore
 const { startStandardQuery, stopStandardQuery } = actions;
 
+//@ts-ignore
 function validateQueryStartStop(queryRunner) {
   return !queryRunner.startQuery.loading && !queryRunner.stopQuery.loading;
 }
 
+//@ts-ignore
 function validateDataset(datasetId) {
   return datasetId !== null;
 }
 
+//@ts-ignore
 function getButtonTooltipKey(hasQueryValidDates) {
   if (!hasQueryValidDates) {
     return "queryRunner.errorDates";
@@ -27,6 +32,7 @@ function getButtonTooltipKey(hasQueryValidDates) {
   return null;
 }
 
+//@ts-ignore
 const mapStateToProps = (state, ownProps) => {
   const { query, queryRunner } = state.queryEditor;
 
@@ -52,12 +58,15 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  //@ts-ignore
   startQuery: (datasetId, query, version) =>
     dispatch(startStandardQuery(datasetId, query, version)),
+  //@ts-ignore
   stopQuery: (datasetId, queryId) =>
     dispatch(stopStandardQuery(datasetId, queryId))
 });
 
+//@ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,

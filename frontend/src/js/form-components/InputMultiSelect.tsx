@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import T from "i18n-react";
 import { components } from "react-select";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 import Markdown from "react-markdown";
 import Mustache from "mustache";
@@ -62,6 +63,7 @@ const InfoText = styled("p")`
 // TODO: Unlimited here + paginated backend vs
 const OPTIONS_LIMIT = 50;
 
+// @ts-ignore
 const MultiValueLabel = params => {
   const label = params.data.optionLabel || params.data.label || params.data;
   const valueLabel = params.data.templateValues
@@ -75,6 +77,7 @@ const MultiValueLabel = params => {
   );
 };
 
+// @ts-ignore
 const optionContainsStr = str => option => {
   return (
     option.value.toString().toLowerCase().includes(str) ||
@@ -90,6 +93,7 @@ const InputMultiSelect = (props: PropsType) => {
 
   const options =
     !!props.options &&
+    // @ts-ignore
     props.options.slice(0, OPTIONS_LIMIT).map(option => ({
       ...option,
       label:
@@ -100,6 +104,7 @@ const InputMultiSelect = (props: PropsType) => {
       optionLabel: option.label
     }));
 
+  // @ts-ignore
   const MenuList = ({ children, ...ownProps }) => {
     return (
       <div>
@@ -122,7 +127,12 @@ const InputMultiSelect = (props: PropsType) => {
             {T.translate("inputMultiSelect.insertAll")}
           </TransparentButton>
         </Row>
-        <components.MenuList {...ownProps}>{children}</components.MenuList>
+        <// @ts-ignore
+        components.MenuList
+          {...ownProps}
+        >
+          {children}
+        </components.MenuList>
       </div>
     );
   };
@@ -151,13 +161,16 @@ const InputMultiSelect = (props: PropsType) => {
       onChange={props.input.onChange}
       onInputChange={
         props.onInputChange || // To allow for async option loading
+        // @ts-ignore
         function (value) {
           return value;
         }
       }
+      // @ts-ignore
       formatCreateLabel={inputValue =>
         T.translate("common.create") + `: "${inputValue}"`
       }
+      // @ts-ignore
       formatOptionLabel={({ label, optionValue, templateValues, highlight }) =>
         optionValue && templateValues ? (
           <SxMarkdown source={Mustache.render(optionValue, templateValues)} />
@@ -190,6 +203,7 @@ const InputMultiSelect = (props: PropsType) => {
       )}
       {!hasTooManyValues && !allowDropFile && Select}
       {!hasTooManyValues && allowDropFile && (
+        // @ts-ignore
         <SxInputMultiSelectDropzone onDropFile={props.onDropFile}>
           {() => Select}
         </SxInputMultiSelectDropzone>

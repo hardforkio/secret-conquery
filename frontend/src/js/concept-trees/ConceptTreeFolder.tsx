@@ -16,7 +16,7 @@ const Root = styled("div")`
 
 type PropsType = {
   depth: number;
-  trees: Object;
+  trees: Record<string, any>;
   tree: ConceptT;
   treeId: ConceptIdT;
   active: boolean;
@@ -26,7 +26,11 @@ type PropsType = {
   onLoadTree: (id: string) => void;
 };
 
+//@ts-ignore
+
 const sumMatchingEntries = (children, initSum) => {
+  //@ts-ignore
+
   return children.reduce((sum, treeId) => {
     const rootConcept = getConceptById(treeId);
     const rootMatchingEntries = rootConcept ? rootConcept.matchingEntries : 0;
@@ -48,9 +52,17 @@ const ConceptTreeFolder = (props: PropsType) => {
         node={{
           id: props.treeId,
           label: props.tree.label,
+          //@ts-ignore
+
           description: props.tree.description,
+          //@ts-ignore
+
           matchingEntries: matchingEntries,
+          //@ts-ignore
+
           dateRange: props.tree.dateRange,
+          //@ts-ignore
+
           additionalInfos: props.tree.additionalInfos,
           children: props.tree.children
         }}
@@ -68,6 +80,8 @@ const ConceptTreeFolder = (props: PropsType) => {
       {props.open &&
         props.tree.children &&
         props.tree.children.map((childId, i) => {
+          //@ts-ignore
+
           const tree = props.trees[childId];
 
           const treeProps = {

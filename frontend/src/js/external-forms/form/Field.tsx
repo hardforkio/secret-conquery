@@ -67,7 +67,9 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           component={Text}
           props={{
             inputType: "text",
+            // @ts-ignore
             label: field.label[locale],
+            // @ts-ignore
             placeholder: (field.placeholder && field.placeholder[locale]) || ""
           }}
         />
@@ -79,7 +81,9 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           component={Text}
           props={{
             inputType: "number",
+            // @ts-ignore
             label: field.label[locale],
+            // @ts-ignore
             placeholder: (field.placeholder && field.placeholder[locale]) || "",
             inputProps: {
               step: field.step || "1",
@@ -97,6 +101,7 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           component={DateRange}
           props={{
             inline: true,
+            // @ts-ignore
             label: field.label[locale]
           }}
         />
@@ -107,7 +112,9 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           name={field.name}
           component={QueryDropzone}
           props={{
+            // @ts-ignore
             label: field.label[locale],
+            // @ts-ignore
             dropzoneText: field.dropzoneLabel[locale]
           }}
         />
@@ -118,7 +125,9 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           name={field.name}
           component={MultiQueryDropzone}
           props={{
+            // @ts-ignore
             label: field.label[locale],
+            // @ts-ignore
             dropzoneChildren: () => field.dropzoneLabel[locale]
           }}
         />
@@ -129,6 +138,7 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           name={field.name}
           component={Checkbox}
           props={{
+            // @ts-ignore
             label: field.label[locale]
           }}
         />
@@ -139,8 +149,10 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           name={field.name}
           component={Select}
           props={{
+            // @ts-ignore
             label: field.label[locale],
             options: field.options.map(option => ({
+              // @ts-ignore
               label: option.label[locale],
               value: option.value
             }))
@@ -153,6 +165,7 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           name={field.name}
           component={Select}
           props={{
+            // @ts-ignore
             label: field.label[locale],
             options: availableDatasets
           }}
@@ -170,6 +183,7 @@ const Field = ({ field, ...commonProps }: PropsType) => {
             component={ToggleBtn}
             props={{
               options: field.tabs.map(tab => ({
+                // @ts-ignore
                 label: tab.title[locale],
                 value: tab.name
               }))
@@ -188,12 +202,15 @@ const Field = ({ field, ...commonProps }: PropsType) => {
           component={ConceptGroup}
           props={{
             fieldName: field.name,
+            // @ts-ignore
             label: field.label[locale],
             conceptDropzoneText: field.conceptDropzoneLabel
-              ? field.conceptDropzoneLabel[locale]
+              ? // @ts-ignore
+                field.conceptDropzoneLabel[locale]
               : T.translate("externalForms.default.conceptDropzoneLabel"),
             attributeDropzoneText: field.conceptColumnDropzoneLabel
-              ? field.conceptColumnDropzoneLabel[locale]
+              ? // @ts-ignore
+                field.conceptColumnDropzoneLabel[locale]
               : T.translate("externalForms.default.conceptDropzoneLabel"),
             datasetId: selectedDatasetId,
             formType,
@@ -203,8 +220,9 @@ const Field = ({ field, ...commonProps }: PropsType) => {
             blacklistedTables: field.blacklistedConnectors,
             whitelistedTables: field.whitelistedConnectors,
             defaults: field.defaults,
-            isValidConcept: (item: Object) =>
+            isValidConcept: (item: Record<string, any>) =>
               !nodeIsInvalid(
+                // @ts-ignore
                 item,
                 field.blacklistedConceptIds,
                 field.whitelistedConceptIds
@@ -223,19 +241,25 @@ const Field = ({ field, ...commonProps }: PropsType) => {
               : { concepts: [] },
             renderRowPrefix:
               field.rowPrefixField &&
+              // @ts-ignore
               ((input, feature, i) => (
                 <SxInputSelect
+                  // @ts-ignore
                   options={field.rowPrefixField.options.map(option => ({
+                    // @ts-ignore
                     label: option.label[locale],
                     value: option.value
                   }))}
                   input={{
+                    // @ts-ignore
                     value: feature[field.rowPrefixField.name],
+                    // @ts-ignore
                     onChange: value =>
                       input.onChange([
                         ...input.value.slice(0, i),
                         {
                           ...input.value[i],
+                          // @ts-ignore
                           [field.rowPrefixField.name]: value
                         },
                         ...input.value.slice(i + 1)

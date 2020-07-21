@@ -29,7 +29,7 @@ import {
   renamePreviousQuery,
   retagPreviousQuery,
   toggleEditPreviousQueryLabel,
-  toggleEditPreviousQueryTags,
+  toggleEditPreviousQueryTags
 } from "./actions";
 
 import PreviousQueryTags from "./PreviousQueryTags";
@@ -38,24 +38,28 @@ import { PreviousQueryT } from "./reducer";
 import PreviousQueriesLabel from "./PreviousQueriesLabel";
 
 const nodeSource = {
+  //@ts-ignore
   beginDrag(props, monitor, component): DraggedQueryType {
+    //@ts-ignore
     const { width, height } = findDOMNode(component).getBoundingClientRect();
     // Return the data describing the dragged item
     return {
+      //@ts-ignore
       width,
       height,
       id: props.query.id,
       label: props.query.label,
-      isPreviousQuery: true,
+      isPreviousQuery: true
     };
-  },
+  }
 };
 
 // These props get injected into the component
+//@ts-ignore
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
+    isDragging: monitor.isDragging()
   };
 }
 
@@ -68,7 +72,8 @@ const Root = styled("div")`
   background-color: ${({ theme }) => theme.col.bg};
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 
-  border-left: ${({ theme, own, system }) =>
+  border-left: ${//@ts-ignore
+  ({ theme, own, system }) =>
     own
       ? `4px solid ${theme.col.orange}`
       : system
@@ -76,7 +81,8 @@ const Root = styled("div")`
       : `1px solid ${theme.col.grayLight}`};
 
   &:hover {
-    ${({ theme, own, system }) =>
+    ${//@ts-ignore
+    ({ theme, own, system }) =>
       !own &&
       !system &&
       css`
@@ -135,6 +141,7 @@ type PropsType = {
 
 // Has to be a class because of https://github.com/react-dnd/react-dnd/issues/530
 class PreviousQuery extends React.Component {
+  //@ts-ignore
   props: PropsType;
 
   render() {
@@ -148,7 +155,7 @@ class PreviousQuery extends React.Component {
       onToggleEditPreviousQueryLabel,
       onRetagPreviousQuery,
       onToggleSharePreviousQuery,
-      userCanDownloadResults,
+      userCanDownloadResults
     } = this.props;
 
     const peopleFound = isEmpty(query.numberOfResults)
@@ -161,30 +168,46 @@ class PreviousQuery extends React.Component {
     );
     const label = query.label || query.id.toString();
     const mayEditQuery = query.own || query.shared;
+    //@ts-ignore
     const isNotEditing = !(query.editingLabel || query.editingTags);
 
     return (
       <Root
-        ref={(instance) => {
+        ref={instance => {
+          //@ts-ignore
           if (isNotEditing) connectDragSource(instance);
         }}
+        //@ts-ignore
         own={!!query.own}
         shared={!!query.shared}
+        //@ts-ignore
         system={!!query.system || (!query.own && !query.shared)}
       >
         <TopInfos>
           <div>
-            {!!query.resultUrl && userCanDownloadResults ? (
-              <WithTooltip text={T.translate("previousQuery.downloadResults")}>
-                <DownloadButton tight bare url={query.resultUrl}>
-                  {peopleFound}
-                </DownloadButton>
-              </WithTooltip>
-            ) : (
-              peopleFound
-            )}
+            {
+              //@ts-ignore
+              !!query.resultUrl && userCanDownloadResults ? (
+                <WithTooltip
+                  text={T.translate("previousQuery.downloadResults")}
+                >
+                  <DownloadButton
+                    //@ts-ignore
+                    tight
+                    bare
+                    //@ts-ignore
+                    url={query.resultUrl}
+                  >
+                    {peopleFound}
+                  </DownloadButton>
+                </WithTooltip>
+              ) : (
+                peopleFound
+              )
+            }
             {query.own && query.shared && (
               <SharedIndicator
+                //@ts-ignore
                 onClick={() => onToggleSharePreviousQuery(!query.shared)}
               >
                 {T.translate("common.shared")}
@@ -193,6 +216,7 @@ class PreviousQuery extends React.Component {
             <TopRight>
               {executedAt}
               {mayEditQuery &&
+                //@ts-ignore
                 !query.editingTags &&
                 (!query.tags || query.tags.length === 0) && (
                   <StyledWithTooltip text={T.translate("common.addTag")}>
@@ -208,6 +232,7 @@ class PreviousQuery extends React.Component {
                   <IconButton
                     icon="upload"
                     bare
+                    //@ts-ignore
                     onClick={() => onToggleSharePreviousQuery(!query.shared)}
                   />
                 </StyledWithTooltip>
@@ -234,15 +259,22 @@ class PreviousQuery extends React.Component {
             loading={!!query.loading}
             label={label}
             selectTextOnMount={true}
+            //@ts-ignore
             editing={!!query.editingLabel}
             onSubmit={onRenamePreviousQuery}
             onToggleEdit={onToggleEditPreviousQueryLabel}
           />
-          <Gray>{query.ownerName}</Gray>
+          <Gray>
+            {
+              //@ts-ignore
+              query.ownerName
+            }
+          </Gray>
         </MiddleRow>
         {mayEditQuery ? (
           <EditableTags
             tags={query.tags}
+            //@ts-ignore
             editing={!!query.editingTags}
             loading={!!query.loading}
             onSubmit={onRetagPreviousQuery}
@@ -259,48 +291,60 @@ class PreviousQuery extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+//@ts-ignore
+const mapStateToProps = state => ({
   availableTags: state.previousQueries.tags,
-  userCanDownloadResults: canDownloadResult(state),
+  userCanDownloadResults: canDownloadResult(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+//@ts-ignore
+const mapDispatchToProps = dispatch => ({
+  //@ts-ignore
   onToggleSharePreviousQuery: (datasetId, queryId, shared) =>
     dispatch(toggleSharePreviousQuery(datasetId, queryId, shared)),
 
+  //@ts-ignore
   onRenamePreviousQuery: (datasetId, queryId, label) =>
     dispatch(renamePreviousQuery(datasetId, queryId, label)),
 
+  //@ts-ignore
   onRetagPreviousQuery: (datasetId, queryId, tags) =>
     dispatch(retagPreviousQuery(datasetId, queryId, tags)),
 
-  onDeletePreviousQuery: (queryId) =>
+  //@ts-ignore
+  onDeletePreviousQuery: queryId =>
     dispatch(deletePreviousQueryModalOpen(queryId)),
 
-  onToggleEditPreviousQueryLabel: (queryId) =>
+  //@ts-ignore
+  onToggleEditPreviousQueryLabel: queryId =>
     dispatch(toggleEditPreviousQueryLabel(queryId)),
 
-  onToggleEditPreviousQueryTags: (queryId) =>
-    dispatch(toggleEditPreviousQueryTags(queryId)),
+  //@ts-ignore
+  onToggleEditPreviousQueryTags: queryId =>
+    dispatch(toggleEditPreviousQueryTags(queryId))
 });
 
+//@ts-ignore
 const mapProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onToggleSharePreviousQuery: (shared) =>
+  //@ts-ignore
+  onToggleSharePreviousQuery: shared =>
     dispatchProps.onToggleSharePreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
       shared
     ),
-  onRenamePreviousQuery: (label) =>
+  //@ts-ignore
+  onRenamePreviousQuery: label =>
     dispatchProps.onRenamePreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
       label
     ),
-  onRetagPreviousQuery: (tags) =>
+  //@ts-ignore
+  onRetagPreviousQuery: tags =>
     dispatchProps.onRetagPreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
@@ -311,7 +355,7 @@ const mapProps = (stateProps, dispatchProps, ownProps) => ({
   onToggleEditPreviousQueryLabel: () =>
     dispatchProps.onToggleEditPreviousQueryLabel(ownProps.query.id),
   onToggleEditPreviousQueryTags: () =>
-    dispatchProps.onToggleEditPreviousQueryTags(ownProps.query.id),
+    dispatchProps.onToggleEditPreviousQueryTags(ownProps.query.id)
 });
 
 export default connect(

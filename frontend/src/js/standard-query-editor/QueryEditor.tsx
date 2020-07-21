@@ -22,8 +22,14 @@ const Root = styled("div")`
 export const QueryEditor = (props: PropsType) => (
   <Root>
     <Query selectedDatasetId={props.selectedDatasetId} />
-    <StandardQueryNodeEditor datasetId={props.selectedDatasetId} />
-    <QueryUploadConceptListModal selectedDatasetId={props.selectedDatasetId} />
+    <StandardQueryNodeEditor
+      // @ts-ignore
+      datasetId={props.selectedDatasetId}
+    />
+    <QueryUploadConceptListModal
+      // @ts-ignore
+      selectedDatasetId={props.selectedDatasetId}
+    />
     <QueryGroupModal />
   </Root>
 );

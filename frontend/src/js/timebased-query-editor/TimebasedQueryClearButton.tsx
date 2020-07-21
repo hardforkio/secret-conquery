@@ -24,6 +24,7 @@ const TimebasedQueryClearButton = (props: PropsType) => {
         onClick={props.clearQuery}
         regular
         icon="trash-alt"
+        //@ts-ignore
         disabled={!props.isEnabled}
       >
         {T.translate("common.clear")}
@@ -32,12 +33,14 @@ const TimebasedQueryClearButton = (props: PropsType) => {
   );
 };
 
+//@ts-ignore
 const mapStateToProps = state => ({
   isEnabled:
     state.timebasedQueryEditor.timebasedQuery.conditions.length > 1 ||
     anyConditionFilled(state.timebasedQueryEditor.timebasedQuery)
 });
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
   clearQuery: () => dispatch(clearTimebasedQuery())
 });

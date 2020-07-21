@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 import {
   reducer as reduxFormReducer,
   FormReducer,
-  FormReducerMapObject,
+  FormReducerMapObject
 } from "redux-form";
 import createQueryRunnerReducer, {
-  QueryRunnerStateT,
+  QueryRunnerStateT
 } from "../query-runner/reducer";
 
 import { SET_EXTERNAL_FORM, LOAD_EXTERNAL_FORM_VALUES } from "./actionTypes";
@@ -13,17 +13,19 @@ import { SET_EXTERNAL_FORM, LOAD_EXTERNAL_FORM_VALUES } from "./actionTypes";
 import { createFormQueryNodeEditorReducer } from "./form-query-node-editor";
 import {
   createFormSuggestionsReducer,
-  FormSuggestionsStateT,
+  FormSuggestionsStateT
 } from "./form-suggestions/reducer";
 import { collectAllFields } from "./helper";
 
+//@ts-ignore
 import type { Forms, Form } from "./config-types";
 
 function collectConceptListFieldNames(config: Form) {
   const fieldNames = collectAllFields(config.fields)
-    .filter((field) => field.type === "CONCEPT_LIST")
-    .map((field) => field.name);
+    .filter(field => field.type === "CONCEPT_LIST")
+    .map(field => field.name);
 
+  //@ts-ignore
   return [...new Set(fieldNames)];
 }
 
@@ -47,7 +49,7 @@ function buildFormReducer(form: Form) {
         suggestions: createFormSuggestionsReducer(
           form.type,
           conceptListFieldNames
-        ),
+        )
       }
     )
   );
@@ -77,6 +79,7 @@ const buildExternalFormsReducer = (availableForms: {
 
     if (!reducer) return all;
 
+    //@ts-ignore
     all[form.type] = reducer;
 
     return all;
@@ -106,7 +109,7 @@ const buildExternalFormsReducer = (availableForms: {
 
             const stateKeys = Object.keys(state.values);
             const filteredValues = Object.keys(action.payload.values)
-              .filter((key) => stateKeys.includes(key))
+              .filter(key => stateKeys.includes(key))
               .reduce<any>((all, key) => {
                 all[key] = action.payload.values[key];
 
@@ -117,14 +120,14 @@ const buildExternalFormsReducer = (availableForms: {
               ...state,
               values: {
                 ...state.values,
-                ...filteredValues,
-              },
+                ...filteredValues
+              }
             };
           }
           default:
             return state;
         }
-      },
+      }
     }),
     {}
   );
@@ -140,7 +143,8 @@ const buildExternalFormsReducer = (availableForms: {
 
     availableForms: (state = availableForms) => state,
 
-    formsContext: combineReducers(formReducers),
+    //@ts-ignore
+    formsContext: combineReducers(formReducers)
   });
 };
 

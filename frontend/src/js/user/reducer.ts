@@ -16,8 +16,9 @@ const initialState: UserStateT = {
 
 const startup = (
   state: UserStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): UserStateT => {
+  // @ts-ignore
   switch (action.type) {
     case LOAD_ME_START:
       return {
@@ -28,12 +29,14 @@ const startup = (
       return {
         ...state,
         loading: false,
+        // @ts-ignore
         error: action.payload.message
       };
     case LOAD_ME_SUCCESS:
       return {
         ...state,
         loading: false,
+        // @ts-ignore
         me: action.payload.data
       };
     default:

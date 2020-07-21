@@ -18,6 +18,7 @@ import {
   setTimebasedConditionMinDaysOrNoEvent
 } from "./actions";
 
+//@ts-ignore
 import TimebasedCondition from "./TimebasedCondition";
 
 const Root = styled("div")`
@@ -37,7 +38,7 @@ const AddBtn = styled(IconButton)`
 `;
 
 type PropsType = {
-  query: Object;
+  query: Record<string, any>;
   onDropTimebasedNode: () => void;
   onRemoveTimebasedNode: () => void;
   onAddTimebasedCondition: () => void;
@@ -52,42 +53,65 @@ type PropsType = {
 
 const TimebasedQueryEditor = (props: PropsType) => {
   return (
+    /* eslint-disable */
     <Root>
-      {props.query.conditions.map((condition, idx) => (
-        <div key={`condition-${idx}`}>
-          <TimebasedCondition
-            condition={condition}
-            conditionIdx={idx}
-            indexResult={props.query.indexResult}
-            removable={props.query.conditions.length > 1}
-            onRemove={() => props.onRemoveTimebasedCondition(idx)}
-            onRemoveTimebasedNode={(resultIdx, moved) => {
-              props.onRemoveTimebasedNode(idx, resultIdx, moved);
-            }}
-            onSetOperator={value =>
-              props.onSetTimebasedConditionOperator(idx, value)
-            }
-            onDropTimebasedNode={(resultIdx, node, moved) => {
-              props.onDropTimebasedNode(idx, resultIdx, node, moved);
-            }}
-            onSetTimebasedNodeTimestamp={(resultIdx, timestamp) => {
-              props.onSetTimebasedNodeTimestamp(idx, resultIdx, timestamp);
-            }}
-            onSetTimebasedIndexResult={props.onSetTimebasedIndexResult}
-            onSetTimebasedConditionMinDays={days => {
-              props.onSetTimebasedConditionMinDays(idx, days);
-            }}
-            onSetTimebasedConditionMaxDays={days => {
-              props.onSetTimebasedConditionMaxDays(idx, days);
-            }}
-            onSetTimebasedConditionMinDaysOrNoEvent={days => {
-              props.onSetTimebasedConditionMinDaysOrNoEvent(idx, days);
-            }}
-          />
+      {
+        //@ts-ignore
+        props.query.conditions.map((condition, idx) => (
+          <div key={`condition-${idx}`}>
+            < // @ts-ignore
+              TimebasedCondition
+              /* eslint-enable */
+              condition={condition}
+              conditionIdx={idx}
+              //@ts-ignore
+              indexResult={props.query.indexResult}
+              //@ts-ignore
+              removable={props.query.conditions.length > 1}
+              //@ts-ignore
+              onRemove={() => props.onRemoveTimebasedCondition(idx)}
+              //@ts-ignore
+              onRemoveTimebasedNode={(resultIdx, moved) => {
+                //@ts-ignore
+                props.onRemoveTimebasedNode(idx, resultIdx, moved);
+              }}
+              //@ts-ignore
+              onSetOperator={value =>
+                //@ts-ignore
+                props.onSetTimebasedConditionOperator(idx, value)
+              }
+              //@ts-ignore
+              onDropTimebasedNode={(resultIdx, node, moved) => {
+                //@ts-ignore
+                props.onDropTimebasedNode(idx, resultIdx, node, moved);
+              }}
+              //@ts-ignore
+              onSetTimebasedNodeTimestamp={(resultIdx, timestamp) => {
+                //@ts-ignore
+                props.onSetTimebasedNodeTimestamp(idx, resultIdx, timestamp);
+              }}
+              onSetTimebasedIndexResult={props.onSetTimebasedIndexResult}
+              //@ts-ignore
+              onSetTimebasedConditionMinDays={days => {
+                //@ts-ignore
+                props.onSetTimebasedConditionMinDays(idx, days);
+              }}
+              //@ts-ignore
+              onSetTimebasedConditionMaxDays={days => {
+                //@ts-ignore
+                props.onSetTimebasedConditionMaxDays(idx, days);
+              }}
+              //@ts-ignore
+              onSetTimebasedConditionMinDaysOrNoEvent={days => {
+                //@ts-ignore
+                props.onSetTimebasedConditionMinDaysOrNoEvent(idx, days);
+              }}
+            />
 
-          <Connector>{T.translate("common.and")}</Connector>
-        </div>
-      ))}
+            <Connector>{T.translate("common.and")}</Connector>
+          </div>
+        ))
+      }
       <AddBtn icon="plus" onClick={props.onAddTimebasedCondition}>
         {T.translate("timebasedQueryEditor.addCondition")}
       </AddBtn>
@@ -95,27 +119,38 @@ const TimebasedQueryEditor = (props: PropsType) => {
   );
 };
 
+//@ts-ignore
 const mapStateToProps = state => ({
   query: state.timebasedQueryEditor.timebasedQuery
 });
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
   onAddTimebasedCondition: () => dispatch(addTimebasedCondition()),
+  //@ts-ignore
   onRemoveTimebasedCondition: idx => dispatch(removeTimebasedCondition(idx)),
+  //@ts-ignore
   onSetTimebasedConditionOperator: (idx, value) =>
     dispatch(setTimebasedConditionOperator(idx, value)),
+  //@ts-ignore
   onDropTimebasedNode: (conditionIdx, resultIdx, node, moved) =>
     dispatch(dropTimebasedNode(conditionIdx, resultIdx, node, moved)),
+  //@ts-ignore
   onSetTimebasedNodeTimestamp: (conditionIdx, resultIdx, timestamp) =>
     dispatch(setTimebasedNodeTimestamp(conditionIdx, resultIdx, timestamp)),
+  //@ts-ignore
   onRemoveTimebasedNode: (conditionIdx, resultIdx, moved) =>
     dispatch(removeTimebasedNode(conditionIdx, resultIdx, moved)),
+  //@ts-ignore
   onSetTimebasedIndexResult: indexResult =>
     dispatch(setTimebasedIndexResult(indexResult)),
+  //@ts-ignore
   onSetTimebasedConditionMinDays: (conditionIdx, days) =>
     dispatch(setTimebasedConditionMinDays(conditionIdx, days)),
+  //@ts-ignore
   onSetTimebasedConditionMaxDays: (conditionIdx, days) =>
     dispatch(setTimebasedConditionMaxDays(conditionIdx, days)),
+  //@ts-ignore
   onSetTimebasedConditionMinDaysOrNoEvent: (conditionIdx, days) =>
     dispatch(setTimebasedConditionMinDaysOrNoEvent(conditionIdx, days))
 });
@@ -123,4 +158,5 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
+  //@ts-ignore
 )(TimebasedQueryEditor);

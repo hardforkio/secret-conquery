@@ -28,6 +28,7 @@ export type PropsType = {
   onResetAllFilters: Function;
 };
 
+//@ts-ignore
 const mapStateToProps = (state, ownProps) => {
   const reduxFormState = selectReduxFormState(state);
   const conceptPosition = selectEditedConceptPosition(
@@ -57,13 +58,15 @@ const mapStateToProps = (state, ownProps) => {
 
   const formState = selectFormContextState(state, ownProps.formType);
   const suggestions = conceptPosition
-    ? selectSuggestions(formState, ownProps.fieldName, conceptPosition)
+    ? //@ts-ignore
+      selectSuggestions(formState, ownProps.fieldName, conceptPosition)
     : null;
 
   return {
     node,
     andIdx,
     orIdx,
+    //@ts-ignore
     editorState: formState[ownProps.fieldName],
     isExcludeTimestampsPossible: false,
     showTables,
@@ -74,32 +77,44 @@ const mapStateToProps = (state, ownProps) => {
 
     onToggleTimestamps: () => {},
     onCloseModal: () => ownProps.onCloseModal(andIdx, orIdx),
+    //@ts-ignore
     onUpdateLabel: label => ownProps.onUpdateLabel(andIdx, orIdx, label),
+    //@ts-ignore
     onDropConcept: concept => ownProps.onDropConcept(andIdx, orIdx, concept),
+    //@ts-ignore
     onRemoveConcept: conceptId =>
       ownProps.onRemoveConcept(andIdx, orIdx, conceptId),
+    //@ts-ignore
     onToggleTable: (...args) => ownProps.onToggleTable(andIdx, orIdx, ...args),
+    //@ts-ignore
     onSelectSelects: (...args) =>
       ownProps.onSelectSelects(andIdx, orIdx, ...args),
+    //@ts-ignore
     onSelectTableSelects: (...args) =>
       ownProps.onSelectTableSelects(andIdx, orIdx, ...args),
+    //@ts-ignore
     onSetFilterValue: (...args) =>
       ownProps.onSetFilterValue(andIdx, orIdx, ...args),
+    //@ts-ignore
     onSwitchFilterMode: (...args) =>
       ownProps.onSwitchFilterMode(andIdx, orIdx, ...args),
     onResetAllFilters: () => ownProps.onResetAllFilters(andIdx, orIdx),
+    //@ts-ignore
     onSetDateColumn: (...args) =>
       ownProps.onSetDateColumn(andIdx, orIdx, ...args)
   };
 };
 
+//@ts-ignore
 const mapDispatchToProps = (dispatch, ownProps) => {
+  //@ts-ignore
   const { loadFormFilterSuggestions } = createFormSuggestionActions(
     ownProps.formType,
     ownProps.fieldName
   );
 
   return {
+    //@ts-ignore
     onLoadFilterSuggestions: (...params) => {
       return dispatch(
         loadFormFilterSuggestions(
@@ -112,10 +127,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
+//@ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
   ...dispatchProps,
+  //@ts-ignore
   onLoadFilterSuggestions: (...params) =>
     dispatchProps.onLoadFilterSuggestions(
       ...params,

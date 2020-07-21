@@ -4,7 +4,9 @@ import Creatable from "react-select/creatable";
 import { withTheme } from "@emotion/react";
 
 // Helps to have a common ground for styling selects
+// @ts-ignore
 const stylesFromTheme = (theme, changed, small) => ({
+  // @ts-ignore
   control: (provided, state) => {
     const smallStyles = small
       ? {
@@ -25,12 +27,14 @@ const stylesFromTheme = (theme, changed, small) => ({
       }
     };
   },
+  // @ts-ignore
   dropdownIndicator: (provided, state) => {
     return {
       ...provided,
       padding: small ? "3px" : "6px"
     };
   },
+  // @ts-ignore
   option: (provided, state) => {
     return {
       ...provided,
@@ -49,6 +53,7 @@ const stylesFromTheme = (theme, changed, small) => ({
       }
     };
   },
+  // @ts-ignore
   multiValueRemove: provided => ({
     ...provided,
     cursor: "pointer",
@@ -59,9 +64,13 @@ const stylesFromTheme = (theme, changed, small) => ({
 });
 
 const ReactSelect = ({
+  // @ts-ignore
   theme,
+  // @ts-ignore
   creatable,
+  // @ts-ignore
   highlightChanged,
+  // @ts-ignore
   small,
   ...props
 }) => {

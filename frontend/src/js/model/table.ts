@@ -19,6 +19,7 @@ export const tableHasActiveFilters = (table: TableWithFilterValueType) =>
   tableHasNonDefaultDateColumn(table) ||
   (table.filters &&
     table.filters.some(
+      // @ts-ignore
       filter => !isEmpty(filter.value) && filter.value !== filter.defaultValue
     ));
 
@@ -63,6 +64,7 @@ export const resetAllFiltersInTables = (tables: TableWithFilterValueType[]) => {
   return tablesWithDefaults(tables);
 };
 
+// @ts-ignore
 const tableWithDefaultDateColumn = table => {
   return {
     ...table,
@@ -75,16 +77,19 @@ const tableWithDefaultDateColumn = table => {
   };
 };
 
+// @ts-ignore
 const tableWithDefaultFilters = table => ({
   ...table,
   filters: filtersWithDefaults(table.filters)
 });
 
+// @ts-ignore
 const tableWithDefaultSelects = table => ({
   ...table,
   selects: selectsWithDefaults(table.selects)
 });
 
+// @ts-ignore
 const tableWithDefaults = table =>
   compose(
     tableWithDefaultDateColumn,
@@ -95,5 +100,6 @@ const tableWithDefaults = table =>
     exclude: false
   });
 
+// @ts-ignore
 export const tablesWithDefaults = tables =>
   tables ? tables.map(tableWithDefaults) : null;

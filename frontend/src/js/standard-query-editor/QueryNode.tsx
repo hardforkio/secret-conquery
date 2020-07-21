@@ -29,12 +29,14 @@ const Root = styled("div")`
   text-align: left;
   border-radius: ${({ theme }) => theme.borderRadius};
   transition: border ${({ theme }) => theme.transitionTime};
-  border: ${({ theme, hasActiveFilters }) =>
+  border: ${//@ts-ignore
+  ({ theme, hasActiveFilters }) =>
     hasActiveFilters
       ? `2px solid ${theme.col.blueGrayDark}`
       : `1px solid ${theme.col.grayMediumLight}`};
   &:hover {
-    border: ${({ theme, hasActiveFilters }) =>
+    border: ${//@ts-ignore
+    ({ theme, hasActiveFilters }) =>
       hasActiveFilters
         ? `2px solid ${theme.col.blueGrayDark}`
         : `1px solid ${theme.col.blueGrayDark}`};
@@ -88,14 +90,17 @@ type PropsType = {
   onEditClick: Function;
   onToggleTimestamps: Function;
   onExpandClick: Function;
+  // @ts-ignore
   connectDragSource: Function;
   andIdx: number;
   orIdx: number;
+  // @ts-ignore
   connectDragSource: ConnectDragSource;
 };
 
 // Has to be a class because of https://github.com/react-dnd/react-dnd/issues/530
 class QueryNode extends React.Component {
+  // @ts-ignore
   props: PropsType;
 
   render() {
@@ -108,6 +113,7 @@ class QueryNode extends React.Component {
       onToggleTimestamps
     } = this.props;
 
+    // @ts-ignore
     const hasActiveFilters = !node.error && nodeHasActiveFilters(node);
 
     const rootNodeLabel = getRootNodeLabel(node);
@@ -116,6 +122,7 @@ class QueryNode extends React.Component {
       <Root
         ref={instance => connectDragSource(instance)}
         hasActiveFilters={hasActiveFilters}
+        // @ts-ignore
         onClick={!!node.error ? () => null : onEditClick}
       >
         <Node>
@@ -129,10 +136,19 @@ class QueryNode extends React.Component {
           ) : (
             <>
               {rootNodeLabel && <RootNode>{rootNodeLabel}</RootNode>}
-              <Label>{node.label || node.id}</Label>
-              {node.description && (!node.ids || node.ids.length === 1) && (
-                <Description>{node.description}</Description>
-              )}
+              <Label>
+                {
+                  // @ts-ignore
+                  node.label || node.id
+                }
+              </Label>
+              {
+                // @ts-ignore
+                node.description && (!node.ids || node.ids.length === 1) && (
+                  // @ts-ignore
+                  <Description>{node.description}</Description>
+                )
+              }
             </>
           )}
         </Node>
@@ -141,10 +157,13 @@ class QueryNode extends React.Component {
           onEditClick={onEditClick}
           onDeleteNode={onDeleteNode}
           onToggleTimestamps={onToggleTimestamps}
+          // @ts-ignore
           isExpandable={isQueryExpandable(node)}
           onExpandClick={() => {
+            // @ts-ignore
             if (!node.query) return;
 
+            // @ts-ignore
             onExpandClick(node.query);
           }}
           previousQueryLoading={node.loading}
@@ -159,6 +178,7 @@ class QueryNode extends React.Component {
  * Implements the drag source contract.
  */
 const nodeSource = {
+  // @ts-ignore
   beginDrag(props, monitor, component): DraggedNodeType | DraggedQueryType {
     // Return the data describing the dragged item
     // NOT using `...node` since that would also spread `children` in.
@@ -166,6 +186,7 @@ const nodeSource = {
     // 1) A concept (dragged from ConceptTreeNode)
     // 2) A previous query (dragged from PreviousQueries)
     const { node, andIdx, orIdx } = props;
+    // @ts-ignore
     const { height, width } = findDOMNode(component).getBoundingClientRect();
 
     const draggedNode = {
@@ -198,6 +219,7 @@ const nodeSource = {
       return {
         ...draggedNode,
         ids: node.ids,
+        // @ts-ignore
         description: node.description,
         tree: node.tree,
         tables: node.tables,
@@ -209,6 +231,7 @@ const nodeSource = {
 /**
  * Specifies the dnd-related props to inject into the component.
  */
+// @ts-ignore
 const collect = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()

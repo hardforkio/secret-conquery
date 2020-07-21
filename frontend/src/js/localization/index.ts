@@ -12,6 +12,7 @@ let dateFnsLocale: AvailableLocale | null = null;
 export const initializeLocalization = (
   locale: AvailableLocale,
   dateLocale: AvailableLocale,
+  // @ts-ignore
   ...texts
 ) => {
   T.setTexts(mergeDeep(...texts));

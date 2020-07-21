@@ -10,7 +10,7 @@ import * as dndTypes from "../common/constants/dndTypes";
 import type { QueryIdT } from "../api/types";
 import type { DraggedNodeType, DraggedQueryType } from "./types";
 
-type DraggedFileType = Object;
+type DraggedFileType = Record<string, any>;
 
 interface PropsT {
   isInitial?: boolean;
@@ -23,7 +23,7 @@ interface PropsT {
 const DROP_TYPES = [
   dndTypes.CONCEPT_TREE_NODE,
   dndTypes.QUERY_NODE,
-  dndTypes.PREVIOUS_QUERY,
+  dndTypes.PREVIOUS_QUERY
 ];
 
 const SxDropzoneWithFileInput = styled(DropzoneWithFileInput)<{
@@ -86,8 +86,9 @@ const QueryEditorDropzone: React.FC<PropsT> = ({
   isInitial,
   onLoadPreviousQuery,
   onDropFile,
-  onDropNode,
+  onDropNode
 }) => {
+  // @ts-ignore
   const onDrop = (props, monitor) => {
     const item = monitor.getItem();
 
@@ -105,6 +106,7 @@ const QueryEditorDropzone: React.FC<PropsT> = ({
       isAnd={isAnd}
       isInitial={isInitial}
       acceptedDropTypes={DROP_TYPES}
+      // @ts-ignore
       onDrop={onDrop}
       onSelectFile={onDropFile}
       disableClick={isInitial}

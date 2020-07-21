@@ -8,20 +8,23 @@ export const useLoadFormConfigs = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  const loadFormConfigs = useCallback(async (datasetId: DatasetIdT) => {
-    setLoading(true);
-    try {
-      const data = await getFormConfigs(datasetId);
+  const loadFormConfigs = useCallback(
+    async (datasetId: DatasetIdT) => {
+      setLoading(true);
+      try {
+        const data = await getFormConfigs(datasetId);
 
-      dispatch(loadFormConfigsSuccess(data));
-    } catch (e) {
-      dispatch(loadFormConfigsError(e));
-    }
-    setLoading(false);
-  }, [dispatch]);
+        dispatch(loadFormConfigsSuccess(data));
+      } catch (e) {
+        dispatch(loadFormConfigsError(e));
+      }
+      setLoading(false);
+    },
+    [dispatch]
+  );
 
   return {
     loading,
-    loadFormConfigs,
+    loadFormConfigs
   };
 };

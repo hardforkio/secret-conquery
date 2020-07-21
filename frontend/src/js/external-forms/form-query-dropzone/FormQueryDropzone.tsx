@@ -1,5 +1,6 @@
 import React from "react";
 
+//@ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import FormQueryResult from "./FormQueryResult";
@@ -10,12 +11,13 @@ import Dropzone from "../../form-components/Dropzone";
 import Label from "../../form-components/Label";
 
 type PropsT = FieldPropsType & {
-  label: string,
-  dropzoneText: string,
-  className?: string
+  label: string;
+  dropzoneText: string;
+  className?: string;
 };
 
 export default (props: PropsT) => {
+  //@ts-ignore
   const onDrop = (dropzoneProps, monitor) => {
     const item = monitor.getItem();
 

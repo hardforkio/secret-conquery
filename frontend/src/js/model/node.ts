@@ -5,6 +5,7 @@ import { objectHasSelectedSelects } from "./select";
 
 export const nodeHasActiveFilters = (node: ConceptQueryNodeType) =>
   node.excludeTimestamps ||
+  // @ts-ignore
   node.includeSubnodes ||
   objectHasSelectedSelects(node) ||
   nodeHasActiveTableFilters(node) ||

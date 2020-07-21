@@ -12,20 +12,27 @@ import { StateT } from "./reducers";
 
 const LeftPane = () => {
   const activeTab = useSelector<StateT, string>(
-    (state) => state.panes.left.activeTab
+    state => state.panes.left.activeTab
   );
   const selectedDatasetId = useSelector<StateT, DatasetIdT | null>(
-    (state) => state.datasets.selectedDatasetId
+    state => state.datasets.selectedDatasetId
   );
 
   return (
     <Pane left>
       {activeTab === "conceptTrees" && (
+        //@ts-ignore
         <ConceptTreeSearchBox datasetId={selectedDatasetId} />
       )}
-      <ConceptTreeList datasetId={selectedDatasetId} />
+      <ConceptTreeList
+        //@ts-ignore
+        datasetId={selectedDatasetId}
+      />
       {activeTab === "previousQueries" && (
-        <PreviousQueriesTab datasetId={selectedDatasetId} />
+        <PreviousQueriesTab
+          //@ts-ignore
+          datasetId={selectedDatasetId}
+        />
       )}
       {activeTab === "formConfigs" && (
         <FormConfigsTab datasetId={selectedDatasetId} />

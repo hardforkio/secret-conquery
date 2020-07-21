@@ -3,28 +3,41 @@ import createQueryRunnerActions from "../query-runner/actions";
 
 export const setExternalForm = (form: string) => ({
   type: SET_EXTERNAL_FORM,
-  payload: { form },
+  payload: { form }
 });
 
 export const loadExternalFormValues = (formType: string, values: any) => ({
   type: LOAD_EXTERNAL_FORM_VALUES,
-  payload: { formType, values },
+  payload: { formType, values }
 });
 
 const {
+  //@ts-ignore
   startExternalFormsQueryStart,
+  //@ts-ignore
   startExternalFormsQueryError,
+  //@ts-ignore
   startExternalFormsQuerySuccess,
+  //@ts-ignore
   startExternalFormsQuery,
+  //@ts-ignore
   stopExternalFormsQueryStart,
+  //@ts-ignore
   stopExternalFormsQueryError,
+  //@ts-ignore
   stopExternalFormsQuerySuccess,
+  //@ts-ignore
   stopExternalFormsQuery,
+  //@ts-ignore
   queryExternalFormsResultStart,
+  //@ts-ignore
   queryExternalFormsResultStop,
+  //@ts-ignore
   queryExternalFormsResultError,
+  //@ts-ignore
   queryExternalFormsResultSuccess,
-  queryExternalFormsResult,
+  //@ts-ignore
+  queryExternalFormsResult
 } = createQueryRunnerActions("externalForms", true);
 
 export {
@@ -40,5 +53,5 @@ export {
   queryExternalFormsResultStop,
   queryExternalFormsResultError,
   queryExternalFormsResultSuccess,
-  queryExternalFormsResult,
+  queryExternalFormsResult
 };

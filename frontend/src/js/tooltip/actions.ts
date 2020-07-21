@@ -4,7 +4,9 @@ import {
   TOGGLE_ADDITIONAL_INFOS
 } from "./actionTypes";
 
-export const displayAdditionalInfos = (additionalInfos: Object) => ({
+export const displayAdditionalInfos = (
+  additionalInfos: Record<string, any>
+) => ({
   type: DISPLAY_ADDITIONAL_INFOS,
   payload: {
     additionalInfos

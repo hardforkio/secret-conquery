@@ -31,7 +31,7 @@ type PropsT = {
 };
 
 const PreviousQueryEditorTab = ({ datasetId }: PropsT) => {
-  const queries = useSelector<StateT, PreviousQueryT[]>((state) =>
+  const queries = useSelector<StateT, PreviousQueryT[]>(state =>
     selectPreviousQueries(
       state.previousQueries.queries,
       state.previousQueriesSearch,
@@ -39,9 +39,9 @@ const PreviousQueryEditorTab = ({ datasetId }: PropsT) => {
     )
   );
   const loading = useSelector<StateT, boolean>(
-    (state) => state.previousQueries.loading
+    state => state.previousQueries.loading
   );
-  const hasPermissionToUpload = useSelector<StateT, boolean>((state) =>
+  const hasPermissionToUpload = useSelector<StateT, boolean>(state =>
     canUploadResult(state)
   );
 

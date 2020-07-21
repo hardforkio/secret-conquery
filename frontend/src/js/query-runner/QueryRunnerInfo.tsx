@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import T from "i18n-react";
+//@ts-ignore
 import type { StateType } from "./reducer";
 
 const Status = styled("p")`
   font-weight: 400;
   margin: 0 10px;
   font-size: ${({ theme }) => theme.font.sm};
-  color: ${({ theme, success, error }) =>
+  color: ${//@ts-ignore
+  ({ theme, success, error }) =>
     success ? theme.col.green : error ? theme.col.red : "initial"};
 `;
 
@@ -42,6 +44,7 @@ const QueryRunnerInfo = ({ queryRunner, className }: PropsType) => {
   return !!message && noQueryResultOrError ? (
     <Status
       className={className}
+      //@ts-ignore
       success={message.type === "success"}
       error={message.type === "error"}
     >

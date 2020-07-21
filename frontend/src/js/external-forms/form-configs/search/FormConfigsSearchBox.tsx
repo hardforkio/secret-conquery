@@ -15,10 +15,10 @@ const Root = styled("div")`
 
 const FormConfigsSearchBox: React.FC = () => {
   const search = useSelector<StateT, string[]>(
-    (state) => state.formConfigsSearch
+    state => state.formConfigsSearch
   );
   const options = useSelector<StateT, string[]>(
-    (state) => state.formConfigs.names
+    state => state.formConfigs.names
   );
 
   const dispatch = useDispatch();
@@ -31,14 +31,17 @@ const FormConfigsSearchBox: React.FC = () => {
         creatable
         isMulti
         name="input"
-        value={search.map((t) => ({ label: t, value: t }))}
-        options={options ? options.map((t) => ({ label: t, value: t })) : []}
-        onChange={(values) =>
-          onSearch(values ? values.map((v) => v.value) : [])
+        value={search.map(t => ({ label: t, value: t }))}
+        options={options ? options.map(t => ({ label: t, value: t })) : []}
+        //@ts-ignore
+        onChange={values =>
+          //@ts-ignore
+          onSearch(values ? values.map(v => v.value) : [])
         }
         placeholder={T.translate("reactSelect.searchPlaceholder")}
         noOptionsMessage={() => T.translate("reactSelect.noResults")}
-        formatCreateLabel={(inputValue) =>
+        //@ts-ignore
+        formatCreateLabel={inputValue =>
           T.translate("common.create") + `: "${inputValue}"`
         }
       />

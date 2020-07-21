@@ -29,7 +29,11 @@ const initialState: DatasetStateT = {
   selectedDatasetId: null
 };
 
-const saveQuery = (state: DatasetStateT, action: Object): DatasetStateT => {
+const saveQuery = (
+  state: DatasetStateT,
+  action: Record<string, any>
+): DatasetStateT => {
+  // @ts-ignore
   const { query, previouslySelectedDatasetId } = action.payload;
 
   if (!query || query.length === 0) return state;
@@ -49,6 +53,7 @@ const saveQuery = (state: DatasetStateT, action: Object): DatasetStateT => {
       ...state.data.slice(0, selectedDatasetIdx),
       {
         ...state.data[selectedDatasetIdx],
+        // @ts-ignore
         query
       },
       ...state.data.slice(selectedDatasetIdx + 1)
@@ -58,21 +63,25 @@ const saveQuery = (state: DatasetStateT, action: Object): DatasetStateT => {
 
 const datasets = (
   state: DatasetStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): DatasetStateT => {
+  // @ts-ignore
   switch (action.type) {
     case LOAD_DATASETS_START:
       return { ...state, loading: true, pristine: false };
     case LOAD_DATASETS_SUCCESS:
+      // @ts-ignore
       const { data } = action.payload;
       const selectedDatasetId = data && data.length > 0 ? data[0].id : null;
 
       return { ...state, loading: false, error: null, data, selectedDatasetId };
     case LOAD_DATASETS_ERROR:
+      // @ts-ignore
       return { ...state, loading: false, error: action.payload.message };
     case SELECT_DATASET:
       return {
         ...state,
+        // @ts-ignore
         selectedDatasetId: action.payload.id
       };
     case SAVE_QUERY:

@@ -10,7 +10,7 @@ import type { QueryGroupType } from "./types";
 type PropsType = {
   group: QueryGroupType;
   andIdx: number;
-  onDropNode: (node: Object) => void;
+  onDropNode: (node: Record<string, any>) => void;
   onDropFile: Function;
   onDeleteNode: Function;
   onEditClick: Function;
@@ -31,8 +31,8 @@ const Group = styled("div")`
   position: relative;
   padding: 6px 8px 8px;
   background-color: ${({ theme }) => theme.col.graySuperLight};
-  border: 1px solid
-    ${({ theme, excluded }) => (excluded ? theme.col.red : theme.col.grayLight)};
+  border: 1px solid ${//@ts-ignore
+    ({ theme, excluded }) => (excluded ? theme.col.red : theme.col.grayLight)};
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
   text-align: center;
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -46,6 +46,7 @@ const QueryOrConnector = styled("p")`
   text-align: center;
 `;
 
+// @ts-ignore
 const isDateActive = dateRange => {
   return !!dateRange && (!!dateRange.min || !!dateRange.max);
 };
@@ -56,21 +57,30 @@ const QueryGroup = (props: PropsType) => {
       <QueryEditorDropzone
         key={props.group.elements.length + 1}
         onDropNode={props.onDropNode}
+        // @ts-ignore
         onDropFile={props.onDropFile}
+        // @ts-ignore
         onLoadPreviousQuery={props.onLoadPreviousQuery}
       />
       <QueryOrConnector>{T.translate("common.or")}</QueryOrConnector>
-      <Group excluded={props.group.exclude}>
+      <Group
+        // @ts-ignore
+        excluded={props.group.exclude}
+      >
         <QueryGroupActions
           excludeActive={!!props.group.exclude}
           dateActive={isDateActive(props.group.dateRange)}
+          // @ts-ignore
           onExcludeClick={props.onExcludeClick}
+          // @ts-ignore
           onDeleteGroup={props.onDeleteGroup}
+          // @ts-ignore
           onDateClick={props.onDateClick}
         />
         {props.group.elements.map((node, orIdx) => (
           <div key={`or-${orIdx}`}>
             <QueryNode
+              // @ts-ignore
               node={node}
               andIdx={props.andIdx}
               orIdx={orIdx}

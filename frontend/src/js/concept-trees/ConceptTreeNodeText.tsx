@@ -11,7 +11,8 @@ const Root = styled("div")`
   cursor: pointer;
   padding: 0 15px 0 15px;
   margin: 2px 0;
-  padding-left: ${({ depth }) => depth * 15 + "px"};
+  padding-left: ${//@ts-ignore
+  ({ depth }) => depth * 15 + "px"};
   display: flex;
 `;
 
@@ -21,17 +22,19 @@ const Text = styled("p")`
   margin: 0;
   padding: 0 10px;
   line-height: 20px;
-  color: ${({ theme, red, disabled }) =>
+  color: ${//@ts-ignore
+  ({ theme, red, disabled }) =>
     red ? theme.col.red : disabled ? theme.col.gray : theme.col.black};
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
 
-  background-color: ${({ theme, isOpen }) =>
-    isOpen ? theme.col.grayVeryLight : "transparent"};
+  background-color: ${//@ts-ignore
+  ({ theme, isOpen }) => (isOpen ? theme.col.grayVeryLight : "transparent")};
 
-  ${({ theme, isOpen, disabled }) =>
+  ${//@ts-ignore
+  ({ theme, isOpen, disabled }) =>
     !disabled &&
     css`
       &:hover {
@@ -118,8 +121,19 @@ export default React.forwardRef(
     }: PropsT,
     ref
   ) => (
-    <Root ref={ref} className={className} depth={depth}>
-      <Text onClick={onClick} isOpen={isOpen} red={red} disabled={disabled}>
+    <Root
+      //@ts-ignore
+      ref={ref}
+      className={className}
+      depth={depth}
+    >
+      <Text
+        onClick={onClick}
+        //@ts-ignore
+        isOpen={isOpen}
+        red={red}
+        disabled={disabled}
+      >
         {hasChildren && (
           <>
             <CaretIconContainer>

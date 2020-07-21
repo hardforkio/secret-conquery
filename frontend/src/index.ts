@@ -20,8 +20,12 @@ const disableLogin = !!process.env.REACT_APP_DISABLE_LOGIN;
 const LANG = process.env.REACT_APP_LANG;
 
 if (!LANG || LANG === "de") {
+  //@ts-ignore
+
   initializeLocalization("de", de, translationsDe);
 } else {
+  //@ts-ignore
+
   initializeLocalization("en", enGB, translationsEn);
 }
 
@@ -37,7 +41,7 @@ const environment = {
     : isProduction
     ? ""
     : MOCK_API_URL,
-  disableLogin,
+  disableLogin
 };
 
 const tabs = [StandardQueryEditorTab, TimebasedQueryEditorTab, FormsTab];

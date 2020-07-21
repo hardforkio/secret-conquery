@@ -21,6 +21,7 @@ const FormsTab = (props: TabPropsType) => {
       const configuredForms = await getForms(props.selectedDatasetId);
 
       const forms = configuredForms.reduce((all, form) => {
+        //@ts-ignore
         all[form.type] = form;
 
         return all;
@@ -33,8 +34,8 @@ const FormsTab = (props: TabPropsType) => {
         TimebasedQueryEditorTab,
         {
           ...tabDescription,
-          reducer: externalFormsReducer,
-        },
+          reducer: externalFormsReducer
+        }
       ];
 
       updateReducers(store, tabs);

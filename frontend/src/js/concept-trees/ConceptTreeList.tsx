@@ -33,7 +33,10 @@ const Root = styled("div")`
     // Also: Can't set it to initial, because IE11 doesn't work then
     // => Empty string instead
   }
-  display: ${({ show }) => (show ? "" : "none")};
+  display: ${
+    //@ts-ignore
+    ({ show }) => (show ? "" : "none")
+  };
 `;
 
 type PropsT = {
@@ -58,11 +61,15 @@ const ConceptTreeList = ({
   if (search.loading) return null;
 
   const anyTreeLoading = Object.keys(trees).some(
+    //@ts-ignore
     treeId => trees[treeId].loading
   );
 
   return (
-    <Root show={activeTab === "conceptTrees"}>
+    <Root
+      //@ts-ignore
+      show={activeTab === "conceptTrees"}
+    >
       {loading && <ConceptTreesLoading />}
       {!loading && !areTreesAvailable && !areDatasetsPristineOrLoading && (
         <EmptyConceptTreeList />
@@ -72,8 +79,10 @@ const ConceptTreeList = ({
         Object.keys(trees)
           // Only take those that don't have a parent, they must be root
           // If they don't have a label, they're loading, or in any other broken state
+          //@ts-ignore
           .filter(treeId => !trees[treeId].parent && trees[treeId].label)
           .map((treeId, i) => (
+            //@ts-ignore
             <ConceptTreeListItem
               key={i}
               search={search}
@@ -97,6 +106,7 @@ export default connect(
     search: state.conceptTrees.search
   }),
   (dispatch, ownProps) => ({
+    //@ts-ignore
     onLoadTree: id => dispatch(loadTree(ownProps.datasetId, id))
   })
 )(ConceptTreeList);

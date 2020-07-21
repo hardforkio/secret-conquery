@@ -7,12 +7,14 @@ import type { TabT } from "./pane/types";
 import AppRouter from "./app/AppRouter";
 
 type PropsType = {
-  store: Object;
-  browserHistory: Object;
+  store: Record<string, any>;
+  browserHistory: Record<string, any>;
   rightTabs: TabT[];
 };
 
 const AppRoot = ({ store, browserHistory, rightTabs }: PropsType) => (
+  //@ts-ignore
+
   <Provider store={store}>
     <AppRouter history={browserHistory} rightTabs={rightTabs} />
   </Provider>

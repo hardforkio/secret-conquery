@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import type { FieldProps } from "redux-form";
 import T from "i18n-react";
 
@@ -10,7 +11,7 @@ import { nodeHasActiveFilters } from "../../model/node";
 
 import {
   CONCEPT_TREE_NODE,
-  FORM_CONCEPT_NODE,
+  FORM_CONCEPT_NODE
 } from "../../common/constants/dndTypes";
 import DropzoneWithFileInput from "../../form-components/DropzoneWithFileInput";
 import UploadConceptListModal from "../../upload-concept-list-modal/UploadConceptListModal";
@@ -18,14 +19,14 @@ import UploadConceptListModal from "../../upload-concept-list-modal/UploadConcep
 import {
   getConceptById,
   getConceptsByIdsWithTablesAndSelects,
-  hasConceptChildren,
+  hasConceptChildren
 } from "../../concept-trees/globalTreeStoreHelper";
 import { tablesWithDefaults } from "../../model/table";
 import { selectsWithDefaults } from "../../model/select";
 
 import {
   initUploadConceptListModal,
-  resetUploadConceptListModal,
+  resetUploadConceptListModal
 } from "../../upload-concept-list-modal/actions";
 
 import DynamicInputGroup from "../form-components/DynamicInputGroup";
@@ -33,7 +34,7 @@ import DropzoneList from "../form-components/DropzoneList";
 
 import {
   initSelectsWithDefaults,
-  initTablesWithDefaults,
+  initTablesWithDefaults
 } from "../transformers";
 
 import type { ConceptListDefaults as ConceptListDefaultsType } from "../config-types";
@@ -50,7 +51,7 @@ type PropsType = FieldProps & {
   label: string;
   datasetId: string;
   onDropFilterFile: Function;
-  newValue?: Object;
+  newValue?: Record<string, any>;
   isSingle?: boolean;
   disallowMultipleColumns?: boolean;
   blacklistedTables?: string[];
@@ -59,25 +60,34 @@ type PropsType = FieldProps & {
   isValidConcept?: Function;
 };
 
+//@ts-ignore
 const addValue = (value, newValue) => [...value, newValue];
 
+//@ts-ignore
 const removeValue = (value, valueIdx) => {
   return [...value.slice(0, valueIdx), ...value.slice(valueIdx + 1)];
 };
 
 const onToggleIncludeSubnodes = (
+  //@ts-ignore
   value,
+  //@ts-ignore
   valueIdx,
+  //@ts-ignore
   conceptIdx,
+  //@ts-ignore
   includeSubnodes,
+  //@ts-ignore
   newValue
 ) => {
   const element = value[valueIdx];
   const concept = element.concepts[conceptIdx];
   const conceptData = getConceptById(concept.ids);
 
+  //@ts-ignore
   const childIds = [];
-  const elements = conceptData.children.map((childId) => {
+  //@ts-ignore
+  const elements = conceptData.children.map(childId => {
     const child = getConceptById(childId);
 
     childIds.push(childId);
@@ -87,13 +97,15 @@ const onToggleIncludeSubnodes = (
       concepts: [
         {
           ids: [childId],
+          //@ts-ignore
           label: child.label,
+          //@ts-ignore
           description: child.description,
           tables: concept.tables,
           selects: concept.selects,
-          tree: concept.tree,
-        },
-      ],
+          tree: concept.tree
+        }
+      ]
     };
   });
 
@@ -102,11 +114,14 @@ const onToggleIncludeSubnodes = (
         ...value.slice(0, valueIdx + 1),
         // Insert right after the element
         ...elements,
-        ...value.slice(valueIdx + 1),
+        ...value.slice(valueIdx + 1)
       ]
-    : value.filter((val) =>
-        val.concepts.some((cpt) => {
-          return childIds.every((childId) => !includes(cpt.ids, childId));
+    : //@ts-ignore
+      value.filter(val =>
+        //@ts-ignore
+        val.concepts.some(cpt => {
+          //@ts-ignore
+          return childIds.every(childId => !includes(cpt.ids, childId));
         })
       );
 
@@ -115,14 +130,17 @@ const onToggleIncludeSubnodes = (
     nextValue.indexOf(element),
     conceptIdx,
     {
-      includeSubnodes,
+      includeSubnodes
     }
   );
 };
 
 const createQueryNodeFromConceptListUploadResult = (
+  //@ts-ignore
   label,
+  //@ts-ignore
   rootConcepts,
+  //@ts-ignore
   resolvedConcepts
 ) => {
   const lookupResult = getConceptsByIdsWithTablesAndSelects(
@@ -136,22 +154,30 @@ const createQueryNodeFromConceptListUploadResult = (
         ids: resolvedConcepts,
         tables: lookupResult.tables,
         selects: lookupResult.selects,
-        tree: lookupResult.root,
+        tree: lookupResult.root
       }
     : null;
 };
 
 const addConceptsFromFile = (
+  //@ts-ignore
   label,
+  //@ts-ignore
   rootConcepts,
+  //@ts-ignore
   resolvedConcepts,
 
+  //@ts-ignore
   defaults,
+  //@ts-ignore
   isValidConcept,
+  //@ts-ignore
 
   value,
+  //@ts-ignore
   newValue,
 
+  //@ts-ignore
   valueIdx,
   conceptIdx = null
 ) => {
@@ -172,6 +198,7 @@ const addConceptsFromFile = (
   }
 };
 
+//@ts-ignore
 const initializeConcept = (item, defaults) => {
   if (!item) return item;
 
@@ -181,31 +208,34 @@ const initializeConcept = (item, defaults) => {
   )({
     ...item,
     tables: tablesWithDefaults(item.tables),
-    selects: selectsWithDefaults(item.selects),
+    selects: selectsWithDefaults(item.selects)
   });
 };
 
+//@ts-ignore
 const addConcept = (value, valueIdx, item) => [
   ...value.slice(0, valueIdx),
   {
     ...value[valueIdx],
-    concepts: [...value[valueIdx].concepts, item],
+    concepts: [...value[valueIdx].concepts, item]
   },
-  ...value.slice(valueIdx + 1),
+  ...value.slice(valueIdx + 1)
 ];
 
+//@ts-ignore
 const removeConcept = (value, valueIdx, conceptIdx) => [
   ...value.slice(0, valueIdx),
   {
     ...value[valueIdx],
     concepts: [
       ...value[valueIdx].concepts.slice(0, conceptIdx),
-      ...value[valueIdx].concepts.slice(conceptIdx + 1),
-    ],
+      ...value[valueIdx].concepts.slice(conceptIdx + 1)
+    ]
   },
-  ...value.slice(valueIdx + 1),
+  ...value.slice(valueIdx + 1)
 ];
 
+//@ts-ignore
 const setConcept = (value, valueIdx, conceptIdx, item) => [
   ...value.slice(0, valueIdx),
   {
@@ -213,18 +243,20 @@ const setConcept = (value, valueIdx, conceptIdx, item) => [
     concepts: [
       ...value[valueIdx].concepts.slice(0, conceptIdx),
       item,
-      ...value[valueIdx].concepts.slice(conceptIdx + 1),
-    ],
+      ...value[valueIdx].concepts.slice(conceptIdx + 1)
+    ]
   },
-  ...value.slice(valueIdx + 1),
+  ...value.slice(valueIdx + 1)
 ];
 
+//@ts-ignore
 const setConceptProperties = (value, valueIdx, conceptIdx, props) =>
   setConcept(value, valueIdx, conceptIdx, {
     ...value[valueIdx].concepts[conceptIdx],
-    ...props,
+    ...props
   });
 
+//@ts-ignore
 const toggleTable = (value, valueIdx, conceptIdx, tableIdx, isExcluded) => {
   const concepts = value[valueIdx].concepts;
   const tables = concepts[conceptIdx].tables;
@@ -241,23 +273,28 @@ const toggleTable = (value, valueIdx, conceptIdx, tableIdx, isExcluded) => {
             ...tables.slice(0, tableIdx),
             {
               ...tables[tableIdx],
-              exclude: isExcluded,
+              exclude: isExcluded
             },
-            ...tables.slice(tableIdx + 1),
-          ],
+            ...tables.slice(tableIdx + 1)
+          ]
         },
-        ...concepts.slice(conceptIdx + 1),
-      ],
+        ...concepts.slice(conceptIdx + 1)
+      ]
     },
-    ...value.slice(valueIdx + 1),
+    ...value.slice(valueIdx + 1)
   ];
 };
 
 const setDateColumn = (
+  //@ts-ignore
   value,
+  //@ts-ignore
   valueIdx,
+  //@ts-ignore
   conceptIdx,
+  //@ts-ignore
   tableIdx,
+  //@ts-ignore
   dateColumnValue
 ) => {
   const concepts = value[valueIdx].concepts;
@@ -270,21 +307,28 @@ const setDateColumn = (
         ...tables[tableIdx],
         dateColumn: {
           ...tables[tableIdx].dateColumn,
-          value: dateColumnValue,
-        },
+          value: dateColumnValue
+        }
       },
-      ...tables.slice(tableIdx + 1),
-    ],
+      ...tables.slice(tableIdx + 1)
+    ]
   });
 };
 
 const setFilterValue = (
+  //@ts-ignore
   value,
+  //@ts-ignore
   valueIdx,
+  //@ts-ignore
   conceptIdx,
+  //@ts-ignore
   tableIdx,
+  //@ts-ignore
   filterIdx,
+  //@ts-ignore
   filterValue,
+  //@ts-ignore
   formattedFilterValue
 ) => {
   const concepts = value[valueIdx].concepts;
@@ -301,38 +345,46 @@ const setFilterValue = (
           {
             ...filters[filterIdx],
             value: filterValue,
-            formattedValue: formattedFilterValue,
+            formattedValue: formattedFilterValue
           },
-          ...filters.slice(filterIdx + 1),
-        ],
+          ...filters.slice(filterIdx + 1)
+        ]
       },
-      ...tables.slice(tableIdx + 1),
-    ],
+      ...tables.slice(tableIdx + 1)
+    ]
   });
 };
 
+//@ts-ignore
 const setSelects = (value, valueIdx, conceptIdx, selectedSelects) => {
   const concepts = value[valueIdx].concepts;
   const selects = concepts[conceptIdx].selects;
 
   return setConceptProperties(value, valueIdx, conceptIdx, {
     // value contains the selects that have now been selected
-    selects: selects.map((select) => ({
+    //@ts-ignore
+    selects: selects.map(select => ({
       ...select,
       selected: !selectedSelects
         ? false
         : !!selectedSelects.find(
-            (selectedValue) => selectedValue.value === select.id
-          ),
-    })),
+            //@ts-ignore
+            selectedValue => selectedValue.value === select.id
+          )
+    }))
   });
 };
 
 const setTableSelects = (
+  //@ts-ignore
   value,
+  //@ts-ignore
   valueIdx,
+  //@ts-ignore
   conceptIdx,
+  //@ts-ignore
   tableIdx,
+  //@ts-ignore
   selectedSelects
 ) => {
   const concepts = value[valueIdx].concepts;
@@ -345,35 +397,44 @@ const setTableSelects = (
       {
         ...tables[tableIdx],
         // value contains the selects that have now been selected
-        selects: selects.map((select) => ({
+        //@ts-ignore
+        selects: selects.map(select => ({
           ...select,
           selected: !selectedSelects
             ? false
             : !!selectedSelects.find(
-                (selectedValue) => selectedValue.value === select.id
-              ),
-        })),
+                //@ts-ignore
+                selectedValue => selectedValue.value === select.id
+              )
+        }))
       },
-      ...tables.slice(tableIdx + 1),
-    ],
+      ...tables.slice(tableIdx + 1)
+    ]
   });
 };
 
+//@ts-ignore
 const resetAllFilters = (value, valueIdx, conceptIdx) => {
   const concepts = value[valueIdx].concepts;
   const tables = concepts[conceptIdx].tables;
 
   return setConceptProperties(value, valueIdx, conceptIdx, {
-    tables: resetAllFiltersInTables(tables),
+    tables: resetAllFiltersInTables(tables)
   });
 };
 
 const switchFilterMode = (
+  //@ts-ignore
   value,
+  //@ts-ignore
   valueIdx,
+  //@ts-ignore
   conceptIdx,
+  //@ts-ignore
   tableIdx,
+  //@ts-ignore
   filterIdx,
+  //@ts-ignore
   mode
 ) => {
   const concepts = value[valueIdx].concepts;
@@ -398,22 +459,23 @@ const switchFilterMode = (
                   ...filters[filterIdx],
                   mode: mode,
                   value: null,
-                  formattedValue: null,
+                  formattedValue: null
                 },
-                ...filters.slice(filterIdx + 1),
-              ],
+                ...filters.slice(filterIdx + 1)
+              ]
             },
-            ...tables.slice(tableIdx + 1),
-          ],
+            ...tables.slice(tableIdx + 1)
+          ]
         },
-        ...concepts.slice(conceptIdx + 1),
-      ],
+        ...concepts.slice(conceptIdx + 1)
+      ]
     },
-    ...value.slice(valueIdx + 1),
+    ...value.slice(valueIdx + 1)
   ];
 };
 
-const copyConcept = (item) => {
+//@ts-ignore
+const copyConcept = item => {
   return JSON.parse(JSON.stringify(item));
 };
 
@@ -436,7 +498,8 @@ const FormConceptGroup = (props: PropsType) => {
 
   const dispatch = useDispatch();
 
-  const initModal = (file) => dispatch(initUploadConceptListModal(file));
+  //@ts-ignore
+  const initModal = file => dispatch(initUploadConceptListModal(file));
   const resetModal = () => dispatch(resetUploadConceptListModal());
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -447,6 +510,7 @@ const FormConceptGroup = (props: PropsType) => {
     resetModal(); // For the common UploadConceptListModal
   };
 
+  //@ts-ignore
   const onDropFile = async (file, valueIdx, conceptIdx) => {
     setModalContext({ valueIdx, conceptIdx });
 
@@ -459,10 +523,14 @@ const FormConceptGroup = (props: PropsType) => {
   };
 
   const onAcceptUploadConceptListModal = (
+    //@ts-ignore
     label,
+    //@ts-ignore
     rootConcepts,
+    //@ts-ignore
     resolvedConcepts
   ) => {
+    //@ts-ignore
     const { valueIdx, conceptIdx } = modalContext;
 
     props.input.onChange(
@@ -485,12 +553,15 @@ const FormConceptGroup = (props: PropsType) => {
     onCloseModal();
   };
 
-  const onAcceptCopyModal = (valuesToCopy) => {
+  //@ts-ignore
+  const onAcceptCopyModal = valuesToCopy => {
     // Deeply copy all values + concepts
+    //@ts-ignore
     const nextValue = valuesToCopy.reduce((currentValue, value) => {
       const newVal = addValue(currentValue, newValue);
 
       return value.concepts.reduce(
+        //@ts-ignore
         (curVal, concept) =>
           addConcept(newVal, curVal.length, copyConcept(concept)),
         currentValue
@@ -524,14 +595,16 @@ const FormConceptGroup = (props: PropsType) => {
         acceptedDropTypes={[CONCEPT_TREE_NODE, FORM_CONCEPT_NODE]}
         allowFile={true}
         disallowMultipleColumns={props.disallowMultipleColumns}
-        onDelete={(i) =>
-          props.input.onChange(removeValue(props.input.value, i))
-        }
-        onDropFile={(file) => onDropFile(file, props.input.value.length)}
+        //@ts-ignore
+        onDelete={i => props.input.onChange(removeValue(props.input.value, i))}
+        //@ts-ignore
+        onDropFile={file => onDropFile(file, props.input.value.length)}
+        //@ts-ignore
         onDrop={(dropzoneProps, monitor) => {
           const item = monitor.getItem();
 
           if (item.files) {
+            //@ts-ignore
             onDropFile(item.files[0], props.input.value.length);
 
             return;
@@ -557,6 +630,7 @@ const FormConceptGroup = (props: PropsType) => {
             )
           );
         }}
+        //@ts-ignore
         items={props.input.value.map((row, i) => (
           <DropzoneListItem>
             {props.renderRowPrefix
@@ -568,7 +642,8 @@ const FormConceptGroup = (props: PropsType) => {
               onAddClick={() =>
                 props.input.onChange(addConcept(props.input.value, i, null))
               }
-              onRemoveClick={(j) =>
+              //@ts-ignore
+              onRemoveClick={j =>
                 props.input.onChange(
                   props.input.value &&
                     props.input.value[i].concepts.length === 1
@@ -576,6 +651,7 @@ const FormConceptGroup = (props: PropsType) => {
                     : removeConcept(props.input.value, i, j)
                 )
               }
+              //@ts-ignore
               items={row.concepts.map((concept, j) =>
                 concept ? (
                   <FormConceptNode
@@ -588,7 +664,7 @@ const FormConceptGroup = (props: PropsType) => {
                     onFilterClick={() =>
                       props.input.onChange(
                         setConceptProperties(props.input.value, i, j, {
-                          isEditing: true,
+                          isEditing: true
                         })
                       )
                     }
@@ -605,13 +681,14 @@ const FormConceptGroup = (props: PropsType) => {
                         ),
                       expandable:
                         !props.isSingle && hasConceptChildren(concept),
-                      active: concept.includeSubnodes,
+                      active: concept.includeSubnodes
                     }}
                   />
                 ) : (
                   <DropzoneWithFileInput
                     acceptedDropTypes={[CONCEPT_TREE_NODE, FORM_CONCEPT_NODE]}
-                    onSelectFile={(file) => onDropFile(file, i, j)}
+                    onSelectFile={file => onDropFile(file, i, j)}
+                    //@ts-ignore
                     onDrop={(dropzoneProps, monitor) => {
                       const item = monitor.getItem();
 
@@ -677,38 +754,44 @@ const FormConceptGroup = (props: PropsType) => {
         datasetId={props.datasetId}
         blacklistedTables={props.blacklistedTables}
         whitelistedTables={props.whitelistedTables}
+        //@ts-ignore
         onCloseModal={(valueIdx, conceptIdx) =>
           props.input.onChange(
             setConceptProperties(props.input.value, valueIdx, conceptIdx, {
-              isEditing: false,
+              isEditing: false
             })
           )
         }
+        //@ts-ignore
         onUpdateLabel={(valueIdx, conceptIdx, label) =>
           props.input.onChange(
             setConceptProperties(props.input.value, valueIdx, conceptIdx, {
-              label,
+              label
             })
           )
         }
+        //@ts-ignore
         onDropConcept={(valueIdx, conceptIdx, concept) => {
           const node = props.input.value[valueIdx].concepts[conceptIdx];
 
           props.input.onChange(
             setConceptProperties(props.input.value, valueIdx, conceptIdx, {
-              ids: [...concept.ids, ...node.ids],
+              ids: [...concept.ids, ...node.ids]
             })
           );
         }}
+        //@ts-ignore
         onRemoveConcept={(valueIdx, conceptIdx, conceptId) => {
           const node = props.input.value[valueIdx].concepts[conceptIdx];
 
           props.input.onChange(
             setConceptProperties(props.input.value, valueIdx, conceptIdx, {
-              ids: node.ids.filter((id) => id !== conceptId),
+              //@ts-ignore
+              ids: node.ids.filter(id => id !== conceptId)
             })
           );
         }}
+        //@ts-ignore
         onToggleTable={(valueIdx, conceptIdx, tableIdx, isExcluded) =>
           props.input.onChange(
             toggleTable(
@@ -720,17 +803,24 @@ const FormConceptGroup = (props: PropsType) => {
             )
           )
         }
+        //@ts-ignore
         onSelectSelects={(valueIdx, conceptIdx, selectedSelects) =>
           props.input.onChange(
             setSelects(props.input.value, valueIdx, conceptIdx, selectedSelects)
           )
         }
         onSetFilterValue={(
+          //@ts-ignore
           valueIdx,
+          //@ts-ignore
           conceptIdx,
+          //@ts-ignore
           tableIdx,
+          //@ts-ignore
           filterIdx,
+          //@ts-ignore
           filterValue,
+          //@ts-ignore
           formattedFilterValue
         ) =>
           props.input.onChange(
@@ -746,9 +836,13 @@ const FormConceptGroup = (props: PropsType) => {
           )
         }
         onSelectTableSelects={(
+          //@ts-ignore
           valueIdx,
+          //@ts-ignore
           conceptIdx,
+          //@ts-ignore
           tableIdx,
+          //@ts-ignore
           selectedSelects
         ) =>
           props.input.onChange(
@@ -761,6 +855,7 @@ const FormConceptGroup = (props: PropsType) => {
             )
           )
         }
+        //@ts-ignore
         onSwitchFilterMode={(valueIdx, conceptIdx, tableIdx, filterIdx, mode) =>
           props.input.onChange(
             switchFilterMode(
@@ -773,11 +868,13 @@ const FormConceptGroup = (props: PropsType) => {
             )
           )
         }
+        //@ts-ignore
         onResetAllFilters={(valueIdx, conceptIdx) =>
           props.input.onChange(
             resetAllFilters(props.input.value, valueIdx, conceptIdx)
           )
         }
+        //@ts-ignore
         onSetDateColumn={(valueIdx, conceptIdx, tableIdx, dateColumnValue) =>
           props.input.onChange(
             setDateColumn(

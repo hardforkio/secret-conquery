@@ -46,7 +46,10 @@ const EditableTags = (props: PropsType) => {
     return (
       <EditableTagsDisplay className={props.className}>
         <StyledIconButton bare icon="edit" onClick={props.onToggleEdit} />
-        {props.tagComponent || <StyledTags tags={props.tags} />}
+        {
+          //@ts-ignore
+          props.tagComponent || <StyledTags tags={props.tags} />
+        }
       </EditableTagsDisplay>
     );
   }

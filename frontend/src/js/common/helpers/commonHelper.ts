@@ -1,16 +1,20 @@
 export const concat = (arr: []) => arr.reduce((a, b) => a.concat(b), []);
 
+// @ts-ignore
 export const flatmap = (ar: [], map: Function) => concat(ar.map(map));
 
 export const compose = (...fns: Function[]) =>
   fns.reduceRight(
+    // @ts-ignore
     (prevFn, nextFn) => (...args) => nextFn(prevFn(...args)),
+    // @ts-ignore
     v => v
   );
 
-export const objectWithoutKey = (key: string) => (obj: Object) => {
+export const objectWithoutKey = (key: string) => (obj: Record<string, any>) => {
   if (!obj.hasOwnProperty(key)) return obj;
 
+  // @ts-ignore
   const { [key]: deleted, ...rest } = obj;
 
   return rest;
@@ -69,12 +73,16 @@ export const toUpperCaseUnderscore = (str: string) => {
 export const isObject = (item: any) =>
   item && typeof item === "object" && !Array.isArray(item);
 
-export const mergeDeep = (...elements: Object[]) => {
+// @ts-ignore
+export const mergeDeep = (...elements: Record<string, any>[]) => {
   return elements.filter(isObject).reduce((aggregate, current) => {
     const nonObjectKeys = Object.keys(current).filter(
+      // @ts-ignore
       key => !isObject(current[key])
     );
+    // @ts-ignore
     const objectKeys = Object.keys(current).filter(key =>
+      // @ts-ignore
       isObject(current[key])
     );
     const newKeys = objectKeys.filter(key => !(key in aggregate));
@@ -83,9 +91,12 @@ export const mergeDeep = (...elements: Object[]) => {
     return Object.assign(
       {},
       aggregate,
+      // @ts-ignore
       ...nonObjectKeys.map(key => ({ [key]: current[key] })),
+      // @ts-ignore
       ...newKeys.map(key => ({ [key]: current[key] })),
       ...mergeKeys.map(key => ({
+        // @ts-ignore
         [key]: mergeDeep(aggregate[key], current[key])
       }))
     );
@@ -102,8 +113,10 @@ export const mergeDeep = (...elements: Object[]) => {
  * }
  * e.g.: const name = getNestedObject(user, ['address', 'street']);
  */
+// @ts-ignore
 export const getNestedObject = (nestedObj, pathArr) => {
   return pathArr.reduce(
+    // @ts-ignore
     (obj, key) => (obj && obj[key] !== "undefined" ? obj[key] : undefined),
     nestedObj
   );

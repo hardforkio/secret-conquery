@@ -113,6 +113,7 @@ class Deque {
   }
 }
 
+//@ts-ignore
 class ReleaseEmitter extends EventEmitter {}
 
 function isFn(x: any) {
@@ -127,6 +128,7 @@ export class Sema {
   nrTokens: number;
   free: Deque;
   waiting: Deque;
+  //@ts-ignore
   releaseEmitter: EventEmitter;
   noTokens: boolean;
   pauseFn: () => void;
@@ -141,10 +143,10 @@ export class Sema {
       resumeFn,
       capacity = 10
     }: {
-      initFn?: () => any,
-      pauseFn?: () => void,
-      resumeFn?: () => void,
-      capacity?: number
+      initFn?: () => any;
+      pauseFn?: () => void;
+      resumeFn?: () => void;
+      capacity?: number;
     } = {}
   ) {
     if (isFn(pauseFn) !== isFn(resumeFn)) {
@@ -156,10 +158,13 @@ export class Sema {
     this.waiting = new Deque(capacity);
     this.releaseEmitter = new ReleaseEmitter();
     this.noTokens = initFn === defaultInit;
+    //@ts-ignore
     this.pauseFn = pauseFn;
+    //@ts-ignore
     this.resumeFn = resumeFn;
     this.paused = false;
 
+    //@ts-ignore
     this.releaseEmitter.on("release", token => {
       const p = this.waiting.shift();
       if (p) {
@@ -180,7 +185,7 @@ export class Sema {
   }
 
   async acquire(): Promise<any> {
-    let token = this.free.pop();
+    const token = this.free.pop();
 
     if (token !== void 0) {
       return token;
@@ -219,8 +224,8 @@ export function RateLimit(
     timeUnit = 1000,
     uniformDistribution = false
   }: {
-    timeUnit?: number,
-    uniformDistribution?: boolean
+    timeUnit?: number;
+    uniformDistribution?: boolean;
   } = {}
 ) {
   const sema = new Sema(uniformDistribution ? 1 : rps);

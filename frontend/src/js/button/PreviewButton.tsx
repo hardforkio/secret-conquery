@@ -8,10 +8,10 @@ import { openPreview } from "../preview/actions";
 import IconButton from "./IconButton";
 
 type PropsType = {
-  url: string,
-  isLoading: boolean,
-  onOpenPreview: (url: string) => void,
-  className?: string
+  url: string;
+  isLoading: boolean;
+  onOpenPreview: (url: string) => void;
+  className?: string;
 };
 
 const PreviewButton = ({
@@ -38,9 +38,11 @@ const PreviewButton = ({
 
 export default connect(
   state => ({
+    //@ts-ignore
     isLoading: state.preview.isLoading
   }),
   dispatch => ({
+    //@ts-ignore
     onOpenPreview: (url: string) => dispatch(openPreview(url))
   })
 )(PreviewButton);

@@ -5,6 +5,7 @@ import {
 
 const initialState = {};
 
+// @ts-ignore
 const queryGroupModal = (state = initialState, action) => {
   switch (action.type) {
     case QUERY_GROUP_MODAL_SET_NODE:

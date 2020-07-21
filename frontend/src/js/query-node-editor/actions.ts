@@ -1,6 +1,8 @@
 import { createActionTypes } from "./actionTypes";
 
-export const createQueryNodeEditorActions = (type: string): Object => {
+export const createQueryNodeEditorActions = (
+  type: string
+): Record<string, any> => {
   const {
     SET_DETAILS_VIEW_ACTIVE,
     SET_INPUT_TABLE_VIEW_ACTIVE,
@@ -10,10 +12,12 @@ export const createQueryNodeEditorActions = (type: string): Object => {
   } = createActionTypes(type);
 
   const setDetailsViewActive = () => ({ type: SET_DETAILS_VIEW_ACTIVE });
+  // @ts-ignore
   const setInputTableViewActive = tableIdx => ({
     type: SET_INPUT_TABLE_VIEW_ACTIVE,
     tableIdx
   });
+  // @ts-ignore
   const setFocusedInput = filterIdx => ({ type: SET_FOCUSED_INPUT, filterIdx });
   const toggleEditLabel = () => ({ type: TOGGLE_EDIT_LABEL });
   const reset = () => ({ type: RESET });

@@ -14,10 +14,14 @@ import {
   INIT,
   RESET
 } from "./actionTypes";
+// @ts-ignore
+import React from "react";
 
 export const resolveConceptsStart = () => ({ type: RESOLVE_CONCEPTS_START });
-export const resolveConceptsSuccess = (res: any, payload?: Object) =>
-  defaultSuccess(RESOLVE_CONCEPTS_SUCCESS, res, payload);
+export const resolveConceptsSuccess = (
+  res: any,
+  payload?: Record<string, any>
+) => defaultSuccess(RESOLVE_CONCEPTS_SUCCESS, res, payload);
 export const resolveConceptsError = (err: any) =>
   defaultError(RESOLVE_CONCEPTS_ERROR, err);
 
@@ -27,8 +31,11 @@ export const selectConceptRootNode = (conceptId: ConceptIdT) => ({
 });
 
 export const selectConceptRootNodeAndResolveCodes = (
+  // @ts-ignore
   datasetId,
+  // @ts-ignore
   treeId,
+  // @ts-ignore
   conceptCodes
 ) => (dispatch: Dispatch) => {
   if (isEmpty(treeId)) {
@@ -39,14 +46,13 @@ export const selectConceptRootNodeAndResolveCodes = (
 
   dispatch(resolveConceptsStart());
 
-  return api
-    .postConceptsListToResolve(datasetId, treeId, conceptCodes)
-    .then(
-      r => dispatch(resolveConceptsSuccess(r)),
-      e => dispatch(resolveConceptsError(e))
-    );
+  return api.postConceptsListToResolve(datasetId, treeId, conceptCodes).then(
+    r => dispatch(resolveConceptsSuccess(r)),
+    e => dispatch(resolveConceptsError(e))
+  );
 };
 
+// @ts-ignore
 export const initUploadConceptListModal = file => async dispatch => {
   const rows = await getUniqueFileRows(file);
 

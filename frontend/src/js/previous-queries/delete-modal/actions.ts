@@ -3,6 +3,7 @@ import {
   DELETE_PREVIOUS_QUERY_MODAL_CLOSE
 } from "./actionTypes";
 
+//@ts-ignore
 export const deletePreviousQueryModalOpen = queryId => ({
   type: DELETE_PREVIOUS_QUERY_MODAL_OPEN,
   payload: { queryId }

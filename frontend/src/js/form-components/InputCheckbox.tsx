@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 const Row = styled("div")`

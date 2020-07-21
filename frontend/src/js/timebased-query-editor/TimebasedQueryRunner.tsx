@@ -4,9 +4,13 @@ import actions from "../app/actions";
 import QueryRunner from "../query-runner/QueryRunner";
 
 import { allConditionsFilled } from "./helpers";
+//@ts-ignore
+import React from "react";
 
+//@ts-ignore
 const { startTimebasedQuery, stopTimebasedQuery } = actions;
 
+//@ts-ignore
 function isButtonEnabled(state, ownProps) {
   return !!(
     ownProps.datasetId !== null &&
@@ -16,6 +20,7 @@ function isButtonEnabled(state, ownProps) {
   );
 }
 
+//@ts-ignore
 const mapStateToProps = (state, ownProps) => ({
   queryRunner: state.timebasedQueryEditor.timebasedQueryRunner,
   isButtonEnabled: isButtonEnabled(state, ownProps),
@@ -27,13 +32,17 @@ const mapStateToProps = (state, ownProps) => ({
   query: state.timebasedQueryEditor.timebasedQuery
 });
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
+  //@ts-ignore
   startQuery: (datasetId, query, version) =>
     dispatch(startTimebasedQuery(datasetId, query, version)),
+  //@ts-ignore
   stopQuery: (datasetId, queryId) =>
     dispatch(stopTimebasedQuery(datasetId, queryId))
 });
 
+//@ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,

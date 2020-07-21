@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
+// @ts-ignore
 import type { Dispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import T from "i18n-react";
@@ -58,15 +59,15 @@ const SxPrimaryButton = styled(PrimaryButton)`
 type PropsType = {
   loading: boolean;
   filename: string;
-  availableConceptRootNodes: Object[];
-  selectedConceptRootNode: Object;
+  availableConceptRootNodes: Record<string, any>[];
+  selectedConceptRootNode: Record<string, any>;
   selectedDatasetId: DatasetIdT;
   conceptCodesFromFile: string[];
-  resolved: Object;
+  resolved: Record<string, any>;
   rootConcepts: TreesT;
   resolvedItemsCount: number;
   unresolvedItemsCount: number;
-  error: Object;
+  error: Record<string, any>;
   onSelectConceptRootNode: Function;
 
   // This really comes from outside container, and depends on the context
@@ -109,6 +110,7 @@ const UploadConceptListModal = (props: PropsType) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // @ts-ignore
     onAccept(label, rootConcepts, resolved.resolvedConcepts);
     onClose();
   };
@@ -116,6 +118,7 @@ const UploadConceptListModal = (props: PropsType) => {
   return (
     <Modal
       closeIcon
+      // @ts-ignore
       onClose={onClose}
       headline={T.translate("uploadConceptListModal.headline")}
     >
@@ -124,6 +127,7 @@ const UploadConceptListModal = (props: PropsType) => {
           label={T.translate("uploadConceptListModal.selectConceptRootNode")}
           input={{
             value: selectedConceptRootNode,
+            // @ts-ignore
             onChange: value =>
               onSelectConceptRootNode(
                 selectedDatasetId,
@@ -132,7 +136,9 @@ const UploadConceptListModal = (props: PropsType) => {
               )
           }}
           options={availableConceptRootNodes.map(x => ({
+            // @ts-ignore
             value: x.key,
+            // @ts-ignore
             label: x.value.label
           }))}
           selectProps={{
@@ -168,6 +174,7 @@ const UploadConceptListModal = (props: PropsType) => {
                     </Msg>
                     <MsgRow>
                       <InputText
+                        // @ts-ignore
                         label={T.translate("uploadConceptListModal.label")}
                         fullWidth
                         inputProps={{
@@ -178,7 +185,10 @@ const UploadConceptListModal = (props: PropsType) => {
                           onChange: setLabel
                         }}
                       />
-                      <SxPrimaryButton type="submit">
+                      <SxPrimaryButton
+                        // @ts-ignore
+                        type="submit"
+                      >
                         {T.translate("uploadConceptListModal.insertNode")}
                       </SxPrimaryButton>
                     </MsgRow>
@@ -197,6 +207,7 @@ const UploadConceptListModal = (props: PropsType) => {
                     <ScrollableList
                       maxVisibleItems={3}
                       fullWidth
+                      // @ts-ignore
                       items={resolved.unknownCodes}
                     />
                   </div>
@@ -210,6 +221,7 @@ const UploadConceptListModal = (props: PropsType) => {
   );
 };
 
+// @ts-ignore
 const selectUnresolvedItemsCount = state => {
   const { resolved } = state.uploadConceptListModal;
 
@@ -218,6 +230,7 @@ const selectUnresolvedItemsCount = state => {
     : 0;
 };
 
+// @ts-ignore
 const selectResolvedItemsCount = state => {
   const { resolved } = state.uploadConceptListModal;
 
@@ -228,17 +241,22 @@ const selectResolvedItemsCount = state => {
     : 0;
 };
 
+// @ts-ignore
 const selectAvailableConceptRootNodes = state => {
   const { trees } = state.conceptTrees;
 
   if (!trees) return null;
 
-  return Object.entries(trees)
-    .map(([key, value]) => ({ key, value }))
-    .filter(({ key, value }) => value.codeListResolvable)
-    .sort((a, b) =>
-      a.value.label.toLowerCase().localeCompare(b.value.label.toLowerCase())
-    );
+  return (
+    Object.entries(trees)
+      .map(([key, value]) => ({ key, value }))
+      // @ts-ignore
+      .filter(({ key, value }) => value.codeListResolvable)
+      .sort((a, b) =>
+        // @ts-ignore
+        a.value.label.toLowerCase().localeCompare(b.value.label.toLowerCase())
+      )
+  );
 };
 
 const mapStateToProps = (state: StateT) => ({
@@ -255,11 +273,14 @@ const mapStateToProps = (state: StateT) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  // @ts-ignore
   onSelectConceptRootNode: (...params) =>
+    // @ts-ignore
     dispatch(selectConceptRootNodeAndResolveCodes(...params))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
+  // @ts-ignore
 )(UploadConceptListModal);

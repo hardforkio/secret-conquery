@@ -94,11 +94,12 @@ const filterItem = (
       ...baseItem,
 
       ids: item.ids,
+      // @ts-ignore
       description: item.description,
       tables: item.tables,
       selects: item.selects,
       tree: item.tree,
-
+      // @ts-ignore
       additionalInfos: item.additionalInfos,
       matchingEntries: item.matchingEntries,
       dateRange: item.dateRange,
@@ -106,7 +107,7 @@ const filterItem = (
       isPreviousQuery: item.isPreviousQuery
     };
 };
-
+// @ts-ignore
 const setGroupProperties = (node, andIdx, properties) => {
   return [
     ...node.slice(0, andIdx),
@@ -117,7 +118,7 @@ const setGroupProperties = (node, andIdx, properties) => {
     ...node.slice(andIdx + 1)
   ];
 };
-
+// @ts-ignore
 const setElementProperties = (node, andIdx, orIdx, properties) => {
   const groupProperties = {
     elements: [
@@ -132,10 +133,12 @@ const setElementProperties = (node, andIdx, orIdx, properties) => {
 
   return setGroupProperties(node, andIdx, groupProperties);
 };
-
+// @ts-ignore
 const setAllElementsProperties = (node, properties) => {
+  // @ts-ignore
   return node.map(group => ({
     ...group,
+    // @ts-ignore
     elements: group.elements.map(element => ({
       ...element,
       ...properties
@@ -144,6 +147,7 @@ const setAllElementsProperties = (node, properties) => {
 };
 
 const dropAndNode = (
+  // @ts-ignore
   state,
   action: {
     payload: {
@@ -166,12 +170,14 @@ const dropAndNode = (
 
   return item.moved
     ? deleteNode(nextState, {
+        // @ts-ignore
         payload: { andIdx: item.andIdx, orIdx: item.orIdx }
       })
     : nextState;
 };
 
 const dropOrNode = (
+  // @ts-ignore
   state,
   action: {
     payload: {
@@ -194,9 +200,11 @@ const dropOrNode = (
   return item.moved
     ? item.andIdx === andIdx
       ? deleteNode(nextState, {
+          // @ts-ignore
           payload: { andIdx: item.andIdx, orIdx: item.orIdx + 1 }
         })
       : deleteNode(nextState, {
+          // @ts-ignore
           payload: { andIdx: item.andIdx, orIdx: item.orIdx }
         })
     : nextState;
@@ -204,6 +212,7 @@ const dropOrNode = (
 
 // Delete a single Node (concept inside a group)
 const deleteNode = (
+  // @ts-ignore
   state,
   action: { payload: { andIdx: number; orIdx: number } }
 ) => {
@@ -222,12 +231,14 @@ const deleteNode = (
   ].filter(and => !!and.elements && and.elements.length > 0);
 };
 
+// @ts-ignore
 const deleteGroup = (state, action) => {
   const { andIdx } = action.payload;
 
   return [...state.slice(0, andIdx), ...state.slice(andIdx + 1)];
 };
 
+// @ts-ignore
 const toggleExcludeGroup = (state, action) => {
   const { andIdx } = action.payload;
 
@@ -241,6 +252,7 @@ const toggleExcludeGroup = (state, action) => {
   ];
 };
 
+// @ts-ignore
 const loadQuery = (state, action) => {
   // In case there is no query, keep state the same
   if (!action.payload.query) return state;
@@ -248,6 +260,7 @@ const loadQuery = (state, action) => {
   return action.payload.query;
 };
 
+// @ts-ignore
 const updateNodeTable = (state, andIdx, orIdx, tableIdx, table) => {
   const node = state[andIdx].elements[orIdx];
   const tables = [
@@ -259,10 +272,12 @@ const updateNodeTable = (state, andIdx, orIdx, tableIdx, table) => {
   return updateNodeTables(state, andIdx, orIdx, tables);
 };
 
+// @ts-ignore
 const updateNodeTables = (state, andIdx, orIdx, tables) => {
   return setElementProperties(state, andIdx, orIdx, { tables });
 };
 
+// @ts-ignore
 const toggleNodeTable = (state, action) => {
   const { tableIdx, isExcluded } = action.payload;
 
@@ -279,21 +294,27 @@ const toggleNodeTable = (state, action) => {
   return updateNodeTable(state, andIdx, orIdx, tableIdx, table);
 };
 
+// @ts-ignore
 const selectEditedNode = state => {
   const selectedNodes = state
     .reduce(
+      // @ts-ignore
       (acc, group, andIdx) => [
         ...acc,
+        // @ts-ignore
         ...group.elements.map((element, orIdx) => ({ andIdx, orIdx, element }))
       ],
       []
     )
+    // @ts-ignore
     .filter(({ element }) => element.isEditing)
+    // @ts-ignore
     .map(({ andIdx, orIdx }) => ({ andIdx, orIdx }));
 
   return selectedNodes.length ? selectedNodes[0] : null;
 };
 
+// @ts-ignore
 const setNodeFilterProperties = (state, action, properties) => {
   const { tableIdx, filterIdx } = action.payload;
 
@@ -324,12 +345,14 @@ const setNodeFilterProperties = (state, action, properties) => {
   return updateNodeTable(state, andIdx, orIdx, tableIdx, newTable);
 };
 
+// @ts-ignore
 const setNodeFilterValue = (state, action) => {
   const { value } = action.payload;
 
   return setNodeFilterProperties(state, action, { value });
 };
 
+// @ts-ignore
 const setNodeTableSelects = (state, action) => {
   const { tableIdx, value } = action.payload;
   const { andIdx, orIdx } = selectEditedNode(state);
@@ -339,10 +362,12 @@ const setNodeTableSelects = (state, action) => {
   // value contains the selects that have now been selected
   const newTable = {
     ...table,
+    // @ts-ignore
     selects: selects.map(select => ({
       ...select,
       selected:
         !!value &&
+        // @ts-ignore
         !!value.find(selectedValue => selectedValue.value === select.id)
     }))
   };
@@ -350,6 +375,7 @@ const setNodeTableSelects = (state, action) => {
   return updateNodeTable(state, andIdx, orIdx, tableIdx, newTable);
 };
 
+// @ts-ignore
 const setNodeTableDateColumn = (state, action) => {
   const { tableIdx, value } = action.payload;
   const { andIdx, orIdx } = selectEditedNode(state);
@@ -368,21 +394,25 @@ const setNodeTableDateColumn = (state, action) => {
   return updateNodeTable(state, andIdx, orIdx, tableIdx, newTable);
 };
 
+// @ts-ignore
 const setNodeSelects = (state, action) => {
   const { value } = action.payload;
   const { andIdx, orIdx } = selectEditedNode(state);
   const { selects } = state[andIdx].elements[orIdx];
 
   return setElementProperties(state, andIdx, orIdx, {
+    // @ts-ignore
     selects: selects.map(select => ({
       ...select,
       selected:
         !!value &&
+        // @ts-ignore
         !!value.find(selectedValue => selectedValue.value === select.id)
     }))
   });
 };
 
+// @ts-ignore
 const switchNodeFilterMode = (state, action) => {
   const { mode } = action.payload;
 
@@ -392,6 +422,7 @@ const switchNodeFilterMode = (state, action) => {
   });
 };
 
+// @ts-ignore
 const resetNodeAllFilters = (state, action) => {
   const nodeIdx = selectEditedNode(state);
   if (!nodeIdx) return state;
@@ -411,12 +442,14 @@ const resetNodeAllFilters = (state, action) => {
   return updateNodeTables(newState, andIdx, orIdx, tables);
 };
 
+// @ts-ignore
 const setGroupDate = (state, action) => {
   const { andIdx, date } = action.payload;
 
   return setGroupProperties(state, andIdx, { dateRange: date });
 };
 
+// @ts-ignore
 const resetGroupDates = (state, action) => {
   const { andIdx } = action.payload;
 
@@ -430,14 +463,17 @@ const resetGroupDates = (state, action) => {
 // `savedConcept` is never modified and only declares possible filters.
 // Since `table` comes from a previous query, it may have set filter values
 // if so, we will need to merge them in.
+// @ts-ignore
 const mergeFiltersFromSavedConcept = (savedTable, table) => {
   if (!table || !table.filters) return savedTable.filters || null;
 
   if (!savedTable.filters) return null;
 
+  // @ts-ignore
   return savedTable.filters.map(filter => {
     // TODO: Improve the api and don't use `.filter`, but `.id` or `.filterId`
     const matchingFilter =
+      // @ts-ignore
       table.filters.find(f => f.filter === filter.id) || {};
 
     const filterModeWithValue =
@@ -457,9 +493,11 @@ const mergeFiltersFromSavedConcept = (savedTable, table) => {
       filterModeWithValue.value && filterModeWithValue.value instanceof Array
         ? {
             ...filterModeWithValue,
+            // @ts-ignore
             value: filterModeWithValue.value.map(val =>
               !!filter.options
-                ? filter.options.find(op => op.value === val)
+                ? // @ts-ignore
+                  filter.options.find(op => op.value === val)
                 : val
             )
           }
@@ -472,12 +510,15 @@ const mergeFiltersFromSavedConcept = (savedTable, table) => {
   });
 };
 
+// @ts-ignore
 const mergeSelects = (savedSelects, conceptOrTable) => {
   if (!conceptOrTable || !conceptOrTable.selects) return savedSelects || null;
 
   if (!savedSelects) return null;
 
+  // @ts-ignore
   return savedSelects.map(select => {
+    // @ts-ignore
     const selectedSelect = conceptOrTable.selects.find(id => id === select.id);
 
     return { ...select, selected: !!selectedSelect };
@@ -494,11 +535,14 @@ const mergeDateColumn = (savedTable: TableT, table: TableT) => {
   };
 };
 
+// @ts-ignore
 const mergeTables = (savedTables, concept) => {
   return savedTables
-    ? savedTables.map(savedTable => {
+    ? // @ts-ignore
+      savedTables.map(savedTable => {
         // Find corresponding table in previous queryObject
         // TODO: Disentangle id / connectorId mixing
+        // @ts-ignore
         const table = concept.tables.find(t => t.id === savedTable.connectorId);
         const filters = mergeFiltersFromSavedConcept(savedTable, table);
         const selects = mergeSelects(savedTable.selects, table);
@@ -518,6 +562,7 @@ const mergeTables = (savedTables, concept) => {
 // Look for tables in the already savedConcept. If they were not included in the
 // respective query concept, exclude them.
 // Also, apply all necessary filters
+// @ts-ignore
 const mergeFromSavedConcept = (savedConcept, concept) => {
   const tables = mergeTables(savedConcept.tables, concept);
   const selects = mergeSelects(savedConcept.selects, concept);
@@ -525,11 +570,13 @@ const mergeFromSavedConcept = (savedConcept, concept) => {
   return { selects, tables };
 };
 
+// @ts-ignore
 const expandNode = (rootConcepts, node) => {
   switch (node.type) {
     case "OR":
       return {
         ...node,
+        // @ts-ignore
         elements: node.children.map(c => expandNode(rootConcepts, c))
       };
     case "SAVED_QUERY":
@@ -582,33 +629,44 @@ const expandNode = (rootConcepts, node) => {
 // a) merge elements with concept data from concept trees (esp. "tables")
 // b) load nested previous queries contained in that query,
 //    so they can also be expanded
+// @ts-ignore
 const expandPreviousQuery = (state, action) => {
   const { rootConcepts, query } = action.payload;
 
+  // @ts-ignore
   return query.root.children.map(child => expandNode(rootConcepts, child));
 };
 
+// @ts-ignore
 const findPreviousQueries = (state, action) => {
   // Find all nodes that are previous queries and have the correct id
   const queries = state
+    // @ts-ignore
     .map((group, andIdx) => {
-      return group.elements
-        .map((concept, orIdx) => ({ ...concept, orIdx }))
-        .filter(
-          concept =>
-            concept.isPreviousQuery && concept.id === action.payload.queryId
-        )
-        .map(concept => ({
-          andIdx,
-          orIdx: concept.orIdx,
-          node: objectWithoutKey("orIdx")(concept)
-        }));
+      return (
+        group.elements
+          // @ts-ignore
+          .map((concept, orIdx) => ({ ...concept, orIdx }))
+          .filter(
+            // @ts-ignore
+            concept =>
+              concept.isPreviousQuery && concept.id === action.payload.queryId
+          )
+          // @ts-ignore
+          .map(concept => ({
+            andIdx,
+            orIdx: concept.orIdx,
+            node: objectWithoutKey("orIdx")(concept)
+          }))
+      );
     })
+    // @ts-ignore
     .filter(group => group.length > 0);
 
   return [].concat.apply([], queries);
 };
 
+// @ts-ignore
 const updatePreviousQueries = (state, action, attributes) => {
   const queries = findPreviousQueries(state, action);
 
@@ -622,6 +680,7 @@ const updatePreviousQueries = (state, action, attributes) => {
         elements: [
           ...nextState[andIdx].elements.slice(0, orIdx),
           {
+            // @ts-ignore
             ...node,
             ...attributes
           },
@@ -633,9 +692,11 @@ const updatePreviousQueries = (state, action, attributes) => {
   }, state);
 };
 
+// @ts-ignore
 const loadPreviousQueryStart = (state, action) => {
   return updatePreviousQueries(state, action, { loading: true });
 };
+// @ts-ignore
 const loadPreviousQuerySuccess = (state, action) => {
   const label = action.payload.data.label
     ? { label: action.payload.data.label }
@@ -648,12 +709,14 @@ const loadPreviousQuerySuccess = (state, action) => {
     query: action.payload.data.query
   });
 };
+// @ts-ignore
 const loadPreviousQueryError = (state, action) => {
   return updatePreviousQueries(state, action, {
     loading: false,
     error: action.payload.message
   });
 };
+// @ts-ignore
 const renamePreviousQuery = (state, action) => {
   return updatePreviousQueries(state, action, {
     loading: false,
@@ -661,6 +724,7 @@ const renamePreviousQuery = (state, action) => {
   });
 };
 
+// @ts-ignore
 function getIndicesFromSelectedOrAction(state, action) {
   const { andIdx, orIdx } = action.payload;
 
@@ -671,6 +735,7 @@ function getIndicesFromSelectedOrAction(state, action) {
   return selectEditedNode(state);
 }
 
+// @ts-ignore
 const toggleTimestamps = (state, action) => {
   const { andIdx, orIdx } = getIndicesFromSelectedOrAction(state, action);
 
@@ -679,9 +744,11 @@ const toggleTimestamps = (state, action) => {
   });
 };
 
+// @ts-ignore
 const loadFilterSuggestionsStart = (state, action) =>
   setNodeFilterProperties(state, action, { isLoading: true });
 
+// @ts-ignore
 const loadFilterSuggestionsSuccess = (state, action) => {
   // When [] comes back from the API, don't touch the current options
   if (!action.payload.data || action.payload.data.length === 0)
@@ -693,19 +760,23 @@ const loadFilterSuggestionsSuccess = (state, action) => {
   });
 };
 
+// @ts-ignore
 const loadFilterSuggestionsError = (state, action) =>
   setNodeFilterProperties(state, action, { isLoading: false });
 
 const createQueryNodeFromConceptListUploadResult = (
+  // @ts-ignore
   label,
+  // @ts-ignore
   rootConcepts,
+  // @ts-ignore
   resolvedConcepts
 ): DraggedNodeType => {
   const lookupResult = getConceptsByIdsWithTablesAndSelects(
     resolvedConcepts,
     rootConcepts
   );
-
+  // @ts-ignore
   return lookupResult
     ? {
         label,
@@ -716,7 +787,7 @@ const createQueryNodeFromConceptListUploadResult = (
       }
     : null;
 };
-
+// @ts-ignore
 const insertUploadedConceptList = (state, action) => {
   const { label, rootConcepts, resolvedConcepts, andIdx } = action.payload;
 
@@ -736,11 +807,11 @@ const insertUploadedConceptList = (state, action) => {
         payload: { andIdx, item: queryElement }
       });
 };
-
+// @ts-ignore
 const selectNodeForEditing = (state, { payload: { andIdx, orIdx } }) => {
   return setElementProperties(state, andIdx, orIdx, { isEditing: true });
 };
-
+// @ts-ignore
 const updateNodeLabel = (state, action) => {
   const node = selectEditedNode(state);
 
@@ -752,7 +823,7 @@ const updateNodeLabel = (state, action) => {
     label: action.payload.label
   });
 };
-
+// @ts-ignore
 const addConceptToNode = (state, action) => {
   const nodePosition = selectEditedNode(state);
 
@@ -765,7 +836,7 @@ const addConceptToNode = (state, action) => {
     ids: [...action.payload.concept.ids, ...node.ids]
   });
 };
-
+// @ts-ignore
 const removeConceptFromNode = (state, action) => {
   const nodePosition = selectEditedNode(state);
 
@@ -775,6 +846,7 @@ const removeConceptFromNode = (state, action) => {
   const node = state[andIdx].elements[orIdx];
 
   return setElementProperties(state, andIdx, orIdx, {
+    // @ts-ignore
     ids: node.ids.filter(id => id !== action.payload.conceptId)
   });
 };
@@ -871,14 +943,18 @@ const removeConceptFromNode = (state, action) => {
 // ]
 const query = (
   state: StandardQueryStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): StandardQueryStateT => {
+  // @ts-ignore
   switch (action.type) {
     case DROP_AND_NODE:
+      // @ts-ignore
       return dropAndNode(state, action);
     case DROP_OR_NODE:
+      // @ts-ignore
       return dropOrNode(state, action);
     case DELETE_NODE:
+      // @ts-ignore
       return deleteNode(state, action);
     case DELETE_GROUP:
       return deleteGroup(state, action);
@@ -889,6 +965,7 @@ const query = (
     case CLEAR_QUERY:
       return initialState;
     case SELECT_NODE_FOR_EDITING:
+      // @ts-ignore
       return selectNodeForEditing(state, action);
     case DESELECT_NODE:
       return setAllElementsProperties(state, { isEditing: false });

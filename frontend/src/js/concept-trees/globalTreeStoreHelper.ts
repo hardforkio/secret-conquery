@@ -7,9 +7,12 @@ import { tablesWithDefaults } from "../model/table";
 import { selectsWithDefaults } from "../model/select";
 
 import { findConcepts } from "./search";
+//@ts-ignore
+import * as React from "react";
 
 // Globally store the huge (1-5 MB) trees for read only
 // - keeps the redux store free from huge data
+// @ts-ignore
 window.conceptTrees = {};
 
 // To make this global variable a little more sane to use,
@@ -18,7 +21,9 @@ window.conceptTrees = {};
 //
 // RESETTER
 //
+// @ts-ignore
 export function resetAllTrees() {
+  // @ts-ignore
   window.conceptTrees = {};
 }
 
@@ -36,6 +41,7 @@ export function setTree(
     [treeId]: rootConcept
   };
 
+  // @ts-ignore
   window.conceptTrees[treeId] = concepts;
 }
 
@@ -43,9 +49,11 @@ export function setTree(
 // GETTER
 //
 export function getConceptById(conceptId?: ConceptIdT): ConceptT | null {
+  // @ts-ignore
   const keys: ConceptIdT[] = Object.keys(window.conceptTrees);
 
   for (let i = 0; i < keys.length; i++) {
+    // @ts-ignore
     const concept = window.conceptTrees[keys[i]][conceptId];
 
     if (concept) return concept;
@@ -59,6 +67,7 @@ export function getConceptById(conceptId?: ConceptIdT): ConceptT | null {
 //
 const findParentConcepts = (concepts: ConceptT[]): ConceptT[] => {
   // Get parent from first concept
+  // @ts-ignore
   const parentId = concepts[0].parent;
   const parentConcept = getConceptById(parentId);
 
@@ -75,10 +84,10 @@ const findParentConcepts = (concepts: ConceptT[]): ConceptT[] => {
 };
 
 interface ConceptsByIds {
-  concepts: (ConceptT & { id: ConceptIdT })[],
-  root: ConceptIdT,
-  tables: TableT[],
-  selects?: SelectorT[]
+  concepts: (ConceptT & { id: ConceptIdT })[];
+  root: ConceptIdT;
+  tables: TableT[];
+  selects?: SelectorT[];
 }
 
 export const getConceptsByIdsWithTablesAndSelects = (
@@ -92,11 +101,14 @@ export const getConceptsByIdsWithTablesAndSelects = (
 
   if (concepts.length !== conceptIds.length) return null;
 
+  // @ts-ignore
   const parentConceptIds = findParentConcepts(concepts).map(
+    // @ts-ignore
     c => c.id.toString() // toString so we can find them by object keys
   );
 
   const rootConceptId = Object.keys(rootConcepts).find(
+    // @ts-ignore
     id => includes(parentConceptIds, id) && !!rootConcepts[id].tables
   );
 
@@ -109,13 +121,17 @@ export const getConceptsByIdsWithTablesAndSelects = (
 
   const rootConcept = rootConcepts[rootConceptId];
 
+  // @ts-ignore
   const selects = rootConcept.selects
-    ? { selects: selectsWithDefaults(rootConcept.selects) }
+    ? // @ts-ignore
+      { selects: selectsWithDefaults(rootConcept.selects) }
     : {};
 
   return {
+    // @ts-ignore
     concepts,
     root: rootConceptId,
+    // @ts-ignore
     tables: tablesWithDefaults(rootConcept.tables),
     ...selects
   };
@@ -124,6 +140,7 @@ export const getConceptsByIdsWithTablesAndSelects = (
 export const hasConceptChildren = (node: ConceptT): boolean => {
   if (!node) return false;
 
+  // @ts-ignore
   const concept = getConceptById(node.ids);
 
   return !!concept && !!concept.children && concept.children.length > 0;
@@ -145,10 +162,12 @@ export const globalSearch = async (trees: TreesT, query: string) => {
   // TODO: Refactor the state and keep both root trees as well as concept trees in a single format
   //       Then simply use that here
   const formattedTrees = Object.keys(trees).reduce((all, key) => {
+    // @ts-ignore
     all[key] = { [key]: trees[key] };
 
     return all;
   }, {});
+  // @ts-ignore
   const combinedTrees = Object.assign({}, formattedTrees, window.conceptTrees);
 
   const result = Object.keys(combinedTrees)

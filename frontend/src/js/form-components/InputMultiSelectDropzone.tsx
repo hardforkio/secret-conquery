@@ -24,7 +24,10 @@ const FileInput = styled("input")`
 const TopRight = styled("p")`
   margin: 0;
   font-size: ${({ theme }) => theme.font.tiny};
-  color: ${({ theme }) => theme.font.gray};
+  color: ${({
+    // @ts-ignore
+    theme
+  }) => theme.font.gray};
   position: absolute;
   top: -15px;
   right: 0;
@@ -36,6 +39,7 @@ const TopRight = styled("p")`
 `;
 
 const target = {
+  // @ts-ignore
   drop: (props, monitor) => {
     const item = monitor.getItem();
 
@@ -45,6 +49,7 @@ const target = {
   }
 };
 
+// @ts-ignore
 const collect = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
@@ -59,12 +64,14 @@ export default DropTarget(
   const fileInputRef = React.useRef(null);
 
   function onOpenFileDialog() {
+    // @ts-ignore
     fileInputRef.current.click();
   }
 
   return (
     <Root>
-      <InnerZone
+      <// @ts-ignore
+      InnerZone
         connectDropTarget={connectDropTarget}
         canDrop={canDrop}
         isOver={isOver}
@@ -77,7 +84,9 @@ export default DropTarget(
           ref={fileInputRef}
           type="file"
           onChange={e => {
+            // @ts-ignore
             onDropFile(e.target.files[0]);
+            // @ts-ignore
             fileInputRef.current.value = null;
           }}
         />

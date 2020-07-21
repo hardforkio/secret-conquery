@@ -5,14 +5,15 @@ import type { DateRangeT, InfoT } from "../api/types";
 import { isEmpty } from "../common/helpers";
 import { toggleAdditionalInfos, displayAdditionalInfos } from "./actions";
 import HoverableBase from "./HoverableBase";
+import { Dispatch } from "redux";
 
 export type AdditionalInfoHoverableNodeType = {
-  label: string,
-  description: string,
-  children?: Array<string>,
-  matchingEntries: number,
-  dateRange: DateRangeT,
-  additionalInfos: InfoT[]
+  label: string;
+  description: string;
+  children?: Array<string>;
+  matchingEntries: number;
+  dateRange: DateRangeT;
+  additionalInfos: InfoT[];
 };
 
 // Whitelist the data we pass (especially: don't pass all children)
@@ -48,6 +49,7 @@ const AdditionalInfoHoverable = (Component: any) => {
 
       if (!node.additionalInfos && isEmpty(node.matchingEntries)) return;
 
+      // @ts-ignore
       dispatch([
         toggleAdditionalInfos(),
         displayAdditionalInfos(additionalInfos(node))
@@ -58,6 +60,7 @@ const AdditionalInfoHoverable = (Component: any) => {
   return connect(
     mapStateToProps,
     mapDispatchToProps
+    // @ts-ignore
   )(HoverableBase(Component));
 };
 

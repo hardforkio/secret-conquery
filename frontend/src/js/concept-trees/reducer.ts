@@ -25,6 +25,7 @@ export type SearchT = {
   loading: boolean;
   query: string;
   words: string[] | null;
+  // @ts-ignore
   result: null | { [key: ConceptIdT]: number };
   resultCount: number;
   duration: number;
@@ -57,8 +58,9 @@ const initialState: ConceptTreesStateT = {
 
 const setSearchTreesSuccess = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
+  // @ts-ignore
   const { query, result } = action.payload;
 
   // only create keys array once, then cache,
@@ -84,8 +86,9 @@ const setSearchTreesSuccess = (
 
 const setSearchTreesStart = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
+  // @ts-ignore
   const { query } = action.payload;
 
   return {
@@ -104,14 +107,16 @@ const setSearchTreesStart = (
 
 const updateTree = (
   state: ConceptTreesStateT,
-  action: Object,
-  attributes: Object
+  action: Record<string, any>,
+  attributes: Record<string, any>
 ): ConceptTreesStateT => {
   return {
     ...state,
     trees: {
       ...state.trees,
+      // @ts-ignore
       [action.payload.treeId]: {
+        // @ts-ignore
         ...state.trees[action.payload.treeId],
         ...attributes
       }
@@ -121,23 +126,25 @@ const updateTree = (
 
 const setTreeLoading = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
   return updateTree(state, action, { loading: true });
 };
 
 const setTreeSuccess = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
   // Side effect in a reducer.
   // Globally store the huge (1-5 MB) trees for read only
   // - keeps the redux store free from huge data
+  // @ts-ignore
   const { treeId, data } = action.payload;
   const newState = updateTree(state, action, { loading: false });
 
   const rootConcept = newState.trees[treeId];
 
+  // @ts-ignore
   setTree(rootConcept, treeId, data);
 
   return newState;
@@ -145,21 +152,24 @@ const setTreeSuccess = (
 
 const setTreeError = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
   return updateTree(state, action, {
     loading: false,
+    // @ts-ignore
     error: action.payload.message
   });
 };
 
 const setLoadTreesSuccess = (
   state: ConceptTreesStateT,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
+  // @ts-ignore
   const { concepts, version } = action.payload.data;
 
   // Assign default select filter values
+  // @ts-ignore
   for (const concept of Object.values(concepts))
     for (const table of concept.tables || [])
       for (const filter of table.filters || [])
@@ -175,8 +185,9 @@ const setLoadTreesSuccess = (
 
 const conceptTrees = (
   state: ConceptTreesStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): ConceptTreesStateT => {
+  // @ts-ignore
   switch (action.type) {
     // All trees
     case LOAD_TREES_START:
@@ -184,6 +195,7 @@ const conceptTrees = (
     case LOAD_TREES_SUCCESS:
       return setLoadTreesSuccess(state, action);
     case LOAD_TREES_ERROR:
+      // @ts-ignore
       return { ...state, loading: false, error: action.payload.message };
 
     // Individual tree:
@@ -205,6 +217,7 @@ const conceptTrees = (
       return {
         ...state,
         search: { ...state.search, loading: false, duration: 0 },
+        // @ts-ignore
         error: action.payload.message
       };
     case CLEAR_SEARCH_QUERY:

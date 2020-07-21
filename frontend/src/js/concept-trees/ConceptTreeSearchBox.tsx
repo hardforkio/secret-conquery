@@ -85,6 +85,7 @@ type PropsT = {
   onToggleShowMismatches: () => void;
 };
 
+//@ts-ignore
 const mapStateToProps = state => ({
   areTreesAvailable: getAreTreesAvailable(state),
   showMismatches: state.conceptTrees.search.showMismatches,
@@ -92,7 +93,9 @@ const mapStateToProps = state => ({
   trees: state.conceptTrees.trees
 });
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
+  //@ts-ignore
   onSearch: (datasetId, trees, query) => {
     if (query.length > 1) dispatch(searchTrees(datasetId, trees, query));
   },
@@ -125,14 +128,17 @@ export default connect(
     return (
       <Root>
         <StyledBaseInput
+          //@ts-ignore
           placeholder={T.translate("conceptTreeList.searchPlaceholder")}
           value={localQuery || ""}
           onChange={value => {
             if (isEmpty(value)) onClearQuery();
 
+            //@ts-ignore
             setLocalQuery(value);
           }}
           inputProps={{
+            //@ts-ignore
             onKeyPress: e => {
               return e.key === "Enter" && !isEmpty(e.target.value)
                 ? onSearch(datasetId, trees, e.target.value)

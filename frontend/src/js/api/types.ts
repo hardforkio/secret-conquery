@@ -19,6 +19,7 @@ export type SelectOptionT = {
 export type SelectOptionsT = SelectOptionT[];
 
 // Example: { min: "2019-01-01", max: "2019-12-31" }
+// @ts-ignore
 export type DateRangeT = ?{ min?: string; max?: string };
 
 export interface CurrencyConfigT {
@@ -223,10 +224,11 @@ export interface GetFrontendConfigResponseT {
   version: string;
 }
 
-export type GetConceptResponseT = Record<ConceptIdT, ConceptElement>;
+export type GetConceptResponseT = Record<ConceptIdT, ConceptElementT>;
 
 export interface GetConceptsResponseT {
   concepts: {
+    // @ts-ignore
     [key: ConceptIdT]: ConceptStructT | ConceptElementT;
   };
   version?: number; // TODO: Is this even sent anymore?

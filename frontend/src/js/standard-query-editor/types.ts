@@ -59,6 +59,7 @@ export type SelectedDateColumnT = DateColumnT & {
 };
 
 export type TableWithFilterValueType = TableT & {
+  // @ts-ignore
   filters: ?FilterWithValueType[];
   selects?: SelectedSelectorType[];
   dateColumn?: SelectedDateColumnT;
@@ -92,9 +93,9 @@ export type DraggedNodeType = {
   label: string;
   excludeTimestamps?: boolean;
 
-  additionalInfos: Object;
+  additionalInfos: Record<string, any>;
   matchingEntries: number;
-  dateRange: Object;
+  dateRange: Record<string, any>;
 
   moved?: boolean;
   andIdx?: number;

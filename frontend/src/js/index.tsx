@@ -15,22 +15,35 @@ import { initializeEnvironment, Environment, basename } from "./environment";
 // require('../../images/og.png');
 // Required for isomophic-fetch
 
+//@ts-ignore
+
 let store;
+//@ts-ignore
+
 let browserHistory;
 const initialState = {};
 
 // Render the App including Hot Module Replacement
-const renderRoot = (tabs: Object, theme: Theme) => {
+const renderRoot = (tabs: Record<string, any>, theme: Theme) => {
   browserHistory =
+    //@ts-ignore
+
     browserHistory ||
     createBrowserHistory({
-      basename: basename(),
+      basename: basename()
     });
+  //@ts-ignore
+
   store = store || makeStore(initialState, browserHistory, tabs);
 
   ReactDOM.render(
     <ThemeProvider theme={theme}>
-      <AppRoot store={store} browserHistory={browserHistory} rightTabs={tabs} />
+      <AppRoot
+        store={store}
+        browserHistory={browserHistory}
+        //@ts-ignore
+        rightTabs={tabs}
+      />
     </ThemeProvider>,
     document.getElementById("root")
   );
@@ -38,7 +51,7 @@ const renderRoot = (tabs: Object, theme: Theme) => {
 
 export default function conquery(
   environment: Environment,
-  tabs: Object,
+  tabs: Record<string, any>,
   theme: Theme // React-Emotion theme, will at some point completely replace sass
 ) {
   initializeEnvironment(environment);

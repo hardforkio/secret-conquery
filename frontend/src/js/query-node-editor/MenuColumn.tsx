@@ -69,13 +69,18 @@ const MenuColumn = (props: PropsType) => {
               onUpdateLabel(value);
               editorState.onToggleEditLabel();
             }}
+            // @ts-ignore
             onToggleEdit={editorState.onToggleEditLabel}
           />
         )}
-        {node.isPreviousQuery && (node.label || node.id || node.ids)}
+        {
+          // @ts-ignore
+          node.isPreviousQuery && (node.label || node.id || node.ids)
+        }
       </NodeName>
       <MenuColumnButton
         active={editorState.detailsViewActive}
+        // @ts-ignore
         onClick={editorState.onSelectDetailsView}
       >
         {T.translate("queryNodeEditor.properties")}
@@ -88,6 +93,7 @@ const MenuColumn = (props: PropsType) => {
           {node.tables.map((table, tableIdx) => (
             <MenuColumnItem
               key={tableIdx}
+              // @ts-ignore
               idx={tableIdx}
               table={table}
               isActive={

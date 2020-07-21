@@ -17,6 +17,7 @@ export function closePreview() {
 
 const loadCSVStart = () => ({ type: LOAD_CSV_START });
 const loadCSVError = (err: any) => defaultError(LOAD_CSV_ERROR, err);
+// @ts-ignore
 const loadCSVSuccess = parsed => ({
   type: OPEN_PREVIEW,
   payload: {
@@ -25,6 +26,7 @@ const loadCSVSuccess = parsed => ({
 });
 
 export function openPreview(url: string) {
+  // @ts-ignore
   return async dispatch => {
     dispatch(loadCSVStart());
 

@@ -9,8 +9,8 @@ const MenuColumnButton = styled(BasicButton)`
   border-radius: 0;
   margin-top: 3px;
   font-weight: 700;
-  color: ${({ theme, disabled }) =>
-    disabled ? theme.col.gray : theme.col.black};
+  color: ${//@ts-ignore
+  ({ theme, disabled }) => (disabled ? theme.col.gray : theme.col.black)};
   width: 100%;
   text-align: left;
   display: inline-flex;
@@ -18,14 +18,16 @@ const MenuColumnButton = styled(BasicButton)`
   align-items: center;
   transition: background-color 0.1s;
 
-  background-color: ${({ theme, active, disabled }) =>
+  background-color: ${//@ts-ignore
+  ({ theme, active, disabled }) =>
     active
       ? theme.col.blueGrayVeryLight
       : disabled
       ? "transparent"
       : theme.col.grayVeryLight};
   &:hover {
-    background-color: ${({ theme, active, disabled }) =>
+    background-color: ${//@ts-ignore
+    ({ theme, active, disabled }) =>
       active
         ? theme.col.blueGrayVeryLight
         : disabled

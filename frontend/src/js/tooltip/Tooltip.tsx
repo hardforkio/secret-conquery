@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
+//@ts-ignore
+
 import type { Dispatch } from "redux-thunk";
 import T from "i18n-react";
 import { connect } from "react-redux";
@@ -162,6 +164,8 @@ const Tooltip = (props: PropsType) => {
     dateRange
   } = additionalInfos;
 
+  //@ts-ignore
+
   const searchHighlight = text => {
     return (
       <Highlighter
@@ -173,6 +177,8 @@ const Tooltip = (props: PropsType) => {
   };
 
   const renderers = {
+    //@ts-ignore
+
     text: ({ value, children, nodeKey }) => searchHighlight(value)
   };
 
@@ -181,6 +187,8 @@ const Tooltip = (props: PropsType) => {
       <StyledIconButton
         small
         frame
+        //@ts-ignore
+
         onClick={onToggleDisplayTooltip}
         icon="angle-left"
       />
@@ -202,6 +210,8 @@ const Tooltip = (props: PropsType) => {
               <TackIconButton
                 bare
                 active
+                //@ts-ignore
+
                 onClick={onToggleAdditionalInfos}
                 icon="thumbtack"
               />
@@ -228,6 +238,8 @@ const Tooltip = (props: PropsType) => {
     </Root>
   );
 };
+
+//@ts-ignore
 
 const mapStateToProps = state => {
   return {

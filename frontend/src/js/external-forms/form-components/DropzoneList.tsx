@@ -47,21 +47,25 @@ const DropzoneList = (props: PropsType) => {
       {props.label && <Label>{props.label}</Label>}
       {props.items && props.items.length > 0 && (
         <div>
-          {props.items.map((item, i) => (
-            <ListItem key={i}>
-              <StyledIconButton
-                icon="times"
-                onClick={() => props.onDelete(i)}
-              />
-              {item}
-            </ListItem>
-          ))}
+          {
+            //@ts-ignore
+            props.items.map((item, i) => (
+              <ListItem key={i}>
+                <StyledIconButton
+                  icon="times"
+                  onClick={() => props.onDelete(i)}
+                />
+                {item}
+              </ListItem>
+            ))
+          }
         </div>
       )}
       {showDropzone && (
         <DropzoneClass
           acceptedDropTypes={props.acceptedDropTypes}
           onDrop={props.onDrop}
+          //@ts-ignore
           onSelectFile={props.onDropFile}
         >
           {props.dropzoneChildren}

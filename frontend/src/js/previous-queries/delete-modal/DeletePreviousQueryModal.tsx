@@ -45,18 +45,22 @@ const DeletePreviousQueryModal = (props: PropsType) => {
   );
 };
 
+//@ts-ignore
 const mapStateToProps = state => ({
   queryId: state.deletePreviousQueryModal.queryId
 });
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
   onClose: () => dispatch(deletePreviousQueryModalClose()),
+  //@ts-ignore
   onDeletePreviousQuery: (datasetId, queryId) => {
     dispatch(deletePreviousQueryModalClose());
     dispatch(deletePreviousQuery(datasetId, queryId));
   }
 });
 
+//@ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
@@ -69,4 +73,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
   mergeProps
+  //@ts-ignore
 )(DeletePreviousQueryModal);

@@ -9,7 +9,7 @@ import FaIcon from "../icon/FaIcon";
 type PropsType = {
   className?: string;
   matchingEntries?: number | null;
-  dateRange?: Object | null;
+  dateRange?: Record<string, any> | null;
 };
 
 const Root = styled("div")``;
@@ -33,7 +33,8 @@ const ConceptDateRangeTooltip = styled(Row)``;
 const Text = styled("p")`
   margin: 0 0 5px;
   font-size: ${({ theme }) => theme.font.xs};
-  color: ${({ theme, zero }) => (zero ? theme.col.red : theme.col.gray)};
+  color: ${//@ts-ignore
+  ({ theme, zero }) => (zero ? theme.col.red : theme.col.gray)};
   text-transform: uppercase;
   font-weight: 400;
 `;
@@ -57,7 +58,8 @@ const Info = styled("div")`
 const Number = styled("p")`
   margin: 0;
   font-size: ${({ theme }) => theme.font.lg};
-  color: ${({ theme, zero }) => (zero ? theme.col.red : "inherit")};
+  color: ${//@ts-ignore
+  ({ theme, zero }) => (zero ? theme.col.red : "inherit")};
   font-weight: 700;
   line-height: 1;
 `;
@@ -96,8 +98,13 @@ const TooltipEntries = (props: PropsType) => {
       <Row>
         <StatsIcon icon="chart-bar" />
         <Info>
-          <Number zero={isZero}>
+          <Number
+            //@ts-ignore
+            zero={isZero}
+          >
             {matchingEntries || isZero ? (
+              //@ts-ignore
+
               numberToThreeDigitArray(matchingEntries).map((threeDigits, i) => (
                 <Digits key={i}>{threeDigits}</Digits>
               ))
@@ -105,7 +112,10 @@ const TooltipEntries = (props: PropsType) => {
               <Digits>-</Digits>
             )}
           </Number>
-          <Text zero={isZero}>
+          <Text
+            //@ts-ignore
+            zero={isZero}
+          >
             {T.translate(
               "tooltip.entriesFound",
               { context: matchingEntries || 2 } // For pluralization
@@ -117,21 +127,31 @@ const TooltipEntries = (props: PropsType) => {
         <CalIcon regular icon="calendar" />
         <Info>
           <Date>
-            {dateRange && dateRange.min
-              ? formatDate(
-                  parseDate(dateRange.min, dateFormat),
-                  displayDateFormat
-                )
-              : "- - - - - - - -"}
+            {
+              //@ts-ignore
+              dateRange && dateRange.min
+                ? formatDate(
+                    //@ts-ignore
+
+                    parseDate(dateRange.min, dateFormat),
+                    displayDateFormat
+                  )
+                : "- - - - - - - -"
+            }
             <Suffix>{`${T.translate("tooltip.date.from")}`}</Suffix>
           </Date>
           <Date>
-            {dateRange && dateRange.max
-              ? formatDate(
-                  parseDate(dateRange.max, dateFormat),
-                  displayDateFormat
-                )
-              : "- - - - - - - -"}
+            {
+              //@ts-ignore
+              dateRange && dateRange.max
+                ? formatDate(
+                    //@ts-ignore
+
+                    parseDate(dateRange.max, dateFormat),
+                    displayDateFormat
+                  )
+                : "- - - - - - - -"
+            }
             <Suffix>{`${T.translate("tooltip.date.to")}`}</Suffix>
           </Date>
         </Info>

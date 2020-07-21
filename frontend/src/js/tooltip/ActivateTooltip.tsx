@@ -26,6 +26,7 @@ const ActivateTooltip = (props: PropsType) => {
   return (
     <Root>
       <StyledIconButton
+        //@ts-ignore
         small
         frame
         icon="angle-right"
@@ -35,6 +36,7 @@ const ActivateTooltip = (props: PropsType) => {
   );
 };
 
+//@ts-ignore
 const mapDispatchToProps = dispatch => ({
   toggleDisplayTooltip: () => dispatch(toggleDisplayTooltip())
 });

@@ -12,7 +12,7 @@ import {
   getDiffInDays,
   parseStdDate,
   formatStdDate,
-  formatDateDistance,
+  formatDateDistance
 } from "../common/helpers/dateHelper";
 
 import TransparentButton from "../button/TransparentButton";
@@ -147,6 +147,7 @@ const AutoSizerContainer = styled("div")`
   flex-grow: 1;
 `;
 
+// @ts-ignore
 function detectColumn(cell) {
   if (cell === "dates") return "DATE_RANGE";
 
@@ -157,6 +158,7 @@ function detectColumnsByHeader(line: string[]) {
   return line.map(detectColumn);
 }
 
+// @ts-ignore
 function getDaysDiff(d1, d2) {
   return Math.abs(getDiffInDays(d1, d2)) + 1;
 }
@@ -175,12 +177,13 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
   let min = null;
   let max = null;
 
-  const dateColumn = columns.find((col) => col === "DATE_RANGE");
+  const dateColumn = columns.find(col => col === "DATE_RANGE");
+  // @ts-ignore
   const dateColumnIdx = columns.indexOf(dateColumn);
 
   if (dateColumnIdx === -1) return {};
 
-  for (let row of rows) {
+  for (const row of rows) {
     // To cut off '{' and '}'
     const cell = row[dateColumnIdx];
     const { first, last } = getFirstAndLastDateOfRange(cell);
@@ -196,12 +199,13 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
   return {
     min,
     max,
-    diff: getDaysDiff(min, max),
+    diff: getDaysDiff(min, max)
   };
 }
 
 const Preview: React.FC = () => {
-  const preview = useSelector<StateT, PreviewStateT>((state) => state.preview);
+  // @ts-ignore
+  const preview = useSelector<StateT, PreviewStateT>(state => state.preview);
   const dispatch = useDispatch();
 
   const onClose = () => dispatch(closePreview());
@@ -216,6 +220,7 @@ const Preview: React.FC = () => {
 
   const { min, max, diff } = getMinMaxDates(slice.slice(1), columns);
 
+  // @ts-ignore
   const Row = ({ index, style }) => (
     <Line style={style} key={index}>
       {slice[index + 1].map((cell, i) => {
@@ -236,7 +241,9 @@ const Preview: React.FC = () => {
                   const diffWidth = getDaysDiff(date1, date2);
                   const diffLeft = getDaysDiff(min, date1);
 
+                  // @ts-ignore
                   const left = (diffLeft / diff) * 100;
+                  // @ts-ignore
                   const width = (diffWidth / diff) * 100;
 
                   return (

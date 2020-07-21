@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import T from "i18n-react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import type { CurrencyConfigT } from "../api/types";
@@ -51,6 +52,7 @@ type PropsType = FieldPropsType & {
   currencyConfig?: CurrencyConfigT;
 };
 
+// @ts-ignore
 function getMinMaxExact(value) {
   if (!value) return { min: "", max: "", exact: "" };
 
@@ -89,6 +91,7 @@ const InputRange = (props: PropsType) => {
     pattern: pattern
   };
 
+  // @ts-ignore
   const onChangeValue = (type, newValue) => {
     const nextValue = newValue >= 0 ? newValue : null;
 
@@ -122,6 +125,7 @@ const InputRange = (props: PropsType) => {
       <ToggleButton
         input={{
           value: mode || "range",
+          // @ts-ignore
           onChange: mode => onSwitchMode(mode)
         }}
         options={[
@@ -137,10 +141,12 @@ const InputRange = (props: PropsType) => {
               currencyConfig={currencyConfig}
               valueType={valueType}
               placeholder={placeholder}
+              // @ts-ignore
               label={T.translate("inputRange.minLabel")}
               tinyLabel={true}
               input={{
                 value: val.min,
+                // @ts-ignore
                 onChange: value => onChangeValue("min", value)
               }}
               inputProps={inputProps}
@@ -150,10 +156,12 @@ const InputRange = (props: PropsType) => {
               currencyConfig={currencyConfig}
               valueType={valueType}
               placeholder={placeholder}
+              // @ts-ignore
               label={T.translate("inputRange.maxLabel")}
               tinyLabel={true}
               input={{
                 value: val.max,
+                // @ts-ignore
                 onChange: value => onChangeValue("max", value)
               }}
               inputProps={inputProps}
@@ -165,10 +173,12 @@ const InputRange = (props: PropsType) => {
             currencyConfig={currencyConfig}
             valueType={valueType}
             placeholder="-"
+            // @ts-ignore
             label={T.translate("inputRange.exactLabel")}
             tinyLabel={true}
             input={{
               value: val.exact,
+              // @ts-ignore
               onChange: value => onChangeValue("exact", value)
             }}
             inputProps={inputProps}

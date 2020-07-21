@@ -2003,7 +2003,7 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/redux-form@^8.2.3":
+"@types/redux-form@^8.2.7":
   version "8.2.7"
   resolved "https://registry.yarnpkg.com/@types/redux-form/-/redux-form-8.2.7.tgz#24282b798b4c1181b1ba4c94b2f92c2ee8dc8ada"
   integrity sha512-dOGHrBB4fchtBNseUU+v501UCEVwmBc8CA5aCOev2Z/LCEkqLLZx/914Ig1WIemCVUqwvKxNBfq3ZBGzMe1kgQ==

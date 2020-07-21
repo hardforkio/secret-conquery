@@ -64,6 +64,7 @@ const FaIcon: React.FC<FaIconPropsT> = ({
   return (
     <Icon
       className={`fa-fw ${className}`}
+      // @ts-ignore
       icon={regular ? ["far", icon] : icon}
       {...restProps}
     />

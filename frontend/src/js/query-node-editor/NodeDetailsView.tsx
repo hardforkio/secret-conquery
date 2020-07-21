@@ -49,33 +49,45 @@ const NodeDetailsView = (props: PropsType) => {
           />
         </Row>
       )}
-      {node.selects && (
-        <Row>
-          <RowHeading>{T.translate("queryNodeEditor.selects")}</RowHeading>
-          <InputMultiSelect
-            input={{
-              onChange: onSelectSelects,
-              value: node.selects
-                .filter(({ selected }) => !!selected)
-                .map(({ id, label }) => ({ value: id, label: label }))
-            }}
-            options={sortSelects(node.selects).map(select => ({
-              value: select.id,
-              label: select.label
-            }))}
-          />
-        </Row>
-      )}
+      {
+        // @ts-ignore
+        node.selects && (
+          <Row>
+            <RowHeading>{T.translate("queryNodeEditor.selects")}</RowHeading>
+            <InputMultiSelect
+              input={{
+                onChange: onSelectSelects,
+                // @ts-ignore
+                value: node.selects
+                  // @ts-ignore
+                  .filter(({ selected }) => !!selected)
+                  // @ts-ignore
+                  .map(({ id, label }) => ({ value: id, label: label }))
+              }}
+              // @ts-ignore
+              options={sortSelects(node.selects).map(select => ({
+                value: select.id,
+                label: select.label
+              }))}
+            />
+          </Row>
+        )
+      }
       {!node.isPreviousQuery && rootConcept && rootConcept.children && (
         <Row>
           <RowHeading>{rootConcept.label}</RowHeading>
           <div>
-            <ConceptDropzone node={node} onDropConcept={onDropConcept} />
+            <ConceptDropzone
+              node={node}
+              // @ts-ignore
+              onDropConcept={onDropConcept}
+            />
           </div>
           <div>
             {node.ids.map(conceptId => (
               <ConceptEntry
                 key={conceptId}
+                // @ts-ignore
                 node={getConceptById(conceptId)}
                 conceptId={conceptId}
                 canRemoveConcepts={node.ids.length > 1}

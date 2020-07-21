@@ -26,40 +26,60 @@ import { QUERY_AGAIN_TIMEOUT } from "./constants";
 
 export default function createQueryRunnerActions(
   type: string,
-  isExternalForm: boolean = false
+  isExternalForm = false
+  //@ts-ignore
 ): { [string]: Function } {
   const uppercaseType = toUpperCaseUnderscore(type);
   const capitalizedType = capitalize(type);
 
+  //@ts-ignore
   const START_QUERY_START = actionTypes[`START_${uppercaseType}_QUERY_START`];
   const START_QUERY_SUCCESS =
+    //@ts-ignore
     actionTypes[`START_${uppercaseType}_QUERY_SUCCESS`];
+  //@ts-ignore
   const START_QUERY_ERROR = actionTypes[`START_${uppercaseType}_QUERY_ERROR`];
+  //@ts-ignore
   const STOP_QUERY_START = actionTypes[`STOP_${uppercaseType}_QUERY_START`];
+  //@ts-ignore
   const STOP_QUERY_SUCCESS = actionTypes[`STOP_${uppercaseType}_QUERY_SUCCESS`];
+  //@ts-ignore
   const STOP_QUERY_ERROR = actionTypes[`STOP_${uppercaseType}_QUERY_ERROR`];
+  //@ts-ignore
   const QUERY_RESULT_START = actionTypes[`QUERY_${uppercaseType}_RESULT_START`];
+  //@ts-ignore
   const QUERY_RESULT_RESET = actionTypes[`QUERY_${uppercaseType}_RESULT_RESET`];
   const QUERY_RESULT_SUCCESS =
+    //@ts-ignore
     actionTypes[`QUERY_${uppercaseType}_RESULT_SUCCESS`];
+  //@ts-ignore
   const QUERY_RESULT_ERROR = actionTypes[`QUERY_${uppercaseType}_RESULT_ERROR`];
 
   const startQueryStart = () => ({ type: START_QUERY_START });
+  //@ts-ignore
   const startQueryError = err => defaultError(START_QUERY_ERROR, err);
+  //@ts-ignore
   const startQuerySuccess = res => defaultSuccess(START_QUERY_SUCCESS, res);
   const startQuery = (
+    //@ts-ignore
     datasetId,
+    //@ts-ignore
     query,
+    //@ts-ignore
     version,
+    //@ts-ignore
     formQueryTransformation?: Function = form => form
   ) => {
+    //@ts-ignore
     return dispatch => {
       dispatch(startQueryStart());
 
       const apiMethod = isExternalForm
-        ? (...args) => api.postFormQueries(...args, formQueryTransformation)
+        ? //@ts-ignore
+          (...args) => api.postFormQueries(...args, formQueryTransformation)
         : api.postQueries;
 
+      //@ts-ignore
       return apiMethod(datasetId, query, type, version).then(
         r => {
           dispatch(startQuerySuccess(r));
@@ -74,9 +94,13 @@ export default function createQueryRunnerActions(
   };
 
   const stopQueryStart = () => ({ type: STOP_QUERY_START });
+  //@ts-ignore
   const stopQueryError = err => defaultError(STOP_QUERY_ERROR, err);
+  //@ts-ignore
   const stopQuerySuccess = res => defaultSuccess(STOP_QUERY_SUCCESS, res);
+  //@ts-ignore
   const stopQuery = (datasetId, queryId) => {
+    //@ts-ignore
     return dispatch => {
       dispatch(stopQueryStart());
 
@@ -89,10 +113,14 @@ export default function createQueryRunnerActions(
 
   const queryResultStart = () => ({ type: QUERY_RESULT_START });
   const queryResultReset = () => ({ type: QUERY_RESULT_RESET });
+  //@ts-ignore
   const queryResultError = err => defaultError(QUERY_RESULT_ERROR, err);
+  //@ts-ignore
   const queryResultSuccess = (res, datasetId) =>
     defaultSuccess(QUERY_RESULT_SUCCESS, res, { datasetId });
+  //@ts-ignore
   const queryResult = (datasetId, queryId) => {
+    //@ts-ignore
     return dispatch => {
       dispatch(queryResultStart());
 
