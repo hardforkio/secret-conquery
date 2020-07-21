@@ -29,7 +29,7 @@ import {
   renamePreviousQuery,
   retagPreviousQuery,
   toggleEditPreviousQueryLabel,
-  toggleEditPreviousQueryTags,
+  toggleEditPreviousQueryTags
 } from "./actions";
 
 import PreviousQueryTags from "./PreviousQueryTags";
@@ -46,16 +46,16 @@ const nodeSource = {
       height,
       id: props.query.id,
       label: props.query.label,
-      isPreviousQuery: true,
+      isPreviousQuery: true
     };
-  },
+  }
 };
 
 // These props get injected into the component
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
+    isDragging: monitor.isDragging()
   };
 }
 
@@ -148,7 +148,7 @@ class PreviousQuery extends React.Component {
       onToggleEditPreviousQueryLabel,
       onRetagPreviousQuery,
       onToggleSharePreviousQuery,
-      userCanDownloadResults,
+      userCanDownloadResults
     } = this.props;
 
     const peopleFound = isEmpty(query.numberOfResults)
@@ -165,7 +165,7 @@ class PreviousQuery extends React.Component {
 
     return (
       <Root
-        ref={(instance) => {
+        ref={instance => {
           if (isNotEditing) connectDragSource(instance);
         }}
         own={!!query.own}
@@ -259,12 +259,12 @@ class PreviousQuery extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   availableTags: state.previousQueries.tags,
-  userCanDownloadResults: canDownloadResult(state),
+  userCanDownloadResults: canDownloadResult(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onToggleSharePreviousQuery: (datasetId, queryId, shared) =>
     dispatch(toggleSharePreviousQuery(datasetId, queryId, shared)),
 
@@ -274,33 +274,33 @@ const mapDispatchToProps = (dispatch) => ({
   onRetagPreviousQuery: (datasetId, queryId, tags) =>
     dispatch(retagPreviousQuery(datasetId, queryId, tags)),
 
-  onDeletePreviousQuery: (queryId) =>
+  onDeletePreviousQuery: queryId =>
     dispatch(deletePreviousQueryModalOpen(queryId)),
 
-  onToggleEditPreviousQueryLabel: (queryId) =>
+  onToggleEditPreviousQueryLabel: queryId =>
     dispatch(toggleEditPreviousQueryLabel(queryId)),
 
-  onToggleEditPreviousQueryTags: (queryId) =>
-    dispatch(toggleEditPreviousQueryTags(queryId)),
+  onToggleEditPreviousQueryTags: queryId =>
+    dispatch(toggleEditPreviousQueryTags(queryId))
 });
 
 const mapProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onToggleSharePreviousQuery: (shared) =>
+  onToggleSharePreviousQuery: shared =>
     dispatchProps.onToggleSharePreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
       shared
     ),
-  onRenamePreviousQuery: (label) =>
+  onRenamePreviousQuery: label =>
     dispatchProps.onRenamePreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
       label
     ),
-  onRetagPreviousQuery: (tags) =>
+  onRetagPreviousQuery: tags =>
     dispatchProps.onRetagPreviousQuery(
       ownProps.datasetId,
       ownProps.query.id,
@@ -311,7 +311,7 @@ const mapProps = (stateProps, dispatchProps, ownProps) => ({
   onToggleEditPreviousQueryLabel: () =>
     dispatchProps.onToggleEditPreviousQueryLabel(ownProps.query.id),
   onToggleEditPreviousQueryTags: () =>
-    dispatchProps.onToggleEditPreviousQueryTags(ownProps.query.id),
+    dispatchProps.onToggleEditPreviousQueryTags(ownProps.query.id)
 });
 
 export default connect(

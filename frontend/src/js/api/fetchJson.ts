@@ -4,7 +4,7 @@ import { getStoredAuthToken } from "../authorization/helper";
 export async function fetchJsonUnauthorized(
   url: string,
   request?: Partial<AxiosRequestConfig>,
-  rawBody: boolean = false
+  rawBody = false
 ) {
   const finalRequest: AxiosRequestConfig = request
     ? {
@@ -50,7 +50,7 @@ export async function fetchJsonUnauthorized(
 function fetchJson(
   url: string,
   request?: Partial<AxiosRequestConfig>,
-  rawBody: boolean = false
+  rawBody = false
 ) {
   const authToken = getStoredAuthToken() || "";
   const finalRequest = {

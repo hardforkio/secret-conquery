@@ -5,7 +5,7 @@ export const transformFormQueryToApi = (
   query: { form: string; formName: string },
   queryType: string,
   formQueryTransformation: Function
-): Object => {
+): Record<string, any> => {
   const { form, formName } = query;
 
   return {

@@ -16,7 +16,7 @@ const Root = styled("div")`
 
 type PropsType = {
   depth: number;
-  trees: Object;
+  trees: Record<string, any>;
   tree: ConceptT;
   treeId: ConceptIdT;
   active: boolean;

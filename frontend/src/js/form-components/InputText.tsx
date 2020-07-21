@@ -16,7 +16,7 @@ interface PropsT extends FieldPropsType {
   placeholder?: string;
   tinyLabel?: boolean;
   large?: boolean;
-  inputProps?: Object;
+  inputProps?: Record<string, any>;
   currencyConfig?: CurrencyConfigT;
   fullWidth?: boolean;
 }

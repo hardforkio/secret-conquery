@@ -37,7 +37,7 @@ const AddBtn = styled(IconButton)`
 `;
 
 type PropsType = {
-  query: Object;
+  query: Record<string, any>;
   onDropTimebasedNode: () => void;
   onRemoveTimebasedNode: () => void;
   onAddTimebasedCondition: () => void;

@@ -9,7 +9,7 @@ const initialState: PreviousQueriesSearchStateT = [];
 
 const previousQueriesSearch = (
   state: PreviousQueriesSearchStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): PreviousQueriesSearchStateT => {
   switch (action.type) {
     case UPDATE_PREVIOUS_QUERIES_SEARCH:

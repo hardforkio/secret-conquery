@@ -72,7 +72,7 @@ const Operator = styled("div")`
 `;
 
 type PropsType = {
-  condition: Object;
+  condition: Record<string, any>;
   conditionIdx: number;
   indexResult: number | string | null;
   removable: boolean;

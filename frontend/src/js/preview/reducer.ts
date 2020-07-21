@@ -17,7 +17,7 @@ const initialState: PreviewStateT = {
 
 export default (
   state: PreviewStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): PreviewStateT => {
   switch (action.type) {
     case LOAD_CSV_START:

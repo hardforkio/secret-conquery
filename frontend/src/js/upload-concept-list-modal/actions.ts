@@ -16,8 +16,10 @@ import {
 } from "./actionTypes";
 
 export const resolveConceptsStart = () => ({ type: RESOLVE_CONCEPTS_START });
-export const resolveConceptsSuccess = (res: any, payload?: Object) =>
-  defaultSuccess(RESOLVE_CONCEPTS_SUCCESS, res, payload);
+export const resolveConceptsSuccess = (
+  res: any,
+  payload?: Record<string, any>
+) => defaultSuccess(RESOLVE_CONCEPTS_SUCCESS, res, payload);
 export const resolveConceptsError = (err: any) =>
   defaultError(RESOLVE_CONCEPTS_ERROR, err);
 
@@ -39,12 +41,10 @@ export const selectConceptRootNodeAndResolveCodes = (
 
   dispatch(resolveConceptsStart());
 
-  return api
-    .postConceptsListToResolve(datasetId, treeId, conceptCodes)
-    .then(
-      r => dispatch(resolveConceptsSuccess(r)),
-      e => dispatch(resolveConceptsError(e))
-    );
+  return api.postConceptsListToResolve(datasetId, treeId, conceptCodes).then(
+    r => dispatch(resolveConceptsSuccess(r)),
+    e => dispatch(resolveConceptsError(e))
+  );
 };
 
 export const initUploadConceptListModal = file => async dispatch => {

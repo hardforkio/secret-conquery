@@ -188,7 +188,10 @@ const createExternal = (query: any) => {
 // The query state already contains the query.
 // But small additions are made (properties whitelisted), empty things filtered out
 // to make it compatible with the backend API
-export const transformQueryToApi = (query: Object, queryType: string) => {
+export const transformQueryToApi = (
+  query: Record<string, any>,
+  queryType: string
+) => {
   switch (queryType) {
     case "timebased":
       return transformTimebasedQueryToApi(query);

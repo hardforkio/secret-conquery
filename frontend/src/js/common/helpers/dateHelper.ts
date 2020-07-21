@@ -15,11 +15,7 @@ import { getDateLocale } from "../../localization";
 // To save the date in this format in the state
 const DATE_FORMAT = "yyyy-MM-dd";
 
-export const formatDateDistance = (
-  d1: Date,
-  d2: Date,
-  withSuffix: boolean = false
-) => {
+export const formatDateDistance = (d1: Date, d2: Date, withSuffix = false) => {
   const dateLocale = getDateLocale();
 
   return formatDistance(d1, d2, { locale: dateLocale, addSuffix: withSuffix });
@@ -62,8 +58,8 @@ export const parseStdDate = (dateString: string) => {
 const DATE_PATTERN = {
   raw: /(^\d{8})$/,
   year: /^[yj][.]*(\d{4})$/,
-  quarter_year: /^[q]([1-4]).(\d{4})$/,
-  month_year: /^[m](1[0-2]|[1-9]).(\d{4})$/
+  quarterYear: /^[q]([1-4]).(\d{4})$/,
+  monthYear: /^[m](1[0-2]|[1-9]).(\d{4})$/
 };
 
 function handleRaw(what, value, displayDateFormat) {
@@ -97,7 +93,7 @@ function handleYear(what, value) {
 }
 
 function handleQuarter(what, value) {
-  const match = DATE_PATTERN.quarter_year.exec(value);
+  const match = DATE_PATTERN.quarterYear.exec(value);
 
   const quarter = parseInt(match[1]);
   const year = parseInt(match[2]);
@@ -109,7 +105,7 @@ function handleQuarter(what, value) {
 }
 
 function handleMonth(what, value) {
-  const match = DATE_PATTERN.month_year.exec(value);
+  const match = DATE_PATTERN.monthYear.exec(value);
 
   const month = parseInt(match[1]);
   const year = parseInt(match[2]);
@@ -153,9 +149,9 @@ export const testRegexes = (
       return handleRaw(what, value, displayDateFormat);
     case DATE_PATTERN.year.test(value):
       return handleYear(what, value);
-    case DATE_PATTERN.quarter_year.test(value):
+    case DATE_PATTERN.quarterYear.test(value):
       return handleQuarter(what, value);
-    case DATE_PATTERN.month_year.test(value):
+    case DATE_PATTERN.monthYear.test(value):
       return handleMonth(what, value);
     default:
       return { min: null, max: null };

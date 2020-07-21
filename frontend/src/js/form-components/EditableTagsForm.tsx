@@ -24,7 +24,7 @@ class EditableTagsForm extends React.Component<PropsType> {
     super(props);
     this.state = {
       values:
-        (props.tags && props.tags.map((t) => ({ label: t, value: t }))) || [],
+        (props.tags && props.tags.map(t => ({ label: t, value: t }))) || []
     };
   }
 
@@ -39,9 +39,7 @@ class EditableTagsForm extends React.Component<PropsType> {
   _onSubmit(e) {
     e.preventDefault();
 
-    const values = this.state.values
-      ? this.state.values.map((v) => v.value)
-      : [];
+    const values = this.state.values ? this.state.values.map(v => v.value) : [];
 
     this.props.onSubmit(values);
   }
@@ -56,9 +54,9 @@ class EditableTagsForm extends React.Component<PropsType> {
           creatable
           name="input"
           value={this.state.values}
-          options={this.props.availableTags.map((t) => ({
+          options={this.props.availableTags.map(t => ({
             label: t,
-            value: t,
+            value: t
           }))}
           onChange={this.handleChange}
           isMulti
@@ -66,7 +64,7 @@ class EditableTagsForm extends React.Component<PropsType> {
           autoFocus={true}
           placeholder={T.translate("reactSelect.tagPlaceholder")}
           noOptionsMessage={() => T.translate("reactSelect.noResults")}
-          formatCreateLabel={(inputValue) =>
+          formatCreateLabel={inputValue =>
             T.translate("common.create") + `: "${inputValue}"`
           }
         />

@@ -58,15 +58,15 @@ const SxPrimaryButton = styled(PrimaryButton)`
 type PropsType = {
   loading: boolean;
   filename: string;
-  availableConceptRootNodes: Object[];
-  selectedConceptRootNode: Object;
+  availableConceptRootNodes: Record<string, any>[];
+  selectedConceptRootNode: Record<string, any>;
   selectedDatasetId: DatasetIdT;
   conceptCodesFromFile: string[];
-  resolved: Object;
+  resolved: Record<string, any>;
   rootConcepts: TreesT;
   resolvedItemsCount: number;
   unresolvedItemsCount: number;
-  error: Object;
+  error: Record<string, any>;
   onSelectConceptRootNode: Function;
 
   // This really comes from outside container, and depends on the context

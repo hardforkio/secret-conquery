@@ -57,7 +57,7 @@ const RootNode = styled("p")`
 type PropsT = {
   valueIdx: number;
   conceptIdx: number;
-  conceptNode: Object;
+  conceptNode: Record<string, any>;
   name: string;
   onFilterClick: Function;
   hasActiveFilters: boolean;

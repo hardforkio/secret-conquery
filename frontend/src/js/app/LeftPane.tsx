@@ -12,10 +12,10 @@ import { StateT } from "./reducers";
 
 const LeftPane = () => {
   const activeTab = useSelector<StateT, string>(
-    (state) => state.panes.left.activeTab
+    state => state.panes.left.activeTab
   );
   const selectedDatasetId = useSelector<StateT, DatasetIdT | null>(
-    (state) => state.datasets.selectedDatasetId
+    state => state.datasets.selectedDatasetId
   );
 
   return (

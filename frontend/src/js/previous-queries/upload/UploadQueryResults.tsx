@@ -17,8 +17,8 @@ type PropsType = {
   datasetId: DatasetIdT | null;
   isModalOpen: boolean;
   loading: boolean;
-  success: Object | null;
-  error: Object | null;
+  success: Record<string, any> | null;
+  error: Record<string, any> | null;
   onOpenModal: Function;
   onCloseModal: Function;
   onUpload: Function;

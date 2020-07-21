@@ -41,7 +41,7 @@ type PropsType = {
   onSetFilterValue: Function;
   onLoadFilterSuggestions: Function;
   onShowDescription: Function;
-  suggestions: Object | null;
+  suggestions: Record<string, any> | null;
   currencyConfig: CurrencyConfigT;
 };
 

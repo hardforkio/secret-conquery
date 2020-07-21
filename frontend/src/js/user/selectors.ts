@@ -2,10 +2,10 @@ import type { StateType } from "../app/reducers";
 import type { Permission } from "../api/types";
 
 interface ContextT {
-  datasetId?: string
-};
+  datasetId?: string;
+}
 
-export function selectPermissions(state: StateType): Permission[] | null {
+export function selectPermissions(state: StateType): Permission[] | null {
   return !!state.user.me && !!state.user.me.permissions
     ? state.user.me.permissions
     : null;

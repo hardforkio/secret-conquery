@@ -29,7 +29,10 @@ const initialState: DatasetStateT = {
   selectedDatasetId: null
 };
 
-const saveQuery = (state: DatasetStateT, action: Object): DatasetStateT => {
+const saveQuery = (
+  state: DatasetStateT,
+  action: Record<string, any>
+): DatasetStateT => {
   const { query, previouslySelectedDatasetId } = action.payload;
 
   if (!query || query.length === 0) return state;
@@ -58,7 +61,7 @@ const saveQuery = (state: DatasetStateT, action: Object): DatasetStateT => {
 
 const datasets = (
   state: DatasetStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): DatasetStateT => {
   switch (action.type) {
     case LOAD_DATASETS_START:

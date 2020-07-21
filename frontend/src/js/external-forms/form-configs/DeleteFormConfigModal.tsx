@@ -32,10 +32,10 @@ type PropsType = {
 const DeleteFormConfigModal = ({
   formConfigId,
   onClose,
-  onDeleteSuccess,
+  onDeleteSuccess
 }: PropsType) => {
   const datasetId = useSelector<StateT, DatasetIdT | null>(
-    (state) => state.datasets.selectedDatasetId
+    state => state.datasets.selectedDatasetId
   );
   const dispatch = useDispatch();
 

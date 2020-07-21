@@ -605,8 +605,7 @@ const findPreviousQueries = (state, action) => {
         }));
     })
     .filter(group => group.length > 0);
-
-  return [].concat.apply([], queries);
+  return [].concat(...queries);
 };
 
 const updatePreviousQueries = (state, action, attributes) => {
@@ -871,7 +870,7 @@ const removeConceptFromNode = (state, action) => {
 // ]
 const query = (
   state: StandardQueryStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): StandardQueryStateT => {
   switch (action.type) {
     case DROP_AND_NODE:

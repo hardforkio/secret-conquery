@@ -24,7 +24,7 @@ export const selectEditedConceptPosition = (state, formName, fieldName) => {
     .reduce(
       (acc, group, andIdx) => [
         ...acc,
-        ...group.concepts.map((concept, orIdx) => ({ andIdx, orIdx, concept })),
+        ...group.concepts.map((concept, orIdx) => ({ andIdx, orIdx, concept }))
       ],
       []
     )
@@ -83,7 +83,7 @@ export const selectActiveFormType = (state: StateT) =>
   state.externalForms ? state.externalForms.activeForm : null;
 
 export const useActiveFormType = () =>
-  useSelector<StateT, string | null>((state) => selectActiveFormType(state));
+  useSelector<StateT, string | null>(state => selectActiveFormType(state));
 
 export const selectFormConfig = (state: StateT): Form | null => {
   const availableForms = selectAvailableForms(state);
@@ -113,13 +113,13 @@ export const selectRunningQuery = (state: StateT) => {
 
 function getVisibleConceptListFields(config, values) {
   const topLevelFields = config.fields.filter(
-    (field) => field.type === "CONCEPT_LIST"
+    field => field.type === "CONCEPT_LIST"
   );
-  const tabFields = config.fields.filter((field) => field.type === "TABS");
+  const tabFields = config.fields.filter(field => field.type === "TABS");
 
   const fieldsWithinVisibleTabs = tabFields.reduce((fields, tabField) => {
     const activeTabName = values[tabField.name];
-    const activeTab = tabField.tabs.find((tab) => tab.name === activeTabName);
+    const activeTab = tabField.tabs.find(tab => tab.name === activeTabName);
 
     const activeTabConceltListFields = activeTab
       ? getVisibleConceptListFields(activeTab)
@@ -132,8 +132,8 @@ function getVisibleConceptListFields(config, values) {
 }
 
 export const useVisibleConceptListFields = () => {
-  const config = useSelector((state) => selectFormConfig(state));
-  const values = useSelector((state) => selectActiveFormValues(state));
+  const config = useSelector(state => selectFormConfig(state));
+  const values = useSelector(state => selectActiveFormValues(state));
 
   if (!config) return false;
 
@@ -141,26 +141,24 @@ export const useVisibleConceptListFields = () => {
 };
 
 export const useAllowExtendedCopying = (targetFieldname: string) => {
-  const values = useSelector((state) => selectActiveFormValues(state));
+  const values = useSelector(state => selectActiveFormValues(state));
   const otherConceptListFields = useVisibleConceptListFields().filter(
-    (field) => field.name !== targetFieldname
+    field => field.name !== targetFieldname
   );
 
   // Need to have min 2 fields to copy from one to another
   if (otherConceptListFields.length < 1) return false;
 
-  const fieldHasFilledConcept = (field) =>
+  const fieldHasFilledConcept = field =>
     !!values[field.name] &&
-    values[field.name].some((value) =>
-      value.concepts.some((concept) => !!concept)
-    );
+    values[field.name].some(value => value.concepts.some(concept => !!concept));
 
   return otherConceptListFields.some(fieldHasFilledConcept);
 };
 
 export const useFormLabelByType = (formType: string) => {
   const availableForms = useSelector<StateT, { [formName: string]: Form }>(
-    (state) => selectAvailableForms(state)
+    state => selectAvailableForms(state)
   );
   const locale = getLocale();
 

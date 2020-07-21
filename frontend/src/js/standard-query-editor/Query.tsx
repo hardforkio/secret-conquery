@@ -46,7 +46,7 @@ type PropsT = {
   selectNodeForEditing: Function;
   queryGroupModalSetNode: Function;
   toggleTimestamps: Function;
-  dateRange: Object;
+  dateRange: Record<string, any>;
 };
 
 const Container = styled("div")`

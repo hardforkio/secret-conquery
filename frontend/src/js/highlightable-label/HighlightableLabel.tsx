@@ -22,7 +22,7 @@ const Label = styled("span")<{ isHighlighted?: boolean }>`
 const HighlightableLabel: FC<PropsT> = ({
   isHighlighted,
   className,
-  label,
+  label
 }) => {
   return (
     <Label className={className} isHighlighted={isHighlighted}>

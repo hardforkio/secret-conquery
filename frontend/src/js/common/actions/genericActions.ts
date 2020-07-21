@@ -14,26 +14,26 @@ interface ErrorObject {
 export const defaultError = (
   type: string,
   error: ErrorObject,
-  payload?: Object
+  payload?: Record<string, any>
 ): ActionT => ({
   type,
   error: true,
   payload: {
     message: error.message,
     status: error.status,
-    ...payload,
-  },
+    ...payload
+  }
 });
 
 export const defaultSuccess = (
   type: string,
   results: any,
-  payload?: Object
+  payload?: Record<string, any>
 ): ActionT => ({
   type,
   payload: {
     data: results,
     receivedAt: Date.now(),
-    ...payload,
-  },
+    ...payload
+  }
 });

@@ -12,7 +12,7 @@ import {
   getDiffInDays,
   parseStdDate,
   formatStdDate,
-  formatDateDistance,
+  formatDateDistance
 } from "../common/helpers/dateHelper";
 
 import TransparentButton from "../button/TransparentButton";
@@ -175,12 +175,12 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
   let min = null;
   let max = null;
 
-  const dateColumn = columns.find((col) => col === "DATE_RANGE");
+  const dateColumn = columns.find(col => col === "DATE_RANGE");
   const dateColumnIdx = columns.indexOf(dateColumn);
 
   if (dateColumnIdx === -1) return {};
 
-  for (let row of rows) {
+  for (const row of rows) {
     // To cut off '{' and '}'
     const cell = row[dateColumnIdx];
     const { first, last } = getFirstAndLastDateOfRange(cell);
@@ -196,12 +196,12 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
   return {
     min,
     max,
-    diff: getDaysDiff(min, max),
+    diff: getDaysDiff(min, max)
   };
 }
 
 const Preview: React.FC = () => {
-  const preview = useSelector<StateT, PreviewStateT>((state) => state.preview);
+  const preview = useSelector<StateT, PreviewStateT>(state => state.preview);
   const dispatch = useDispatch();
 
   const onClose = () => dispatch(closePreview());

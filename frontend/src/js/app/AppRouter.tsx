@@ -8,7 +8,7 @@ import WithAuthToken from "../authorization/WithAuthToken";
 import App from "./App";
 
 type PropsType = {
-  history: Object;
+  history: Record<string, any>;
   rightTabs: TabT[];
 };
 

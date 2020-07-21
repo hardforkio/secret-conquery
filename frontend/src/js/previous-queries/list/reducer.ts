@@ -60,7 +60,7 @@ const findQuery = (queries: PreviousQueryT[], queryId: string | number) => {
 
 const updatePreviousQuery = (
   state: PreviousQueriesStateT,
-  action: Object,
+  action: Record<string, any>,
   attributes: Partial<PreviousQueryT>
 ) => {
   const { query, queryIdx } = findQuery(state.queries, action.payload.queryId);
@@ -88,7 +88,7 @@ const sortQueries = (queries: PreviousQueryT[]) => {
 
 const toggleQueryAttribute = (
   state: PreviousQueriesStateT,
-  action: Object,
+  action: Record<string, any>,
   attribute: keyof PreviousQueryT
 ) => {
   const { query } = findQuery(state.queries, action.payload.queryId);
@@ -98,7 +98,10 @@ const toggleQueryAttribute = (
   return updatePreviousQuery(state, action, { [attribute]: !query[attribute] });
 };
 
-const deletePreviousQuery = (state: PreviousQueriesStateT, action: Object) => {
+const deletePreviousQuery = (
+  state: PreviousQueriesStateT,
+  action: Record<string, any>
+) => {
   const { queryIdx } = findQuery(state.queries, action.payload.queryId);
 
   return {
@@ -123,7 +126,7 @@ const findUniqueTags = (queries: PreviousQueryT[]) => {
 const findNewTags = (tags: string[]) => {
   if (!tags) return [];
 
-  let uniqueTags = new Set<string>();
+  const uniqueTags = new Set<string>();
 
   tags.forEach(tag => uniqueTags.add(tag));
 
@@ -146,7 +149,7 @@ const updateUniqueNames = (existingNames: string[], newName: string) => {
 
 const previousQueriesReducer = (
   state: PreviousQueriesStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ): PreviousQueriesStateT => {
   switch (action.type) {
     case LOAD_PREVIOUS_QUERIES_START:

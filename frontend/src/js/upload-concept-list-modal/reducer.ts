@@ -30,7 +30,7 @@ const initialState: UploadConceptListModalStateT = {
 
 const uploadConcepts = (
   state: UploadConceptListModalStateT = initialState,
-  action: Object
+  action: Record<string, any>
 ) => {
   switch (action.type) {
     case INIT:

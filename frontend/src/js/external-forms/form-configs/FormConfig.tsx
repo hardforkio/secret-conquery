@@ -118,11 +118,11 @@ interface PropsT {
 const FormConfig: React.FC<PropsT> = ({
   datasetId,
   config,
-  onIndicateDeletion,
+  onIndicateDeletion
 }) => {
   const formLabel = useFormLabelByType(config.formType);
   const availableTags = useSelector<StateT, string[]>(
-    (state) => state.formConfigs.tags
+    state => state.formConfigs.tags
   );
 
   const createdAt = config.createdAt
@@ -182,17 +182,17 @@ const FormConfig: React.FC<PropsT> = ({
     height: 100,
     type: FORM_CONFIG,
     id: config.id,
-    label: config.label,
+    label: config.label
   };
 
   const [collectedProps, drag] = useDrag({
     item: dragItem,
-    isDragging: (monitor) => monitor.isDragging(),
+    isDragging: monitor => monitor.isDragging()
   });
 
   return (
     <Root
-      ref={(instance) => {
+      ref={instance => {
         if (isNotEditing) drag(instance);
       }}
       own={!!config.own}

@@ -8,7 +8,10 @@ const initialState: StateType = {
   messageKey: null
 };
 
-export default (state: StateType = initialState, action: Object): StateType => {
+export default (
+  state: StateType = initialState,
+  action: Record<string, any>
+): StateType => {
   switch (action.type) {
     case SET_MESSAGE:
       return { ...state, messageKey: action.payload.messageKey };

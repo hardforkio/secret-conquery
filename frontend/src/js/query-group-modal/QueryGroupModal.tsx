@@ -30,7 +30,7 @@ const ResetAll = styled(IconButton)`
 `;
 
 type PropsType = {
-  group: Object;
+  group: Record<string, any>;
   andIdx: number;
   onClose: () => void;
   onSetDate: (date: any) => void;

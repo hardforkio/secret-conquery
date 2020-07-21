@@ -15,7 +15,7 @@ export function parseCSV(file: File, delimiter?: string) {
   });
 }
 
-export function loadCSV(url: String) {
+export function loadCSV(url: string) {
   return new Promise((resolve, reject) => {
     Papa.parse(url, {
       download: true,

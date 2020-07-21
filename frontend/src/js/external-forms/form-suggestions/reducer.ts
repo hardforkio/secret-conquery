@@ -1,10 +1,10 @@
 import { createActionTypes } from "./actionTypes";
 
 const updateFormFilterProperty = (
-  state: Object,
-  action: Object,
-  property: Object
-): Object => {
+  state: Record<string, any>,
+  action: Record<string, any>,
+  property: Record<string, any>
+): Record<string, any> => {
   const { andIdx, orIdx, filterIdx, tableIdx, fieldName } = action.payload;
 
   const fieldContent = state[fieldName];
@@ -35,16 +35,16 @@ const updateFormFilterProperty = (
 };
 
 const loadFormFilterSuggestionsStart = (
-  state: Object,
-  action: Object
-): Object => {
+  state: Record<string, any>,
+  action: Record<string, any>
+): Record<string, any> => {
   return updateFormFilterProperty(state, action, { isLoading: true });
 };
 
 const loadFormFilterSuggestionsSuccess = (
-  state: Object,
-  action: Object
-): Object => {
+  state: Record<string, any>,
+  action: Record<string, any>
+): Record<string, any> => {
   const { andIdx, orIdx, filterIdx, tableIdx, fieldName } = action.payload;
   const previousOptions =
     (state[fieldName] &&
@@ -72,14 +72,14 @@ const loadFormFilterSuggestionsSuccess = (
 };
 
 const loadFormFilterSuggestionsError = (
-  state: Object,
-  action: Object
-): Object => {
+  state: Record<string, any>,
+  action: Record<string, any>
+): Record<string, any> => {
   return updateFormFilterProperty(state, action, { isLoading: false });
 };
 
 // TODO: SPEC THIS OUT!
-export type FormSuggestionsStateT = Object;
+export type FormSuggestionsStateT = Record<string, any>;
 
 export const createFormSuggestionsReducer = (
   formType: string,
@@ -99,7 +99,7 @@ export const createFormSuggestionsReducer = (
 
   return (
     state: FormSuggestionsStateT = {},
-    action: Object
+    action: Record<string, any>
   ): FormSuggestionsStateT => {
     if (reducerHandlers[action.type])
       return reducerHandlers[action.type](state, action);

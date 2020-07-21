@@ -7,7 +7,7 @@ import api from "../../api";
 export const createFormSuggestionActions = (
   formType: string,
   fieldName: string
-): Object => {
+): Record<string, any> => {
   const actionTypes = createActionTypes(formType, fieldName);
 
   const loadFormFilterSuggestionsStart = (

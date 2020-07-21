@@ -13,21 +13,21 @@ import type { FiltersContextT } from "./TableFilters";
 import UploadFilterListModal from "./UploadFilterListModal";
 
 type FilterContextT = FiltersContextT & {
-  filterId: FilterIdT
+  filterId: FilterIdT;
 };
 
 type PropsT = FieldPropsType & {
-  context: FilterContextT,
+  context: FilterContextT;
 
-  label: string,
-  options: SelectOptionsT,
-  disabled?: boolean,
-  tooltip?: string,
-  allowDropFile?: boolean,
+  label: string;
+  options: SelectOptionsT;
+  disabled?: boolean;
+  tooltip?: string;
+  allowDropFile?: boolean;
 
-  isLoading?: boolean,
-  onLoad?: Function,
-  startLoadingThreshold: number
+  isLoading?: boolean;
+  onLoad?: Function;
+  startLoadingThreshold: number;
 };
 
 export default ({

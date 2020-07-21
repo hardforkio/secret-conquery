@@ -69,7 +69,7 @@ export default function createQueryRunnerReducer(type: string) {
 
   return (
     state: QueryRunnerStateT = initialState,
-    action: Object
+    action: Record<string, any>
   ): QueryRunnerStateT => {
     switch (action.type) {
       // To start a query

@@ -6,9 +6,9 @@ import devMiddleware from "./middleware/devMiddleware";
 import prodMiddleware from "./middleware/prodMiddleware";
 
 export function makeStore(
-  initialState: Object,
-  browserHistory: Object,
-  tabs: Object
+  initialState: Record<string, any>,
+  browserHistory: Record<string, any>,
+  tabs: Record<string, any>
 ) {
   const createMiddleware =
     process.env.NODE_ENV === "production" ? prodMiddleware : devMiddleware;

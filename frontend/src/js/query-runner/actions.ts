@@ -26,7 +26,7 @@ import { QUERY_AGAIN_TIMEOUT } from "./constants";
 
 export default function createQueryRunnerActions(
   type: string,
-  isExternalForm: boolean = false
+  isExternalForm = false
 ): { [string]: Function } {
   const uppercaseType = toUpperCaseUnderscore(type);
   const capitalizedType = capitalize(type);
