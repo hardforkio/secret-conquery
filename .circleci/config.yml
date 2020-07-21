@@ -21,7 +21,7 @@ jobs:
           app-dir: ~/project/frontend
           cache-path: ~/project/frontend/node_modules
       - run: yarn test
-  lint:
+  lint-and-typecheck:
     <<: *defaults
     steps:
       - checkout:
@@ -34,9 +34,10 @@ jobs:
           app-dir: ~/project/frontend
           cache-path: ~/project/frontend/node_modules
       - run: yarn lint
+      - run: yarn typecheck
 
 workflows:
   build-and-test:
     jobs:
       - test
-      - lint
+      - lint-and-typecheck
