@@ -1,6 +1,7 @@
 import Papa from "papaparse";
 
 export function parseCSV(file: File, delimiter?: string) {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
       header: false,
@@ -16,7 +17,9 @@ export function parseCSV(file: File, delimiter?: string) {
 }
 
 export function loadCSV(url: string) {
+  // @ts-ignore
   return new Promise((resolve, reject) => {
+    // @ts-ignore
     Papa.parse(url, {
       download: true,
       delimiter: ";",

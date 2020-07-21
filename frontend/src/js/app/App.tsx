@@ -12,6 +12,8 @@ const Root = styled("div")`
   position: relative;
 `;
 
+//@ts-ignore
+
 const App = props => {
   useStartup();
 

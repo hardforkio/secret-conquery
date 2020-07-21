@@ -72,6 +72,7 @@ type PropsType = {
   target?: Record<string, any>;
 };
 
+// @ts-ignore
 const collect = (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
@@ -93,6 +94,7 @@ const Dropzone = ({
     collect
   )(InnerZone);
 
+  // @ts-ignore
   return <FinalZone {...restProps} />;
 };
 

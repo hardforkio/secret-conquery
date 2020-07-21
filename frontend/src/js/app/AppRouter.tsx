@@ -14,12 +14,17 @@ type PropsType = {
 
 const AppRouter = ({ history, ...rest }: PropsType) => {
   return (
-    <Router history={history}>
+    <Router
+      //@ts-ignore
+      history={history}
+    >
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route
           path="/*"
           render={routeProps => (
+            //@ts-ignore
+
             <WithAuthToken {...routeProps}>
               <App {...rest} />
             </WithAuthToken>

@@ -57,6 +57,7 @@ type PropsT = {
 export default ({ loading, success, error, onClose, onUpload }: PropsT) => {
   const [file, setFile] = React.useState(null);
 
+  //@ts-ignore
   function onDrop(_, monitor) {
     const item = monitor.getItem();
 
@@ -67,12 +68,14 @@ export default ({ loading, success, error, onClose, onUpload }: PropsT) => {
 
   return (
     <Modal
+      //@ts-ignore
       onClose={onClose}
       closeIcon
       headline={
         <>
           {T.translate("uploadQueryResultsModal.headline")}
           <InfoTooltip
+            //@ts-ignore
             text={T.translate("uploadQueryResultsModal.formatInfo.text")}
           />
         </>
@@ -90,23 +93,31 @@ export default ({ loading, success, error, onClose, onUpload }: PropsT) => {
           <div>
             {file && (
               <CSVColumnPicker
+                //@ts-ignore
                 file={file}
                 loading={loading}
+                //@ts-ignore
                 onUpload={onUpload}
                 onReset={() => setFile(null)}
               />
             )}
             {!file && (
-              <SxDropzoneWithFileInput onDrop={onDrop} onSelectFile={setFile}>
+              <SxDropzoneWithFileInput
+                onDrop={onDrop}
+                //@ts-ignore
+                onSelectFile={setFile}
+              >
                 {() => T.translate("uploadQueryResultsModal.dropzone")}
               </SxDropzoneWithFileInput>
             )}
             {error && (
               <Error>
                 <ErrorMessage
+                  //@ts-ignore
                   message={T.translate("uploadQueryResultsModal.uploadFailed")}
                 />
                 <ErrorMessageSub
+                  //@ts-ignore
                   message={T.translate(
                     "uploadQueryResultsModal.uploadFailedSub"
                   )}

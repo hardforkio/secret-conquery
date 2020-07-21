@@ -10,6 +10,8 @@ import {
 export const loadFormConfigsSuccess = (response: FormConfigT[]) =>
   defaultSuccess(LOAD_CONFIGS_SUCCESS, response);
 export const loadFormConfigsError = (err: Error) =>
+  //@ts-ignore
+
   defaultError(LOAD_CONFIGS_ERROR, err);
 
 export const patchFormConfigSuccess = (

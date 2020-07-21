@@ -8,6 +8,7 @@
   ],
   "plugins": ["prettier"],
   "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
     "jsx-a11y/accessible-emoji": "off",
     "prettier/prettier": [
       "error",

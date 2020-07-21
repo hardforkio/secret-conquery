@@ -15,12 +15,14 @@ const Root = styled("div")`
   background-color: white;
   max-width: 200px;
   border-radius: ${({ theme }) => theme.borderRadius};
-  border: ${({ active }) => (active ? "2px" : "1px")} solid
-    ${({ theme, active }) =>
+  border: ${//@ts-ignore
+    ({ active }) => (active ? "2px" : "1px")} solid ${//@ts-ignore
+    ({ theme, active }) =>
       active ? theme.col.blueGrayDark : theme.col.grayLight};
 
   &:hover {
-    border: ${({ active }) => (active ? "2px" : "1px")} solid
+    border: ${//@ts-ignore
+      ({ active }) => (active ? "2px" : "1px")} solid
       ${({ theme }) => theme.col.blueGrayDark};
   }
 
@@ -72,12 +74,14 @@ type PropsT = {
 
 // generalized node to handle concepts queried in forms
 const FormConceptNode = (props: PropsT) => {
+  //@ts-ignore
   const rootNodeLabel = getRootNodeLabel(props.conceptNode);
 
   const [, drag] = useDrag({
     item: {
       type: dndTypes.FORM_CONCEPT_NODE
     },
+    //@ts-ignore
     begin: monitor => ({
       conceptNode: props.conceptNode
     })
@@ -87,14 +91,26 @@ const FormConceptNode = (props: PropsT) => {
     <Root
       ref={drag}
       active={props.hasActiveFilters}
+      //@ts-ignore
       onClick={props.onFilterClick}
     >
       <Left>
         {rootNodeLabel && <RootNode>{rootNodeLabel}</RootNode>}
-        {props.conceptNode && props.conceptNode.label}
-        {props.conceptNode && !!props.conceptNode.description && (
-          <Description>{props.conceptNode.description}</Description>
-        )}
+        {
+          //@ts-ignore
+          props.conceptNode && props.conceptNode.label
+        }
+        {
+          //@ts-ignore
+          props.conceptNode && !!props.conceptNode.description && (
+            <Description>
+              {
+                //@ts-ignore
+                props.conceptNode.description
+              }
+            </Description>
+          )
+        }
       </Left>
       <Right>
         {props.expand && props.expand.expandable && (
@@ -108,8 +124,12 @@ const FormConceptNode = (props: PropsT) => {
                   : "expand-arrows-alt"
               }
               tiny
+              //@ts-ignore
+
               onClick={e => {
                 e.stopPropagation();
+                //@ts-ignore
+
                 props.expand.onClick();
               }}
             />

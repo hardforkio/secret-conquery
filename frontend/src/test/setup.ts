@@ -1,5 +1,6 @@
 import axios from "axios";
 import { initializeEnvironment } from "../js/environment";
+//@ts-ignore
 import httpAdapter from "axios/lib/adapters/http";
 
 axios.defaults.adapter = httpAdapter;

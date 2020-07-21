@@ -147,6 +147,7 @@ const AutoSizerContainer = styled("div")`
   flex-grow: 1;
 `;
 
+// @ts-ignore
 function detectColumn(cell) {
   if (cell === "dates") return "DATE_RANGE";
 
@@ -157,6 +158,7 @@ function detectColumnsByHeader(line: string[]) {
   return line.map(detectColumn);
 }
 
+// @ts-ignore
 function getDaysDiff(d1, d2) {
   return Math.abs(getDiffInDays(d1, d2)) + 1;
 }
@@ -176,6 +178,7 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
   let max = null;
 
   const dateColumn = columns.find(col => col === "DATE_RANGE");
+  // @ts-ignore
   const dateColumnIdx = columns.indexOf(dateColumn);
 
   if (dateColumnIdx === -1) return {};
@@ -201,6 +204,7 @@ function getMinMaxDates(rows: string[][], columns: string[]) {
 }
 
 const Preview: React.FC = () => {
+  // @ts-ignore
   const preview = useSelector<StateT, PreviewStateT>(state => state.preview);
   const dispatch = useDispatch();
 
@@ -216,6 +220,7 @@ const Preview: React.FC = () => {
 
   const { min, max, diff } = getMinMaxDates(slice.slice(1), columns);
 
+  // @ts-ignore
   const Row = ({ index, style }) => (
     <Line style={style} key={index}>
       {slice[index + 1].map((cell, i) => {
@@ -236,7 +241,9 @@ const Preview: React.FC = () => {
                   const diffWidth = getDaysDiff(date1, date2);
                   const diffLeft = getDaysDiff(min, date1);
 
+                  // @ts-ignore
                   const left = (diffLeft / diff) * 100;
+                  // @ts-ignore
                   const width = (diffWidth / diff) * 100;
 
                   return (

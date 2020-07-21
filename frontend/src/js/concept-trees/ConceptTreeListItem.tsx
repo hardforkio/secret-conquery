@@ -22,6 +22,7 @@ type PropsT = {
 export default ({ trees, treeId, search, onLoadTree }: PropsT) => {
   const tree = trees[treeId];
 
+  //@ts-ignore
   if (!isNodeInSearchResult(treeId, tree.children, search)) return null;
 
   const rootConcept = getConceptById(treeId);
@@ -37,14 +38,18 @@ export default ({ trees, treeId, search, onLoadTree }: PropsT) => {
     <ConceptTree
       id={treeId}
       label={tree.label}
+      //@ts-ignore
       description={tree.description}
       tree={rootConcept}
+      //@ts-ignore
       loading={!!tree.loading}
+      //@ts-ignore
       error={tree.error}
       {...commonProps}
     />
   ) : (
     <ConceptTreeFolder
+      //@ts-ignore
       trees={trees}
       tree={tree}
       active={tree.active}

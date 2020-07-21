@@ -5,6 +5,7 @@ import type { DateRangeT, InfoT } from "../api/types";
 import { isEmpty } from "../common/helpers";
 import { toggleAdditionalInfos, displayAdditionalInfos } from "./actions";
 import HoverableBase from "./HoverableBase";
+import { Dispatch } from "redux";
 
 export type AdditionalInfoHoverableNodeType = {
   label: string;
@@ -48,6 +49,7 @@ const AdditionalInfoHoverable = (Component: any) => {
 
       if (!node.additionalInfos && isEmpty(node.matchingEntries)) return;
 
+      // @ts-ignore
       dispatch([
         toggleAdditionalInfos(),
         displayAdditionalInfos(additionalInfos(node))
@@ -55,7 +57,11 @@ const AdditionalInfoHoverable = (Component: any) => {
     }
   });
 
-  return connect(mapStateToProps, mapDispatchToProps)(HoverableBase(Component));
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
+    // @ts-ignore
+  )(HoverableBase(Component));
 };
 
 export default AdditionalInfoHoverable;

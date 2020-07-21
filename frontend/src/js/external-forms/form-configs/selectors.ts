@@ -34,6 +34,8 @@ const configHasFilterType = (
     return !!activeFormType && config.formType === activeFormType;
 
   // Checks config.own, config.shared or config.system
+  //@ts-ignore
+
   if (config[filter]) return true;
 
   // Special case for a "system"-config:

@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import type { SelectOptionsT } from "../api/types";
@@ -23,6 +24,7 @@ const AsyncInputMultiSelect = ({
 }: PropsType) => (
   <InputMultiSelect
     {...props}
+    // @ts-ignore
     onInputChange={value => {
       if (value.length >= startLoadingThreshold) onLoad(value);
 

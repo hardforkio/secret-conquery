@@ -58,6 +58,7 @@ const QueryRunner = (props: PropsType) => {
 
   const isStartStopLoading =
     !!queryRunner &&
+    //@ts-ignore
     (queryRunner.startQuery.loading || queryRunner.stopQuery.loading);
 
   return (
@@ -87,13 +88,19 @@ const QueryRunner = (props: PropsType) => {
           {!!queryRunner && <QueryRunnerInfo queryRunner={queryRunner} />}
         </LoadingGroup>
         {!!queryRunner &&
+          //@ts-ignore
           !!queryRunner.queryResult &&
+          //@ts-ignore
           !queryRunner.queryResult.error &&
+          //@ts-ignore
           !queryRunner.queryResult.loading &&
           !isQueryRunning && (
             <QueryResults
+              //@ts-ignore
               datasetId={queryRunner.queryResult.datasetId}
+              //@ts-ignore
               resultCount={queryRunner.queryResult.resultCount}
+              //@ts-ignore
               resultUrl={queryRunner.queryResult.resultUrl}
             />
           )}

@@ -27,10 +27,12 @@ import {
 
 type ResultType = {
   id: number;
+  //@ts-ignore
   timestamp: $Keys<typeof TIMEBASED_TIMESTAMP_TYPES>;
 };
 
 type ConditionType = {
+  //@ts-ignore
   operator: $Keys<typeof TIMEBASED_OPERATOR_TYPES>;
   result0: ResultType | null;
   result1: ResultType | null;
@@ -47,6 +49,7 @@ const getEmptyNode = () => ({
   result1: null
 });
 
+//@ts-ignore
 const setTimebasedConditionAttributes = (state, action, attributes) => {
   const { conditionIdx } = action.payload;
 
@@ -63,6 +66,7 @@ const setTimebasedConditionAttributes = (state, action, attributes) => {
   };
 };
 
+//@ts-ignore
 const setNode = (state, action, node) => {
   const { resultIdx } = action.payload;
 
@@ -76,7 +80,9 @@ const setNode = (state, action, node) => {
   return setTimebasedConditionAttributes(state, action, attributes);
 };
 
+//@ts-ignore
 const conditionResultsToArray = conditions => {
+  //@ts-ignore
   return conditions.reduce((results, c) => {
     if (c.result0) results.push(c.result0);
     if (c.result1) results.push(c.result1);
@@ -85,7 +91,9 @@ const conditionResultsToArray = conditions => {
   }, []);
 };
 
+//@ts-ignore
 const getPossibleIndexResults = conditions => {
+  //@ts-ignore
   return conditions.reduce((possibleResults, condition, i) => {
     if (condition.operator === DAYS_OR_NO_EVENT_BEFORE && condition.result1)
       possibleResults.push(condition.result1);
@@ -100,6 +108,7 @@ const getPossibleIndexResults = conditions => {
   }, []);
 };
 
+//@ts-ignore
 const ensureIndexResult = state => {
   // Return if there is already an indexResult
   if (state.indexResult) return state;
@@ -121,6 +130,7 @@ const ensureIndexResult = state => {
   return { ...state, indexResult: null };
 };
 
+//@ts-ignore
 const dropTimebasedNode = (state, action) => {
   const { node } = action.payload;
   const stateWithNode = setNode(state, action, node);
@@ -128,6 +138,7 @@ const dropTimebasedNode = (state, action) => {
   return node.moved ? stateWithNode : ensureIndexResult(stateWithNode);
 };
 
+//@ts-ignore
 const removeTimebasedNode = (state, action) => {
   const { conditionIdx, resultIdx, moved } = action.payload;
   const node = state.conditions[conditionIdx][`result${resultIdx}`];
@@ -153,6 +164,7 @@ const removeTimebasedNode = (state, action) => {
   return ensureIndexResult(nextState);
 };
 
+//@ts-ignore
 const setTimebasedNodeTimestamp = (state, action) => {
   const { conditionIdx, resultIdx, timestamp } = action.payload;
 
@@ -166,6 +178,7 @@ const setTimebasedNodeTimestamp = (state, action) => {
   return setTimebasedConditionAttributes(state, action, attributes);
 };
 
+//@ts-ignore
 const setTimebasedConditionOperator = (state, action) => {
   const { conditionIdx, operator } = action.payload;
 
@@ -201,18 +214,21 @@ const setTimebasedConditionOperator = (state, action) => {
       };
 };
 
+//@ts-ignore
 const setTimebasedConditionMinDays = (state, action) => {
   const { days } = action.payload;
 
   return setTimebasedConditionAttributes(state, action, { minDays: days });
 };
 
+//@ts-ignore
 const setTimebasedConditionMaxDays = (state, action) => {
   const { days } = action.payload;
 
   return setTimebasedConditionAttributes(state, action, { maxDays: days });
 };
 
+//@ts-ignore
 const setTimebasedConditionMinDaysOrNoEvent = (state, action) => {
   const { days } = action.payload;
 
@@ -221,6 +237,7 @@ const setTimebasedConditionMinDaysOrNoEvent = (state, action) => {
   });
 };
 
+//@ts-ignore
 const setTimebasedIndexResult = (state, action) => {
   const { indexResult } = action.payload;
 
@@ -230,6 +247,7 @@ const setTimebasedIndexResult = (state, action) => {
   };
 };
 
+//@ts-ignore
 const addTimebasedCondition = (state, action) => {
   return {
     ...state,
@@ -237,6 +255,7 @@ const addTimebasedCondition = (state, action) => {
   };
 };
 
+//@ts-ignore
 const removeTimebasedCondition = (state, action) => {
   const { conditionIdx } = action.payload;
   const deletedCondition = state.conditions[conditionIdx];
@@ -264,9 +283,11 @@ const removeTimebasedCondition = (state, action) => {
   return ensureIndexResult({ ...nextState, indexResult: null });
 };
 
+//@ts-ignore
 const renamePreviousQueries = (state, action) => {
   return {
     ...state,
+    //@ts-ignore
     conditions: state.conditions.map(c => {
       const result0 =
         c.result0 && c.result0.id === action.payload.queryId
@@ -341,6 +362,7 @@ const timebasedQuery = (
   state: TimebasedQueryStateT = initialState,
   action: Record<string, any>
 ): TimebasedQueryStateT => {
+  //@ts-ignore
   switch (action.type) {
     case DROP_TIMEBASED_NODE:
       return dropTimebasedNode(state, action);

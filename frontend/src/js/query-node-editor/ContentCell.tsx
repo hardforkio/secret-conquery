@@ -20,6 +20,7 @@ const Headline = styled("h5")`
 
 type PropsType = {
   className?: string;
+  // @ts-ignore
   children?: React.Node;
   headline?: string;
 };

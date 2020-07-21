@@ -1,5 +1,6 @@
 import { MULTI_SELECT, BIG_MULTI_SELECT } from "../form-components/filterTypes";
 
+// @ts-ignore
 const filterWithDefaults = filter => {
   switch (filter.type) {
     case MULTI_SELECT:
@@ -16,5 +17,6 @@ const filterWithDefaults = filter => {
   }
 };
 
+// @ts-ignore
 export const filtersWithDefaults = filters =>
   filters ? filters.map(filterWithDefaults) : null;

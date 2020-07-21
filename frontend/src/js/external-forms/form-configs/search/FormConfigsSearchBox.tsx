@@ -33,9 +33,14 @@ const FormConfigsSearchBox: React.FC = () => {
         name="input"
         value={search.map(t => ({ label: t, value: t }))}
         options={options ? options.map(t => ({ label: t, value: t })) : []}
-        onChange={values => onSearch(values ? values.map(v => v.value) : [])}
+        //@ts-ignore
+        onChange={values =>
+          //@ts-ignore
+          onSearch(values ? values.map(v => v.value) : [])
+        }
         placeholder={T.translate("reactSelect.searchPlaceholder")}
         noOptionsMessage={() => T.translate("reactSelect.noResults")}
+        //@ts-ignore
         formatCreateLabel={inputValue =>
           T.translate("common.create") + `: "${inputValue}"`
         }

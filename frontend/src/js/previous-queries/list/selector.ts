@@ -24,6 +24,7 @@ const queryHasFilterType = (query: PreviousQueryT, filter: string) => {
   if (filter === "all") return true;
 
   // Checks query.own, query.shared or query.system
+  //@ts-ignore
   if (query[filter]) return true;
 
   // Special case for a "system"-previous-query:

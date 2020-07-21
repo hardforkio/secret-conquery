@@ -16,6 +16,7 @@ export const createQueryNodeEditorReducer = (type: string) => {
     RESET
   } = createActionTypes(type);
 
+  // @ts-ignore
   return (state = initialState, action) => {
     switch (action.type) {
       case SET_DETAILS_VIEW_ACTIVE:

@@ -2,6 +2,7 @@ export const readFileAsText = (file: File) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
 
+    // @ts-ignore
     reader.onload = evt => resolve(evt.target.result);
     reader.onerror = err => reject(err);
 
@@ -22,6 +23,7 @@ export const stripFilename = (fileName: string) => {
 export async function getFileRows(file: File) {
   const text = await readFileAsText(file);
 
+  // @ts-ignore
   const rows = cleanFileContent(text);
 
   if (rows.length === 0) {
@@ -35,5 +37,6 @@ export async function getUniqueFileRows(file: File) {
   const rows = await getFileRows(file);
 
   // Take care of duplicate rows
+  // @ts-ignore
   return [...new Set(rows)];
 }

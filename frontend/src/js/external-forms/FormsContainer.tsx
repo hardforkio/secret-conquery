@@ -29,7 +29,11 @@ const FormsContainer: FC<PropsT> = ({ datasetId }) => {
     <Root>
       {!!formConfig && (
         <>
-          <FormConfigSaver activeFormType datasetId={datasetId} />
+          <FormConfigSaver
+            //@ts-ignore
+            activeFormType
+            datasetId={datasetId}
+          />
           <Form config={formConfig} selectedDatasetId={datasetId} />
         </>
       )}

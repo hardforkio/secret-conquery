@@ -29,6 +29,8 @@ import type {
   FormConfigT,
   BaseFormConfigT
 } from "js/external-forms/form-configs/reducer";
+// @ts-ignore
+import React from "react";
 
 const PROTECTED_PREFIX = "/api";
 
@@ -78,6 +80,7 @@ export function postQueries(
 export function postFormQueries(
   datasetId: DatasetIdT,
   query: { form: string; formName: string },
+  // @ts-ignore
   queryType: string,
   version: any,
   formQueryTransformation: Function

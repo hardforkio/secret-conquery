@@ -43,14 +43,20 @@ const PreviewItem = styled("div")`
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 1px solid ${({ theme }) => theme.col.gray};
-  width: ${({ width }) => `${width}px`};
-  height: ${({ height }) => `${height}px`};
+  width: ${//@ts-ignore
+  ({ width }) => `${width}px`};
+  height: ${//@ts-ignore
+  ({ height }) => `${height}px`};
 `;
 
 // The mobile drag preview doesn't seem to be working at the moment
 // Consider upgrading react-dnd BUT somehow try to keep IE11 compatibility
+//@ts-ignore
+
 const generatePreview = (type, item, style) => {
   console.log("PREVIEW RENDERED", item.width, item.height, style);
+  //@ts-ignore
+
   return <PreviewItem width={item.width} height={item.height} style={style} />;
 };
 
@@ -102,6 +108,8 @@ const Content = ({ displayTooltip, rightTabs }: PropsType) => {
     </DndProvider>
   );
 };
+
+//@ts-ignore
 
 const mapStateToProps = (state, ownProps) => ({
   displayTooltip: state.tooltip.displayTooltip

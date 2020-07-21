@@ -33,6 +33,7 @@ describe("upload concepts dialog", () => {
         .reply(200, { body: apiResponse });
 
       const expectedActions = [
+        // @ts-ignore
         selectConceptRootNode(conceptId),
         resolveConceptsStart(),
         resolveConceptsSuccess({ body: apiResponse })
@@ -41,6 +42,7 @@ describe("upload concepts dialog", () => {
 
       return store
         .dispatch(
+          // @ts-ignore
           selectConceptRootNodeAndResolveCodes(
             datasetId,
             conceptId,
@@ -59,6 +61,7 @@ describe("upload concepts dialog", () => {
 
           expect(completeApiRequest.type).toEqual(expectedActions[2].type);
           expect(completeApiRequest.payload.data).toEqual(
+            // @ts-ignore
             expectedActions[2].payload.data
           );
           expect(typeof completeApiRequest.payload.receivedAt).toBe("number");
@@ -81,6 +84,7 @@ describe("upload concepts dialog", () => {
         .reply(404, error);
 
       const expectedActions = [
+        // @ts-ignore
         selectConceptRootNode(conceptId),
         resolveConceptsStart(),
         resolveConceptsError(error)
@@ -89,6 +93,7 @@ describe("upload concepts dialog", () => {
 
       return store
         .dispatch(
+          // @ts-ignore
           selectConceptRootNodeAndResolveCodes(
             datasetId,
             conceptId,

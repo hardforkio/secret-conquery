@@ -32,6 +32,7 @@ export const loadTreesSuccess = (res: any) =>
   defaultSuccess(LOAD_TREES_SUCCESS, res);
 
 export const loadTrees = (datasetId: DatasetIdT) => {
+  //@ts-ignore
   return async (dispatch: Dispatch) => {
     // TODO: Careful, side effect, extract this soon
     resetAllTrees();
@@ -47,6 +48,7 @@ export const loadTrees = (datasetId: DatasetIdT) => {
       if (!result.concepts) return;
 
       for (const treeId of Object.keys(result.concepts)) {
+        //@ts-ignore
         if (result.concepts[treeId].detailsAvailable) {
           dispatch(loadTree(datasetId, treeId));
         }
@@ -71,6 +73,7 @@ const TREES_TO_LOAD_IN_PARALLEL = 5;
 const semaphore = new Sema(TREES_TO_LOAD_IN_PARALLEL);
 
 export const loadTree = (datasetId: DatasetIdT, treeId: ConceptIdT) => {
+  //@ts-ignore
   return async (dispatch: DispatchProp) => {
     await semaphore.acquire();
 
@@ -110,10 +113,12 @@ export const searchTreesError = (query: string, err: any) =>
   defaultError(SEARCH_TREES_ERROR, err, { query });
 
 export const searchTrees = (
+  //@ts-ignore
   datasetId: DatasetIdT,
   trees: TreesT,
   query: string
 ) => {
+  //@ts-ignore
   return async (dispatch: Dispatch) => {
     dispatch(searchTreesStart(query));
 

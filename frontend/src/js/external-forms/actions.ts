@@ -12,18 +12,31 @@ export const loadExternalFormValues = (formType: string, values: any) => ({
 });
 
 const {
+  //@ts-ignore
   startExternalFormsQueryStart,
+  //@ts-ignore
   startExternalFormsQueryError,
+  //@ts-ignore
   startExternalFormsQuerySuccess,
+  //@ts-ignore
   startExternalFormsQuery,
+  //@ts-ignore
   stopExternalFormsQueryStart,
+  //@ts-ignore
   stopExternalFormsQueryError,
+  //@ts-ignore
   stopExternalFormsQuerySuccess,
+  //@ts-ignore
   stopExternalFormsQuery,
+  //@ts-ignore
   queryExternalFormsResultStart,
+  //@ts-ignore
   queryExternalFormsResultStop,
+  //@ts-ignore
   queryExternalFormsResultError,
+  //@ts-ignore
   queryExternalFormsResultSuccess,
+  //@ts-ignore
   queryExternalFormsResult
 } = createQueryRunnerActions("externalForms", true);
 

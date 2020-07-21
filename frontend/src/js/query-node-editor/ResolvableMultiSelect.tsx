@@ -1,4 +1,5 @@
 import * as React from "react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import type { SelectOptionsT, FilterIdT } from "../api/types";
@@ -36,6 +37,7 @@ export default ({
   label,
   options,
   disabled,
+  // @ts-ignore
   tooltip,
   allowDropFile,
 
@@ -51,6 +53,7 @@ export default ({
   // Can be both, an auto-completable (async) multi select or a regular one
   const Component = !!onLoad ? AsyncInputMultiSelect : InputMultiSelect;
 
+  // @ts-ignore
   const onDropFile = async file => {
     setLoading(true);
 
@@ -65,7 +68,9 @@ export default ({
         rows
       );
 
+      // @ts-ignore
       setResolved(r);
+      // @ts-ignore
       setIsModalOpen(r.unknownCodes && r.unknownCodes.length > 0);
 
       if (
@@ -86,8 +91,10 @@ export default ({
     <>
       {allowDropFile && isModalOpen && (
         <UploadFilterListModal
+          // @ts-ignore
           resolved={resolved}
           loading={loading}
+          // @ts-ignore
           error={error}
           onClose={() => setIsModalOpen(false)}
         />

@@ -38,7 +38,8 @@ const SubMessage = styled("p")`
 const Preview = styled("div")`
   border-radius: ${({ theme }) => theme.borderRadius};
   background-color: ${({ theme }) => theme.col.grayVeryLight};
-  width: ${({ width }) => width}px;
+  width: ${//@ts-ignore
+  ({ width }) => width}px;
   height: 20px;
   margin: 3px 0;
 `;
@@ -59,20 +60,53 @@ export default () => (
         </SubMessage>
       </Msg>
     </MsgContainer>
-    <Preview width={200} />
-    <Preview width={100} />
+    <Preview
+      //@ts-ignore
+      width={200}
+    />
+    <Preview
+      //@ts-ignore
+      width={100}
+    />
     <Container>
-      <Preview width={250} />
-      <Preview width={150} />
-      <Preview width={300} />
+      <Preview
+        //@ts-ignore
+        width={250}
+      />
+      <Preview
+        //@ts-ignore
+        width={150}
+      />
+      <Preview
+        //@ts-ignore
+        width={300}
+      />
       <Container>
-        <Preview width={200} />
-        <Preview width={50} />
+        <Preview
+          //@ts-ignore
+          width={200}
+        />
+        <Preview
+          //@ts-ignore
+          width={50}
+        />
       </Container>
     </Container>
-    <Preview width={350} />
-    <Preview width={200} />
-    <Preview width={300} />
-    <Preview width={250} />
+    <Preview
+      //@ts-ignore
+      width={350}
+    />
+    <Preview
+      //@ts-ignore
+      width={200}
+    />
+    <Preview
+      //@ts-ignore
+      width={300}
+    />
+    <Preview
+      //@ts-ignore
+      width={250}
+    />
   </Root>
 );

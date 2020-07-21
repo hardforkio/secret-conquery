@@ -36,6 +36,7 @@ const DynamicInputGroup = ({
   onAddClick
 }: PropsType) => {
   // 0 means "infinite"
+  //@ts-ignore
   const limitNotReached = limit === 0 || items.length < limit;
 
   return (
@@ -53,11 +54,20 @@ const DynamicInputGroup = ({
             you can also just delete the following constraint:
            */}
           {limit !== 1 && (
+            //@ts-ignore
             <RemoveBtn tiny icon="times" onClick={() => onRemoveClick(idx)} />
           )}
         </GroupItem>
       ))}
-      {limitNotReached && <AddBtn icon="plus" tiny onClick={onAddClick} />}
+      {limitNotReached && (
+        <AddBtn
+          icon="plus"
+          //@ts-ignore
+          tiny
+          //@ts-ignore
+          onClick={onAddClick}
+        />
+      )}
     </div>
   );
 };

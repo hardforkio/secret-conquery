@@ -12,10 +12,12 @@ export const createQueryNodeEditorActions = (
   } = createActionTypes(type);
 
   const setDetailsViewActive = () => ({ type: SET_DETAILS_VIEW_ACTIVE });
+  // @ts-ignore
   const setInputTableViewActive = tableIdx => ({
     type: SET_INPUT_TABLE_VIEW_ACTIVE,
     tableIdx
   });
+  // @ts-ignore
   const setFocusedInput = filterIdx => ({ type: SET_FOCUSED_INPUT, filterIdx });
   const toggleEditLabel = () => ({ type: TOGGLE_EDIT_LABEL });
   const reset = () => ({ type: RESET });

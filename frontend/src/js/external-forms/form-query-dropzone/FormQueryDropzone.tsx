@@ -1,5 +1,6 @@
 import React from "react";
 
+//@ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import FormQueryResult from "./FormQueryResult";
@@ -16,6 +17,7 @@ type PropsT = FieldPropsType & {
 };
 
 export default (props: PropsT) => {
+  //@ts-ignore
   const onDrop = (dropzoneProps, monitor) => {
     const item = monitor.getItem();
 

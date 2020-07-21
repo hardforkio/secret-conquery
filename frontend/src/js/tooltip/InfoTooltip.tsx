@@ -17,6 +17,7 @@ const Root = styled(WithTooltip)`
   padding: 0 10px;
 `;
 
+// @ts-ignore
 const InfoTooltip = ({ className, text, noIcon, place }: PropsType) => {
   return (
     <Root className={className} text={text}>

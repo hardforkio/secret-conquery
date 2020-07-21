@@ -17,6 +17,7 @@ const WithTooltip: React.FC<PropsT> = ({
   if (!text) return <>{children}</>;
 
   return (
+    // @ts-ignore
     <Tooltip
       className={className}
       position={place || "top"}

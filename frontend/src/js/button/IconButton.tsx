@@ -25,8 +25,8 @@ const StyledTransparentButton = styled(BasicButton)`
   transition: opacity ${({ theme }) => theme.transitionTime};
 
   border-radius: ${({ theme }) => theme.borderRadius};
-  border: ${({ theme, frame }) =>
-    frame ? "1px solid " + theme.col.gray : "none"};
+  border: ${//@ts-ignore
+  ({ theme, frame }) => (frame ? "1px solid " + theme.col.gray : "none")};
 
   &:hover {
     opacity: 1;

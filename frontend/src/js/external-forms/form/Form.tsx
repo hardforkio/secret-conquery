@@ -22,6 +22,7 @@ import type {
 } from "../config-types";
 
 import Field from "./Field";
+import { StateT } from "app-types";
 
 const DEFAULT_VALUE_BY_TYPE = {
   STRING: "",
@@ -71,6 +72,7 @@ function getPossibleValidations(fieldType: string) {
 }
 
 function getInitialValue(field: FormFieldType) {
+  // @ts-ignore
   return field.defaultValue || DEFAULT_VALUE_BY_TYPE[field.type];
 }
 
@@ -78,9 +80,11 @@ function getErrorForField(field: FormFieldType, value: any) {
   const defaultValidation = DEFAULT_VALIDATION_BY_TYPE[field.type];
 
   let error = defaultValidation ? defaultValidation(value) : null;
-
+  // @ts-ignore
   if (!!field.validations && field.validations.length > 0) {
+    // @ts-ignore
     for (const validation of field.validations) {
+      // @ts-ignore
       const validateFn = getPossibleValidations(field.type)[validation];
 
       if (validateFn) {
@@ -115,7 +119,6 @@ type PropsType = {
 // The form works with `redux-form``
 const ConfiguredForm = ({ config, ...props }: ConfiguredFormPropsType) => {
   const Form = ({
-    onSubmit,
     getFieldValue,
     availableDatasets,
     selectedDatasetId
@@ -123,8 +126,12 @@ const ConfiguredForm = ({ config, ...props }: ConfiguredFormPropsType) => {
     const locale = getLocale();
 
     return (
+      // @ts-ignore
       <form>
-        <FormsHeader headline={config.headline[locale]} />
+        <FormsHeader
+          // @ts-ignore
+          headline={config.headline[locale]}
+        />
         {config.fields.map(field => (
           <Field
             key={field.name}
@@ -141,15 +148,19 @@ const ConfiguredForm = ({ config, ...props }: ConfiguredFormPropsType) => {
   };
 
   const allFields = collectAllFields(config.fields);
+
   const fieldValueSelector = formValueSelector(
     config.type,
+    // @ts-ignore
     selectReduxFormState
   );
 
   const ReduxFormConnectedForm = reduxForm({
     form: config.type,
+    // @ts-ignore
     getFormState: selectReduxFormState,
     initialValues: allFields.reduce((allValues, field) => {
+      // @ts-ignore
       allValues[field.name] = getInitialValue(field);
 
       return allValues;
@@ -167,18 +178,21 @@ const ConfiguredForm = ({ config, ...props }: ConfiguredFormPropsType) => {
         //
         // => Otherwise, we'd have to check which tab is selected here,
         //    and which errors to add
+        // @ts-ignore
         const error = getErrorForField(field, values[name]);
 
         if (error) {
+          // @ts-ignore
           errors[name] = error;
         }
 
         return errors;
       }, {})
+    // @ts-ignore
   })(Form);
 
-  const mapStateToProps = state => ({
-    getFieldValue: field => fieldValueSelector(state, field),
+  const mapStateToProps = (state: StateT) => ({
+    getFieldValue: (field: string) => fieldValueSelector(state, field),
     availableDatasets: state.datasets.data.map(dataset => ({
       label: dataset.label,
       value: dataset.id
@@ -187,6 +201,7 @@ const ConfiguredForm = ({ config, ...props }: ConfiguredFormPropsType) => {
 
   const ReduxConnectedForm = connect(mapStateToProps)(ReduxFormConnectedForm);
 
+  // @ts-ignore
   return <ReduxConnectedForm {...props} />;
 };
 

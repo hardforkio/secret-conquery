@@ -16,6 +16,8 @@ const WithAuthToken = ({ location, children }: PropsType) => {
   const goToLogin = () => dispatch(push("/login"));
 
   const { search } = location;
+  //@ts-ignore
+
   const params = new URLSearchParams(search);
   const accessToken = params.get("access_token");
 

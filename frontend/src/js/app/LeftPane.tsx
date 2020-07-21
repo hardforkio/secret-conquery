@@ -21,11 +21,18 @@ const LeftPane = () => {
   return (
     <Pane left>
       {activeTab === "conceptTrees" && (
+        //@ts-ignore
         <ConceptTreeSearchBox datasetId={selectedDatasetId} />
       )}
-      <ConceptTreeList datasetId={selectedDatasetId} />
+      <ConceptTreeList
+        //@ts-ignore
+        datasetId={selectedDatasetId}
+      />
       {activeTab === "previousQueries" && (
-        <PreviousQueriesTab datasetId={selectedDatasetId} />
+        <PreviousQueriesTab
+          //@ts-ignore
+          datasetId={selectedDatasetId}
+        />
       )}
       {activeTab === "formConfigs" && (
         <FormConfigsTab datasetId={selectedDatasetId} />

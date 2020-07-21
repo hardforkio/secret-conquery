@@ -4,11 +4,12 @@ import styled from "@emotion/styled";
 import BasicButton from "./BasicButton";
 
 const TransparentButton = styled(BasicButton)`
-  color: ${({ theme, light }) => (light ? theme.col.gray : theme.col.black)};
+  color: ${//@ts-ignore
+  ({ theme, light }) => (light ? theme.col.gray : theme.col.black)};
   background-color: transparent;
   border-radius: ${({ theme }) => theme.borderRadius};
-  border: 1px solid
-    ${({ theme, light }) => (light ? theme.col.grayLight : theme.col.gray)};
+  border: 1px solid ${//@ts-ignore
+    ({ theme, light }) => (light ? theme.col.grayLight : theme.col.gray)};
 
   &:hover {
     background-color: ${({ theme }) => theme.col.grayVeryLight};
@@ -19,5 +20,6 @@ const TransparentButton = styled(BasicButton)`
     background-color: ${({ theme }) => theme.col.grayVeryLight};
   }
 `;
+//@ts-ignore
 
 export default props => <TransparentButton {...props} />;

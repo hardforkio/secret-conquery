@@ -30,6 +30,7 @@ const startup = (
   state: StartupStateT = initialState,
   action: Record<string, any>
 ): StartupStateT => {
+  // @ts-ignore
   switch (action.type) {
     case LOAD_CONFIG_START:
       return {
@@ -40,12 +41,14 @@ const startup = (
       return {
         ...state,
         loading: false,
+        // @ts-ignore
         error: action.payload.message
       };
     case LOAD_CONFIG_SUCCESS:
       return {
         ...state,
         loading: false,
+        // @ts-ignore
         config: action.payload.data
       };
     default:

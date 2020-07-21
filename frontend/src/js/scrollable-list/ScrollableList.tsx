@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import ReactList from "react-list";
 
 type PropsType = {
+  //@ts-ignore
   items: React.Node[];
   maxVisibleItems?: number;
   fullWidth?: boolean;
@@ -16,13 +17,15 @@ const Root = styled("div")`
   // If the number of visible items is specified here,
   // make an additional element half-visible at the end to indicate
   // that the list is scrollable
-  max-height: ${({ maxVisibleItems }) => (maxVisibleItems + 0.5) * 34}px;
+  max-height: ${//@ts-ignore
+  ({ maxVisibleItems }) => (maxVisibleItems + 0.5) * 34}px;
   max-width: 340px;
   border-radius: 2px;
   border: 1px solid ${({ theme }) => theme.col.grayMediumLight};
   color: ${({ theme }) => theme.col.black};
 
-  ${({ fullWidth }) =>
+  ${//@ts-ignore
+  ({ fullWidth }) =>
     fullWidth &&
     css`
       width: 100%;
@@ -42,6 +45,7 @@ const Item = styled("div")`
 `;
 
 const ScrollableList = (props: PropsType) => {
+  // @ts-ignore
   const renderItem = (index, key) => {
     return (
       <Item key={key} className="scrollable-list-item">
@@ -51,6 +55,7 @@ const ScrollableList = (props: PropsType) => {
   };
 
   return (
+    // @ts-ignore
     <Root maxVisibleItems={props.maxVisibleItems} fullWidth={!!props.fullWidth}>
       <ReactList
         itemRenderer={renderItem}

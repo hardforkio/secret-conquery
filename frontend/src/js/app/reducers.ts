@@ -84,6 +84,7 @@ const buildAppReducer = (tabs: TabT[]) => {
     formConfigsSearch,
     formConfigsFilter,
     ...tabs.reduce((all, tab) => {
+      //@ts-ignore
       all[tab.key] = tab.reducer;
       return all;
     }, {})

@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
+//@ts-ignore
+
 import type { Dispatch } from "redux-thunk";
 import T from "i18n-react";
 import { connect } from "react-redux";
 
 import { isEmpty } from "../common/helpers";
 import ReactSelect from "../form-components/ReactSelect";
+
+//@ts-ignore
 
 import type { DatasetType } from "./reducer";
 import { selectDataset } from "./actions";
@@ -36,6 +40,8 @@ const DatasetSelector = (props: PropsType) => {
       <ReactSelect
         name="dataset-selector"
         value={error ? -1 : selected}
+        //@ts-ignore
+
         onChange={value =>
           !isEmpty(value)
             ? selectDataset(value.value, selectedDatasetId)
@@ -53,6 +59,8 @@ const DatasetSelector = (props: PropsType) => {
   );
 };
 
+//@ts-ignore
+
 const mapStateToProps = state => ({
   selectedDatasetId: state.datasets.selectedDatasetId,
   datasets: state.datasets.data,
@@ -61,16 +69,22 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  //@ts-ignore
+
   selectDataset: (datasets, datasetId, previouslySelectedDatasetId, query) =>
     dispatch(
       selectDataset(datasets, datasetId, previouslySelectedDatasetId, query)
     )
 });
 
+//@ts-ignore
+
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   ...stateProps,
   ...dispatchProps,
+  //@ts-ignore
+
   selectDataset: (datasetId, selectedDatasetId) =>
     dispatchProps.selectDataset(
       stateProps.datasets,

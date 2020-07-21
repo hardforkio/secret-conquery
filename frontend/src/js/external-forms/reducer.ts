@@ -17,6 +17,7 @@ import {
 } from "./form-suggestions/reducer";
 import { collectAllFields } from "./helper";
 
+//@ts-ignore
 import type { Forms, Form } from "./config-types";
 
 function collectConceptListFieldNames(config: Form) {
@@ -24,6 +25,7 @@ function collectConceptListFieldNames(config: Form) {
     .filter(field => field.type === "CONCEPT_LIST")
     .map(field => field.name);
 
+  //@ts-ignore
   return [...new Set(fieldNames)];
 }
 
@@ -77,6 +79,7 @@ const buildExternalFormsReducer = (availableForms: {
 
     if (!reducer) return all;
 
+    //@ts-ignore
     all[form.type] = reducer;
 
     return all;
@@ -140,6 +143,7 @@ const buildExternalFormsReducer = (availableForms: {
 
     availableForms: (state = availableForms) => state,
 
+    //@ts-ignore
     formsContext: combineReducers(formReducers)
   });
 };

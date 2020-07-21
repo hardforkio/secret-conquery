@@ -63,6 +63,7 @@ const updatePreviousQuery = (
   action: Record<string, any>,
   attributes: Partial<PreviousQueryT>
 ) => {
+  // @ts-ignore
   const { query, queryIdx } = findQuery(state.queries, action.payload.queryId);
 
   if (!query) return state;
@@ -91,6 +92,7 @@ const toggleQueryAttribute = (
   action: Record<string, any>,
   attribute: keyof PreviousQueryT
 ) => {
+  // @ts-ignore
   const { query } = findQuery(state.queries, action.payload.queryId);
 
   if (!query) return state;
@@ -102,6 +104,7 @@ const deletePreviousQuery = (
   state: PreviousQueriesStateT,
   action: Record<string, any>
 ) => {
+  // @ts-ignore
   const { queryIdx } = findQuery(state.queries, action.payload.queryId);
 
   return {
@@ -151,6 +154,7 @@ const previousQueriesReducer = (
   state: PreviousQueriesStateT = initialState,
   action: Record<string, any>
 ): PreviousQueriesStateT => {
+  // @ts-ignore
   switch (action.type) {
     case LOAD_PREVIOUS_QUERIES_START:
       return { ...state, loading: true };
@@ -158,11 +162,15 @@ const previousQueriesReducer = (
       return {
         ...state,
         loading: false,
+        // @ts-ignore
         queries: sortQueries(action.payload.data),
+        // @ts-ignore
         tags: findUniqueTags(action.payload.data),
+        // @ts-ignore
         names: findUniqueNames(action.payload.data)
       };
     case LOAD_PREVIOUS_QUERIES_ERROR:
+      // @ts-ignore
       return { ...state, loading: false, error: action.payload.message };
     case LOAD_PREVIOUS_QUERY_START:
     case RENAME_PREVIOUS_QUERY_START:
@@ -174,6 +182,7 @@ const previousQueriesReducer = (
       return updatePreviousQuery(state, action, {
         loading: false,
         error: null,
+        // @ts-ignore
         ...action.payload.data
       });
     case RENAME_PREVIOUS_QUERY_SUCCESS:
@@ -181,8 +190,10 @@ const previousQueriesReducer = (
         ...updatePreviousQuery(state, action, {
           loading: false,
           error: null,
+          // @ts-ignore
           label: action.payload.label
         }),
+        // @ts-ignore
         names: updateUniqueNames(state.names, action.payload.label)
       };
     case RETAG_PREVIOUS_QUERY_SUCCESS:
@@ -190,14 +201,17 @@ const previousQueriesReducer = (
         ...updatePreviousQuery(state, action, {
           loading: false,
           error: null,
+          // @ts-ignore
           tags: action.payload.tags
         }),
+        // @ts-ignore
         tags: findNewTags([...state.tags, ...action.payload.tags])
       };
     case TOGGLE_SHARE_PREVIOUS_QUERY_SUCCESS:
       return updatePreviousQuery(state, action, {
         loading: false,
         error: null,
+        // @ts-ignore
         shared: action.payload.shared
       });
     case DELETE_PREVIOUS_QUERY_SUCCESS:
@@ -209,11 +223,14 @@ const previousQueriesReducer = (
     case DELETE_PREVIOUS_QUERY_ERROR:
       return updatePreviousQuery(state, action, {
         loading: false,
+        // @ts-ignore
         error: action.payload.message
       });
     case TOGGLE_EDIT_PREVIOUS_QUERY_LABEL:
+      // @ts-ignore
       return toggleQueryAttribute(state, action, "editingLabel");
     case TOGGLE_EDIT_PREVIOUS_QUERY_TAGS:
+      // @ts-ignore
       return toggleQueryAttribute(state, action, "editingTags");
     default:
       return state;

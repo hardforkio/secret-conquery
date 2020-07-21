@@ -40,7 +40,11 @@ const ClearZone = styled("div")`
 `;
 
 class SnackMessage extends React.PureComponent {
+  //@ts-ignore
+
   handleClickOutside(e) {
+    //@ts-ignore
+
     if (this.props.messageKey) this.props.resetMessage();
   }
 
@@ -48,16 +52,27 @@ class SnackMessage extends React.PureComponent {
     // Must be an empty div here for onClickOutside to connect properly
     return (
       <div>
-        {this.props.messageKey && (
-          <Root>
-            <Relative>
-              {T.translate(this.props.messageKey)}
-              <ClearZone onClick={this.props.resetMessage}>
-                <FaIcon white large icon="times" />
-              </ClearZone>
-            </Relative>
-          </Root>
-        )}
+        {
+          //@ts-ignore
+          this.props.messageKey && (
+            <Root>
+              <Relative>
+                {
+                  //@ts-ignore
+                  T.translate(this.props.messageKey)
+                }
+                <ClearZone
+                  onClick={
+                    //@ts-ignore
+                    this.props.resetMessage
+                  }
+                >
+                  <FaIcon white large icon="times" />
+                </ClearZone>
+              </Relative>
+            </Root>
+          )
+        }
       </div>
     );
   }
@@ -65,7 +80,11 @@ class SnackMessage extends React.PureComponent {
 
 export default connect(
   state => ({
+    //@ts-ignore
+
     messageKey: state.snackMessage.messageKey
   }),
+  //@ts-ignore
+
   dispatch => ({ resetMessage: msg => dispatch(setMessage(null)) })
 )(onClickOutside(SnackMessage));

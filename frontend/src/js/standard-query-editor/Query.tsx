@@ -74,8 +74,11 @@ const Query = (props: PropsT) => {
       {props.isEmptyQuery ? (
         <QueryEditorDropzone
           isInitial
+          // @ts-ignore
           onDropNode={props.dropAndNode}
+          // @ts-ignore
           onDropFile={props.dropConceptListFile}
+          // @ts-ignore
           onLoadPreviousQuery={props.loadPreviousQuery}
         />
       ) : (
@@ -86,15 +89,21 @@ const Query = (props: PropsT) => {
                 key={andIdx}
                 group={group}
                 andIdx={andIdx}
+                // @ts-ignore
                 onDropNode={item => props.dropOrNode(item, andIdx)}
+                // @ts-ignore
                 onDropFile={file => props.dropConceptListFile(file, andIdx)}
+                // @ts-ignore
                 onDeleteNode={orIdx => props.deleteNode(andIdx, orIdx)}
+                // @ts-ignore
                 onDeleteGroup={orIdx => props.deleteGroup(andIdx, orIdx)}
+                // @ts-ignore
                 onEditClick={orIdx => props.selectNodeForEditing(andIdx, orIdx)}
                 onExpandClick={props.expandPreviousQuery}
                 onExcludeClick={() => props.toggleExcludeGroup(andIdx)}
                 onDateClick={() => props.queryGroupModalSetNode(andIdx)}
                 onLoadPreviousQuery={props.loadPreviousQuery}
+                // @ts-ignore
                 onToggleTimestamps={orIdx =>
                   props.toggleTimestamps(andIdx, orIdx)
                 }
@@ -104,11 +113,14 @@ const Query = (props: PropsT) => {
               </QueryGroupConnector>
             ])
             .concat(
+              // @ts-ignore
               <QueryEditorDropzone
                 key={props.query.length + 1}
                 isAnd
                 onDropNode={item => props.dropAndNode(item, props.dateRange)}
+                // @ts-ignore
                 onDropFile={props.dropConceptListFile}
+                // @ts-ignore
                 onLoadPreviousQuery={props.loadPreviousQuery}
               />
             )}
@@ -118,6 +130,7 @@ const Query = (props: PropsT) => {
   );
 };
 
+// @ts-ignore
 function mapStateToProps(state) {
   return {
     query: state.queryEditor.query,
@@ -128,31 +141,47 @@ function mapStateToProps(state) {
   };
 }
 
+// @ts-ignore
 const mapDispatchToProps = dispatch => ({
+  // @ts-ignore
   dropAndNode: (item, dateRange) => dispatch(dropAndNode(item, dateRange)),
+  // @ts-ignore
   dropConceptListFile: (file, andIdx) =>
+    // @ts-ignore
     dispatch(openQueryUploadConceptListModal(andIdx, file)),
+  // @ts-ignore
   dropOrNode: (item, andIdx) => dispatch(dropOrNode(item, andIdx)),
+  // @ts-ignore
   deleteNode: (andIdx, orIdx) => dispatch(deleteNode(andIdx, orIdx)),
+  // @ts-ignore
   deleteGroup: (andIdx, orIdx) => dispatch(deleteGroup(andIdx, orIdx)),
+  // @ts-ignore
   toggleExcludeGroup: andIdx => dispatch(toggleExcludeGroup(andIdx)),
+  // @ts-ignore
   toggleTimestamps: (andIdx, orIdx) =>
     dispatch(toggleTimestamps(andIdx, orIdx)),
+  // @ts-ignore
   selectNodeForEditing: (andIdx, orIdx) =>
     dispatch(selectNodeForEditing(andIdx, orIdx)),
+  // @ts-ignore
   queryGroupModalSetNode: andIdx => dispatch(queryGroupModalSetNode(andIdx)),
+  // @ts-ignore
   expandPreviousQuery: (datasetId, rootConcepts, queryId) =>
     dispatch(expandPreviousQuery(datasetId, rootConcepts, queryId)),
+  // @ts-ignore
   loadPreviousQuery: (datasetId, queryId) =>
     dispatch(loadPreviousQuery(datasetId, queryId))
 });
 
+// @ts-ignore
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
+  // @ts-ignore
   loadPreviousQuery: queryId =>
     dispatchProps.loadPreviousQuery(ownProps.selectedDatasetId, queryId),
+  // @ts-ignore
   expandPreviousQuery: queryId =>
     dispatchProps.expandPreviousQuery(
       ownProps.selectedDatasetId,

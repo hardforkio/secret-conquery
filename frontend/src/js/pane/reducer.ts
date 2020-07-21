@@ -16,6 +16,7 @@ export interface PanesStateT {
   };
 }
 
+// @ts-ignore
 export const buildPanesReducer = tabs => {
   const initialState: PanesStateT = {
     left: {
@@ -28,6 +29,7 @@ export const buildPanesReducer = tabs => {
     },
     right: {
       activeTab: tabs[0].key,
+      // @ts-ignore
       tabs: tabs.map(tab => ({ label: tab.label, key: tab.key }))
     }
   };
@@ -36,13 +38,16 @@ export const buildPanesReducer = tabs => {
     state: PanesStateT = initialState,
     action: Record<string, any>
   ): PanesStateT => {
+    // @ts-ignore
     switch (action.type) {
       case CLICK_PANE_TAB:
+        // @ts-ignore
         const { paneType, tab } = action.payload;
 
         return {
           ...state,
           [paneType]: {
+            // @ts-ignore
             ...state[paneType],
             activeTab: tab
           }

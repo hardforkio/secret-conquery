@@ -30,6 +30,7 @@ const CurrencyInput = ({
   //   NOT supply isNumberString
   //   and instead to supply EITHER a float value OR an empty string
   const [formattedValue, setFormattedValue] = React.useState<number | string>(
+    // @ts-ignore
     isEmpty(value) ? "" : value / factor
   );
 
@@ -57,6 +58,7 @@ const CurrencyInput = ({
       className="clearable-input__input"
       placeholder={placeholder}
       type="text"
+      // @ts-ignore
       onValueChange={onValueChange}
       value={formattedValue}
     />

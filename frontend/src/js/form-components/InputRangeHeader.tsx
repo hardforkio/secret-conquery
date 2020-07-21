@@ -13,11 +13,13 @@ type PropsType = {
 const InputRangeHeader = styled("p")`
   font-size: ${({ theme }) => theme.font.sm};
   margin: 2px 8px;
-  color: ${({ theme, disabled }) => (disabled ? theme.col.gray : "initial")};
+  color: ${// @ts-ignore
+  ({ theme, disabled }) => (disabled ? theme.col.gray : "initial")};
 `;
 
 export default ({ label, unit, className, tooltip, disabled }: PropsType) => {
   return (
+    // @ts-ignore
     <InputRangeHeader className={className} disabled={disabled}>
       {label}
       {unit && ` ( ${unit} )`}

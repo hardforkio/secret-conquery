@@ -88,6 +88,7 @@ const QueryEditorDropzone: React.FC<PropsT> = ({
   onDropFile,
   onDropNode
 }) => {
+  // @ts-ignore
   const onDrop = (props, monitor) => {
     const item = monitor.getItem();
 
@@ -105,6 +106,7 @@ const QueryEditorDropzone: React.FC<PropsT> = ({
       isAnd={isAnd}
       isInitial={isInitial}
       acceptedDropTypes={DROP_TYPES}
+      // @ts-ignore
       onDrop={onDrop}
       onSelectFile={onDropFile}
       disableClick={isInitial}

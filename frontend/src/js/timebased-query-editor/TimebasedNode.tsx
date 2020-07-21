@@ -55,6 +55,7 @@ type PropsType = {
 
 // Has to be a class because of https://github.com/react-dnd/react-dnd/issues/530
 class TimebasedNode extends React.Component {
+  //@ts-ignore
   props: PropsType;
 
   render() {
@@ -70,18 +71,23 @@ class TimebasedNode extends React.Component {
 
     const toggleButton = (
       <StyledVerticalToggleButton
+        //@ts-ignore
         onToggle={onSetTimebasedNodeTimestamp}
+        //@ts-ignore
         activeValue={node.timestamp}
         options={[
           {
+            //@ts-ignore
             label: T.translate("timebasedQueryEditor.timestampFirst"),
             value: EARLIEST
           },
           {
+            //@ts-ignore
             label: T.translate("timebasedQueryEditor.timestampRandom"),
             value: RANDOM
           },
           {
+            //@ts-ignore
             label: T.translate("timebasedQueryEditor.timestampLast"),
             value: LATEST
           }
@@ -104,9 +110,16 @@ class TimebasedNode extends React.Component {
               {toggleButton}
             </div>
             <div className="timebased-node__description">
-              <StyledIconButton icon="times" onClick={onRemove} />
+              <StyledIconButton
+                icon="times"
+                //@ts-ignore
+                onClick={onRemove}
+              />
               <p className="timebased-node__description__text">
-                {node.label || node.id}
+                {
+                  //@ts-ignore
+                  node.label || node.id
+                }
               </p>
             </div>
           </div>
@@ -132,9 +145,11 @@ class TimebasedNode extends React.Component {
  * Implements the drag source contract.
  */
 const nodeSource = {
+  //@ts-ignore
   beginDrag(props, monitor, component) {
     // Return the data describing the dragged item
     const { node, conditionIdx, resultIdx } = props;
+    //@ts-ignore
     const { width, height } = findDOMNode(component).getBoundingClientRect();
 
     return {
@@ -151,6 +166,7 @@ const nodeSource = {
 /**
  * Specifies the dnd-related props to inject into the component.
  */
+//@ts-ignore
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),

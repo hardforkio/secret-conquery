@@ -40,6 +40,7 @@ const SxIconButton = styled(IconButton)`
 `;
 
 const ConceptEntry = AdditionalInfoHoverable(
+  // @ts-ignore
   ({ node, conceptId, canRemoveConcepts, onRemoveConcept }) => {
     return (
       <Concept>
@@ -60,6 +61,7 @@ const ConceptEntry = AdditionalInfoHoverable(
         {canRemoveConcepts && (
           <SxIconButton
             onClick={() => onRemoveConcept(conceptId)}
+            // @ts-ignore
             tiny
             regular
             icon="trash-alt"

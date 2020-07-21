@@ -38,9 +38,11 @@ const PreviewButton = ({
 
 export default connect(
   state => ({
+    //@ts-ignore
     isLoading: state.preview.isLoading
   }),
   dispatch => ({
+    //@ts-ignore
     onOpenPreview: (url: string) => dispatch(openPreview(url))
   })
 )(PreviewButton);

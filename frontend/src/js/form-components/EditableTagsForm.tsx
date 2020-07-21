@@ -32,14 +32,20 @@ class EditableTagsForm extends React.Component<PropsType> {
     this.props.onCancel();
   }
 
+  //@ts-ignore
   handleChange = (values: any, actionMeta: any) => {
     this.setState({ values });
   };
 
+  //@ts-ignore
   _onSubmit(e) {
     e.preventDefault();
 
-    const values = this.state.values ? this.state.values.map(v => v.value) : [];
+    //@ts-ignore
+    const values = this.state.values
+      ? //@ts-ignore
+        this.state.values.map(v => v.value)
+      : [];
 
     this.props.onSubmit(values);
   }
@@ -53,7 +59,9 @@ class EditableTagsForm extends React.Component<PropsType> {
         <ReactSelect
           creatable
           name="input"
+          //@ts-ignore
           value={this.state.values}
+          //@ts-ignore
           options={this.props.availableTags.map(t => ({
             label: t,
             value: t
@@ -64,11 +72,17 @@ class EditableTagsForm extends React.Component<PropsType> {
           autoFocus={true}
           placeholder={T.translate("reactSelect.tagPlaceholder")}
           noOptionsMessage={() => T.translate("reactSelect.noResults")}
+          //@ts-ignore
           formatCreateLabel={inputValue =>
             T.translate("common.create") + `: "${inputValue}"`
           }
         />
-        <StyledPrimaryButton type="submit" small disabled={this.props.loading}>
+        <StyledPrimaryButton
+          //@ts-ignore
+          type="submit"
+          small
+          disabled={this.props.loading}
+        >
           {T.translate("common.save")}
         </StyledPrimaryButton>
       </form>

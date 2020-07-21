@@ -5,6 +5,7 @@ import IconButton from "../button/IconButton";
 import FaIcon from "../icon/FaIcon";
 
 import { tableHasActiveFilters, tableIsDisabled } from "../model/table";
+// @ts-ignore
 import type { TableWithFilterValueType } from "../standard-query-node-editor/types";
 
 import MenuColumnButton from "./MenuColumnButton";
@@ -58,11 +59,13 @@ export default ({
   //       Yet, this is the way we can get it to work in IE11
   //       => Try to use a clickable div and a nested button instead
   return (
+    // @ts-ignore
     <MenuColumnButton active={isActive} disabled={isDisabled} onClick={onClick}>
       <SxIconButton
         regular
         icon={table.exclude ? "square" : "check-square"}
         disabled={isDisabled || (!table.exclude && isOnlyOneTableIncluded)}
+        // @ts-ignore
         onClick={event => {
           // To prevent selecting the table as well, see above
           event.stopPropagation();

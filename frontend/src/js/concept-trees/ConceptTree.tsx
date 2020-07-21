@@ -23,7 +23,8 @@ type PropsType = {
 };
 
 const LoadingTree = styled("p")`
-  padding-left: ${({ depth }) => 24 + depth * 15}px;
+  padding-left: ${//@ts-ignore
+  ({ depth }) => 24 + depth * 15}px;
   font-size: ${({ theme }) => theme.font.sm};
   margin: 2px 0;
   line-height: 20px;
@@ -31,7 +32,8 @@ const LoadingTree = styled("p")`
 const ErrorMessage = styled("p")`
   color: ${({ theme }) => theme.col.red};
   font-weight: 400;
-  padding-left: ${({ depth }) => 12 + depth * 15}px;
+  padding-left: ${//@ts-ignore
+  ({ depth }) => 12 + depth * 15}px;
   font-size: ${({ theme }) => theme.font.sm};
   margin: 2px 0;
   line-height: 20px;
@@ -48,7 +50,10 @@ const Spinner = styled("span")`
 export default (props: PropsType) => {
   if (props.loading)
     return (
-      <LoadingTree depth={props.depth}>
+      <LoadingTree
+        //@ts-ignore
+        depth={props.depth}
+      >
         <Spinner>
           <FaIcon icon="spinner" />
         </Spinner>
@@ -57,10 +62,15 @@ export default (props: PropsType) => {
     );
   else if (props.error)
     return (
-      <ErrorMessage depth={props.depth}>
+      <ErrorMessage
+        //@ts-ignore
+        depth={props.depth}
+      >
         <ReloadButton
           red
           icon="redo"
+          //@ts-ignore
+
           onClick={() => props.onLoadTree(props.treeId)}
         />
         {T.translate("conceptTreeList.error", { tree: props.label })}
@@ -69,6 +79,8 @@ export default (props: PropsType) => {
   else if (props.tree)
     return (
       <ConceptTreeNode
+        //@ts-ignore
+
         id={props.id}
         data={{ ...props.tree, tree: props.treeId }}
         depth={props.depth}

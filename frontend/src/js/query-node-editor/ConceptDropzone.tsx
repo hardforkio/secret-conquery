@@ -21,16 +21,19 @@ const ConceptDropzone = ({ node, onDropConcept }: PropsType) => {
   const dropzoneTarget = {
     // Usually, "drop" is specified here as well, but our Dropzone implementation splits that
 
+    // @ts-ignore
     canDrop(_, monitor) {
       const item = monitor.getItem();
       // The dragged item should contain exactly one id
       // since it was dragged from the tree
       const conceptId = item.ids[0];
 
+      // @ts-ignore
       return item.tree === node.tree && !node.ids.some(id => id === conceptId);
     }
   };
 
+  // @ts-ignore
   const onDrop = (_, monitor) => {
     const item = monitor.getItem();
 

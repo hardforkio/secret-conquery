@@ -2,7 +2,9 @@ import { transformElementsToApi } from "../api/apiHelper";
 
 import type { Form as FormType } from "./config-types";
 
+//@ts-ignore
 function transformElementGroupsToApi(elementGroups) {
+  //@ts-ignore
   return elementGroups.map(({ concepts, ...rest }) => ({
     type: "OR",
     children: transformElementsToApi(concepts),
@@ -10,6 +12,7 @@ function transformElementGroupsToApi(elementGroups) {
   }));
 }
 
+//@ts-ignore
 function transformFieldToApi(fieldConfig, form) {
   const formValue = form[fieldConfig.name];
 
@@ -17,6 +20,7 @@ function transformFieldToApi(fieldConfig, form) {
     case "RESULT_GROUP":
       return formValue.id;
     case "MULTI_RESULT_GROUP":
+      //@ts-ignore
       return formValue.map(group => group.id);
     case "DATE_RANGE":
       return {
@@ -26,6 +30,7 @@ function transformFieldToApi(fieldConfig, form) {
     case "CONCEPT_LIST":
       return transformElementGroupsToApi(formValue);
     case "TABS":
+      //@ts-ignore
       const selectedTab = fieldConfig.tabs.find(tab => tab.name === formValue);
 
       return {
@@ -38,7 +43,9 @@ function transformFieldToApi(fieldConfig, form) {
   }
 }
 
+//@ts-ignore
 function transformFieldsToApi(fields, form) {
+  //@ts-ignore
   return fields.reduce((all, fieldConfig) => {
     all[fieldConfig.name] = transformFieldToApi(fieldConfig, form);
 

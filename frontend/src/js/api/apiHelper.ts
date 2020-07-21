@@ -63,6 +63,7 @@ export const transformTablesToApi = (tables: TableWithFilterValueType[]) => {
         selects: transformSelectsToApi(table.selects),
         filters: table.filters
           ? table.filters
+              // @ts-ignore
               .filter(filter => !isEmpty(filter.value)) // Only send filters with a value
               .map(filter => ({
                 filter: filter.id,

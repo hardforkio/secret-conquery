@@ -59,6 +59,7 @@ export type SelectedDateColumnT = DateColumnT & {
 };
 
 export type TableWithFilterValueType = TableT & {
+  // @ts-ignore
   filters: ?FilterWithValueType[];
   selects?: SelectedSelectorType[];
   dateColumn?: SelectedDateColumnT;

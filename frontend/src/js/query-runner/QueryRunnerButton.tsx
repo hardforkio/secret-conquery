@@ -16,9 +16,10 @@ const Left = styled("span")`
   transition: ${({ theme }) =>
     `color ${theme.transitionTime}, background-color ${theme.transitionTime}`};
   padding: 0 15px;
-  background-color: ${({ theme, running }) =>
-    running ? "white" : theme.col.blueGrayDark};
-  border-right: ${({ theme, running }) =>
+  background-color: ${//@ts-ignore
+  ({ theme, running }) => (running ? "white" : theme.col.blueGrayDark)};
+  border-right: ${//@ts-ignore
+  ({ theme, running }) =>
     running ? `1px solid ${theme.col.blueGrayDark}` : "transparent"};
 `;
 
@@ -50,6 +51,7 @@ const StyledBasicButton = styled(BasicButton)`
   }
 `;
 
+//@ts-ignore
 function getIcon(loading, running) {
   return loading ? "spinner" : running ? "stop" : "play";
 }
@@ -68,8 +70,12 @@ const QueryRunnerButton = ({
   const icon = getIcon(isStartStopLoading, isQueryRunning);
 
   return (
+    //@ts-ignore
     <StyledBasicButton type="button" onClick={onClick} disabled={disabled}>
-      <Left running={isQueryRunning}>
+      <Left
+        //@ts-ignore
+        running={isQueryRunning}
+      >
         <FaIcon white={!isQueryRunning} icon={icon} />
       </Left>
       <Label>{label}</Label>

@@ -15,6 +15,7 @@ const Text = styled("p")`
   margin: 0;
 `;
 
+// @ts-ignore
 export default ({ value, onClear }) => (
   <Root>
     <Text>
@@ -22,7 +23,9 @@ export default ({ value, onClear }) => (
     </Text>
     <IconButton
       icon="times"
+      // @ts-ignore
       title={T.translate("common.clearValue")}
+      // @ts-ignore
       aria-label={T.translate("common.clearValue")}
       onClick={onClear}
     />

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 const Root = styled("p")`
@@ -13,10 +14,11 @@ const Option = styled("span")`
   cursor: pointer;
   transition: color ${({ theme }) => theme.transitionTime},
     background-color ${({ theme }) => theme.transitionTime};
-  color: ${({ theme, active }) => (active ? theme.col.black : theme.col.gray)};
+  color: ${// @ts-ignore
+  ({ theme, active }) => (active ? theme.col.black : theme.col.gray)};
   border: 1px solid ${({ theme }) => theme.col.gray};
-  background-color: ${({ theme, active }) =>
-    active ? "white" : theme.col.grayLight};
+  background-color: ${// @ts-ignore
+  ({ theme, active }) => (active ? "white" : theme.col.grayLight)};
 
   margin-left: -1px;
 
@@ -32,8 +34,8 @@ const Option = styled("span")`
   }
 
   &:hover {
-    background-color: ${({ theme, active }) =>
-      active ? "white" : theme.col.grayVeryLight};
+    background-color: ${// @ts-ignore
+    ({ theme, active }) => (active ? "white" : theme.col.grayVeryLight)};
   }
 `;
 
@@ -49,17 +51,21 @@ type PropsType = FieldPropsType & {
 const ToggleButton = (props: PropsType) => {
   return (
     <Root>
-      {props.options.map(({ value, label }, i) => (
-        <Option
-          key={i}
-          active={props.input.value === value}
-          onClick={() => {
-            if (value !== props.input.value) props.input.onChange(value);
-          }}
-        >
-          {label}
-        </Option>
-      ))}
+      {
+        // @ts-ignore
+        props.options.map(({ value, label }, i) => (
+          <Option
+            key={i}
+            // @ts-ignore
+            active={props.input.value === value}
+            onClick={() => {
+              if (value !== props.input.value) props.input.onChange(value);
+            }}
+          >
+            {label}
+          </Option>
+        ))
+      }
     </Root>
   );
 };

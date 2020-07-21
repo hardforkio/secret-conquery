@@ -32,8 +32,10 @@ const uploadConcepts = (
   state: UploadConceptListModalStateT = initialState,
   action: Record<string, any>
 ) => {
+  // @ts-ignore
   switch (action.type) {
     case INIT:
+      // @ts-ignore
       const { filename, rows } = action.payload;
 
       return {
@@ -46,6 +48,7 @@ const uploadConcepts = (
     case SELECT_CONCEPT_ROOT_NODE:
       return {
         ...state,
+        // @ts-ignore
         selectedConceptRootNode: action.conceptId,
         resolved: null
       };
@@ -60,6 +63,7 @@ const uploadConcepts = (
         ...state,
         loading: false,
         resolved: null,
+        // @ts-ignore
         error: action.payload
       };
     case RESOLVE_CONCEPTS_SUCCESS:
@@ -67,6 +71,7 @@ const uploadConcepts = (
         ...state,
         loading: false,
         error: null,
+        // @ts-ignore
         resolved: action.payload.data
       };
     case RESET:

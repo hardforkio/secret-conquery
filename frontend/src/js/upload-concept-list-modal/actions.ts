@@ -14,6 +14,8 @@ import {
   INIT,
   RESET
 } from "./actionTypes";
+// @ts-ignore
+import React from "react";
 
 export const resolveConceptsStart = () => ({ type: RESOLVE_CONCEPTS_START });
 export const resolveConceptsSuccess = (
@@ -29,8 +31,11 @@ export const selectConceptRootNode = (conceptId: ConceptIdT) => ({
 });
 
 export const selectConceptRootNodeAndResolveCodes = (
+  // @ts-ignore
   datasetId,
+  // @ts-ignore
   treeId,
+  // @ts-ignore
   conceptCodes
 ) => (dispatch: Dispatch) => {
   if (isEmpty(treeId)) {
@@ -47,6 +52,7 @@ export const selectConceptRootNodeAndResolveCodes = (
   );
 };
 
+// @ts-ignore
 export const initUploadConceptListModal = file => async dispatch => {
   const rows = await getUniqueFileRows(file);
 

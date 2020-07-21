@@ -67,6 +67,7 @@ const findUniqueNames = (queries: FormConfigT[]) => {
   return Array.from(uniqueNames);
 };
 
+// @ts-ignore
 const updateFormConfig = (configs: FormConfigT[], { id, values }) => {
   const config = configs.find(conf => conf.id === id);
 

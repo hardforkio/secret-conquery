@@ -39,6 +39,7 @@ const EditableTextForm: React.FC<PropsT> = ({
   onSubmit,
   onCancel
 }) => {
+  // @ts-ignore
   EditableTextForm.handleClickOutside = onCancel;
 
   const [value, setValue] = useState<string>(text);
@@ -66,7 +67,12 @@ const EditableTextForm: React.FC<PropsT> = ({
           }
         }}
       />
-      <SxPrimaryButton type="submit" small disabled={loading}>
+      <SxPrimaryButton
+        // @ts-ignore
+        type="submit"
+        small
+        disabled={loading}
+      >
         {T.translate("common.save")}
       </SxPrimaryButton>
     </Form>
@@ -78,5 +84,6 @@ const EditableTextForm: React.FC<PropsT> = ({
 // }
 
 export default clickOutside(EditableTextForm, {
+  // @ts-ignore
   handleClickOutside: () => EditableTextForm.handleClickOutside
 });

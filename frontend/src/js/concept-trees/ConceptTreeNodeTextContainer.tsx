@@ -28,10 +28,12 @@ type PropsType = {
   isStructFolder?: boolean;
 };
 
+//@ts-ignore
+
 function getResultCount(search, node) {
   return search.result &&
-    search.result[node.id] > 0 &&
-    node.children &&
+  search.result[node.id] > 0 &&
+  node.children && //@ts-ignore
     node.children.some(child => search.result[child] > 0)
     ? search.result[node.id]
     : null;
@@ -41,13 +43,21 @@ function getResultCount(search, node) {
 class ConceptTreeNodeTextContainer extends React.Component {
   render() {
     const {
+      //@ts-ignore
       node,
+      //@ts-ignore
       depth,
+      //@ts-ignore
       search,
+      //@ts-ignore
       active,
+      //@ts-ignore
       open,
+      //@ts-ignore
       connectDragSource,
+      //@ts-ignore
       onTextClick,
+      //@ts-ignore
       isStructFolder
     } = this.props;
 
@@ -82,10 +92,13 @@ class ConceptTreeNodeTextContainer extends React.Component {
  * Implements the drag source contract.
  */
 const nodeSource = {
+  //@ts-ignore
   beginDrag(props: PropsType, monitor, component): DraggedNodeType {
+    //@ts-ignore
     const { width, height } = findDOMNode(component).getBoundingClientRect();
 
     return {
+      //@ts-ignore
       width,
       height,
       ...props.createQueryElement()
@@ -96,6 +109,7 @@ const nodeSource = {
 /**
  * Specifies the props to inject into your component.
  */
+//@ts-ignore
 const collect = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()

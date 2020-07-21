@@ -35,13 +35,17 @@ describe("standard query editor", () => {
       const state = createQueryStateWithOneBigMultiSelect();
 
       state[0].elements[0].tables[0].filters[0].options = [
+        //@ts-ignore
         { value: 1, label: "1" }
       ];
+      //@ts-ignore
       state[0].elements[0].tables[0].filters[0].value = [1];
 
       const action = setFilterValue(0, 0, []);
+      //@ts-ignore
       const updatedState = reducer(state, action);
 
+      //@ts-ignore
       expect(updatedState[0].elements[0].tables[0].filters[0].value).toEqual(
         []
       );
@@ -58,8 +62,10 @@ describe("standard query editor", () => {
         { value: "2", label: "2" }
       ];
       const action = loadFilterSuggestionsSuccess(options, 0, 0);
+      //@ts-ignore
       const updatedState = reducer(state, action);
 
+      //@ts-ignore
       expect(updatedState[0].elements[0].tables[0].filters[0].options).toEqual(
         options
       );
@@ -72,12 +78,17 @@ describe("standard query editor", () => {
         { value: "2", label: "2" }
       ];
       const state = createQueryStateWithOneBigMultiSelect();
+      //@ts-ignore
       state[0].elements[0].tables[0].filters[0].options = options;
 
+      //@ts-ignore
       const newOptions = [];
+      //@ts-ignore
       const action = loadFilterSuggestionsSuccess(newOptions, 0, 0);
+      //@ts-ignore
       const updatedState = reducer(state, action);
 
+      //@ts-ignore
       expect(updatedState[0].elements[0].tables[0].filters[0].options).toEqual(
         options
       );

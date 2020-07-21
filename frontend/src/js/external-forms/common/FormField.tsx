@@ -5,6 +5,7 @@ const TheFormField = styled("div")`
   margin: 0 0 10px;
 `;
 
+//@ts-ignore
 export default Component => props => (
   <TheFormField>
     <Component {...props} />

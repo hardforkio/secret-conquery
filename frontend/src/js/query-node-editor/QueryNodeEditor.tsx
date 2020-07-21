@@ -127,16 +127,22 @@ export const createConnectedQueryNodeEditor = (
   mapDispatchToProps: Function,
   mergeProps: Function
 ) => {
+  // @ts-ignore
   const mapDispatchToPropsInternal = (dispatch: Dispatch, ownProps) => {
     const externalDispatchProps = mapDispatchToProps
       ? mapDispatchToProps(dispatch, ownProps)
       : {};
 
     const {
+      // @ts-ignore
       setDetailsViewActive,
+      // @ts-ignore
       toggleEditLabel,
+      // @ts-ignore
       setInputTableViewActive,
+      // @ts-ignore
       setFocusedInput,
+      // @ts-ignore
       reset
     } = createQueryNodeEditorActions(ownProps.name);
 
@@ -146,14 +152,17 @@ export const createConnectedQueryNodeEditor = (
         ...(externalDispatchProps.editorState || {}),
         onSelectDetailsView: () => dispatch(setDetailsViewActive()),
         onToggleEditLabel: () => dispatch(toggleEditLabel()),
+        // @ts-ignore
         onSelectInputTableView: tableIdx =>
           dispatch(setInputTableViewActive(tableIdx)),
+        // @ts-ignore
         onShowDescription: filterIdx => dispatch(setFocusedInput(filterIdx)),
         onReset: () => dispatch(reset())
       }
     };
   };
 
+  // @ts-ignore
   const mergePropsInternal = (stateProps, dispatchProps, ownProps) => {
     const externalMergedProps = mergeProps
       ? mergeProps(stateProps, dispatchProps, ownProps)
@@ -169,6 +178,7 @@ export const createConnectedQueryNodeEditor = (
   };
 
   return connect(
+    // @ts-ignore
     mapStateToProps,
     mapDispatchToPropsInternal,
     mergePropsInternal

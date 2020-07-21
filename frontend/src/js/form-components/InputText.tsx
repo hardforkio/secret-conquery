@@ -1,4 +1,5 @@
 import React from "react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import { isEmpty } from "../common/helpers";
@@ -26,7 +27,9 @@ const InputText: React.FC<PropsT> = props => {
     <Labeled
       className={props.className}
       valueChanged={
+        // @ts-ignore
         !isEmpty(props.input.value) &&
+        // @ts-ignore
         props.input.value !== props.input.defaultValue
       }
       fullWidth={props.fullWidth}
@@ -39,7 +42,9 @@ const InputText: React.FC<PropsT> = props => {
         inputType={props.inputType || "text"}
         valueType={props.valueType}
         placeholder={props.placeholder}
+        // @ts-ignore
         value={props.input.value}
+        // @ts-ignore
         onChange={props.input.onChange}
         currencyConfig={props.currencyConfig}
         inputProps={props.inputProps}

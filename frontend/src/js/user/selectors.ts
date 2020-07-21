@@ -1,3 +1,4 @@
+//@ts-ignore
 import type { StateType } from "../app/reducers";
 import type { Permission } from "../api/types";
 

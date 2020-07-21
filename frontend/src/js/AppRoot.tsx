@@ -13,6 +13,8 @@ type PropsType = {
 };
 
 const AppRoot = ({ store, browserHistory, rightTabs }: PropsType) => (
+  //@ts-ignore
+
   <Provider store={store}>
     <AppRouter history={browserHistory} rightTabs={rightTabs} />
   </Provider>

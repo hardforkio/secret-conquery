@@ -35,6 +35,7 @@ const FormsHeader: React.FC = () => {
         regular
         icon="trash-alt"
         onClick={() => onClear(activeFormType)}
+        // @ts-ignore
         title={T.translate("externalForms.common.clear")}
       >
         {T.translate("externalForms.common.clear")}

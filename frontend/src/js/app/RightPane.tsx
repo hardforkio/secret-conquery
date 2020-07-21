@@ -15,6 +15,7 @@ const RightPane = ({ tabs, activeTab, selectedDatasetId }: PropsType) => {
   // during setup
   const theActiveTab = tabs.find(tab => tab.key === activeTab);
 
+  //@ts-ignore
   const tab = React.createElement(theActiveTab.component, {
     selectedDatasetId: selectedDatasetId
   });
@@ -23,6 +24,8 @@ const RightPane = ({ tabs, activeTab, selectedDatasetId }: PropsType) => {
 };
 
 export default connect(state => ({
+  //@ts-ignore
   activeTab: state.panes.right.activeTab,
+  //@ts-ignore
   selectedDatasetId: state.datasets.selectedDatasetId
 }))(RightPane);

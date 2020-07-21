@@ -1,6 +1,9 @@
 // import { createLogger }  from 'redux-logger';
 import prodMiddleware from "./prodMiddleware";
+//@ts-ignore
+import React from "react";
 
+//@ts-ignore
 export default function (browserHistory) {
   // const reduxLogger = createLogger({
   //   diff: false,

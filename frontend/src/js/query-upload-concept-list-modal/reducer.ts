@@ -7,9 +7,11 @@ type StateT = {
 
 const initialState: StateT = {
   isOpen: false,
+  // @ts-ignore
   andIdx: null
 };
 
+// @ts-ignore
 export default (state = initialState, action) => {
   switch (action.type) {
     case MODAL_OPEN:

@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import type { SelectedSelectorType } from "./types";
 
 import { sortSelects } from "../model/select";

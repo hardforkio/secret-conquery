@@ -1,3 +1,4 @@
+//@ts-ignore
 import type { Dispatch, getState } from "redux-thunk";
 import { reset } from "redux-form";
 
@@ -92,7 +93,9 @@ export const selectDataset = (
     } else {
       const nextDataset = datasets.find(db => db.id === datasetId);
 
+      //@ts-ignore
       if (!nextDataset || !nextDataset.query) dispatch(clearQuery());
+      //@ts-ignore
       else dispatch(loadQuery(nextDataset.query));
 
       dispatch(loadTrees(datasetId));
@@ -105,6 +108,7 @@ export const selectDataset = (
   };
 };
 
+//@ts-ignore
 const selectActiveForm = getStateFn => {
   const state = getStateFn();
 

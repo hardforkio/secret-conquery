@@ -104,11 +104,13 @@ export default ({ file, loading, onUpload, onReset }: PropsT) => {
   ];
 
   React.useEffect(() => {
+    //@ts-ignore
     async function parse(f, d) {
       try {
         setCSVLoading(true);
 
         const parsed = await parseCSV(f, d);
+        //@ts-ignore
         const { result } = parsed;
 
         setCSVLoading(false);
@@ -121,6 +123,7 @@ export default ({ file, loading, onUpload, onReset }: PropsT) => {
             // The first two columns are IDs, which will be concatenated
             // The other two columns are date ranges
             // We simply assume that the data is in this format by default
+            //@ts-ignore
             result.data[0].length >= 4
               ? ["ID", "ID", "START_DATE", "END_DATE"]
               : ["ID", "ID", "DATE_SET"]
@@ -172,26 +175,31 @@ export default ({ file, loading, onUpload, onReset }: PropsT) => {
           {csv.length > 0 &&
             csv.slice(0, 1).map((row, j) => (
               <tr key={j}>
-                {row.map((cell, i) => (
-                  <Th key={cell + i}>
-                    <ReactSelect
-                      small
-                      options={SELECT_OPTIONS}
-                      value={
-                        SELECT_OPTIONS.find(o => o.value === csvHeader[i]) ||
-                        SELECT_OPTIONS[0]
-                      }
-                      onChange={value =>
-                        setCSVHeader([
-                          ...csvHeader.slice(0, i),
-                          value.value,
-                          ...csvHeader.slice(i + 1)
-                        ])
-                      }
-                    />
-                    <SxPadded>{cell}</SxPadded>
-                  </Th>
-                ))}
+                {
+                  //@ts-ignore
+                  row.map((cell, i) => (
+                    <Th key={cell + i}>
+                      <ReactSelect
+                        small
+                        options={SELECT_OPTIONS}
+                        value={
+                          SELECT_OPTIONS.find(o => o.value === csvHeader[i]) ||
+                          SELECT_OPTIONS[0]
+                        }
+                        //@ts-ignore
+                        onChange={value =>
+                          //@ts-ignore
+                          setCSVHeader([
+                            ...csvHeader.slice(0, i),
+                            value.value,
+                            ...csvHeader.slice(i + 1)
+                          ])
+                        }
+                      />
+                      <SxPadded>{cell}</SxPadded>
+                    </Th>
+                  ))
+                }
               </tr>
             ))}
         </thead>
@@ -199,25 +207,32 @@ export default ({ file, loading, onUpload, onReset }: PropsT) => {
           {csv.length > 0 &&
             csv.slice(1, 6).map((row, j) => (
               <tr key={j}>
-                {row.map((cell, i) => (
-                  <Td key={cell + i}>
-                    <Padded>{cell}</Padded>
-                  </Td>
-                ))}
+                {
+                  //@ts-ignore
+                  row.map((cell, i) => (
+                    <Td key={cell + i}>
+                      <Padded>{cell}</Padded>
+                    </Td>
+                  ))
+                }
               </tr>
             ))}
           {csv.length > 6 && (
             <tr>
-              {new Array(csv[0].length).fill(null).map((_, j) => (
-                <Td key={j}>
-                  <Padded>...</Padded>
-                </Td>
-              ))}
+              {
+                //@ts-ignore
+                new Array(csv[0].length).fill(null).map((_, j) => (
+                  <Td key={j}>
+                    <Padded>...</Padded>
+                  </Td>
+                ))
+              }
             </tr>
           )}
         </tbody>
       </Table>
       <PrimaryButton
+        //@ts-ignore
         disabled={loading || csv.length === 0}
         onClick={uploadQuery}
       >

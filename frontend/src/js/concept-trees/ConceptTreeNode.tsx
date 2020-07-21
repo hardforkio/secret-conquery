@@ -64,6 +64,7 @@ class ConceptTreeNode extends React.Component<PropsType> {
     const { id, data, depth, open, search } = this.props;
 
     if (!search.showMismatches) {
+      //@ts-ignore
       const shouldRender = isNodeInSearchResult(id, data.children, search);
 
       if (!shouldRender) return null;
@@ -75,6 +76,7 @@ class ConceptTreeNode extends React.Component<PropsType> {
       <Root>
         <ConceptTreeNodeTextContainer
           node={{
+            //@ts-ignore
             id,
             label: data.label,
             description: data.description,
@@ -86,6 +88,7 @@ class ConceptTreeNode extends React.Component<PropsType> {
             children: data.children
           }}
           createQueryElement={(): DraggedNodeType => {
+            //@ts-ignore
             const { tables, selects } = getConceptById(data.tree);
 
             const description = data.description
@@ -101,6 +104,7 @@ class ConceptTreeNode extends React.Component<PropsType> {
 
               additionalInfos: data.additionalInfos,
               matchingEntries: data.matchingEntries,
+              //@ts-ignore
               dateRange: data.dateRange,
 
               tree: data.tree
@@ -120,6 +124,7 @@ class ConceptTreeNode extends React.Component<PropsType> {
               return child ? (
                 <OpenableConceptTreeNode
                   key={i}
+                  //@ts-ignore
                   id={childId}
                   data={selectTreeNodeData(child, data.tree)}
                   depth={this.props.depth + 1}

@@ -4,6 +4,9 @@ import css from "@emotion/css";
 import T from "i18n-react";
 import IconButton from "../button/IconButton";
 import { Icon } from "../icon/FaIcon";
+//@ts-ignore
+
+import QueryNodeActions from "./QueryNodeActions";
 
 const Actions = styled("div")`
   margin: 0 0 6px;
@@ -24,6 +27,7 @@ const StyledIconButton = styled(IconButton)`
   text-decoration: ${({ active }) => (active ? "underline" : "initial")};
 `;
 
+// @ts-ignore
 const activeStyle = ({ theme, active }) =>
   css`
     color: ${active ? theme.col.red : theme.col.black};
@@ -54,9 +58,12 @@ type PropsType = {
 
 const QueryGroupActions = (props: PropsType) => {
   return (
+    /* eslint-disable */
     <Actions>
       <div>
-        <RedIconButton
+        < // @ts-ignore
+          RedIconButton
+          /* eslint-enable */
           red
           tight
           active={props.excludeActive}
@@ -76,7 +83,13 @@ const QueryGroupActions = (props: PropsType) => {
         </StyledIconButton>
       </div>
       <Right>
-        <IconButton noFrame tiny icon="times" onClick={props.onDeleteGroup} />
+        <IconButton
+          // @ts-ignore
+          noFrame
+          tiny
+          icon="times"
+          onClick={props.onDeleteGroup}
+        />
       </Right>
     </Actions>
   );

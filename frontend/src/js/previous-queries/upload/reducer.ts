@@ -4,6 +4,7 @@ import { OPEN_UPLOAD_MODAL, CLOSE_UPLOAD_MODAL } from "./actionTypes";
 import createQueryRunnerReducer from "../../query-runner/reducer";
 
 function isModalOpen(state = false, action: Record<string, any>): boolean {
+  // @ts-ignore
   switch (action.type) {
     case OPEN_UPLOAD_MODAL:
       return true;

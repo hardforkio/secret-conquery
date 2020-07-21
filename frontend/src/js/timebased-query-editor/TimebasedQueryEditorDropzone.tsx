@@ -25,6 +25,7 @@ const TimebasedQueryEditorDropzone = ({
   onRemoveTimebasedNode,
   onDropNode
 }: PropsType) => {
+  //@ts-ignore
   const onDrop = (props, monitor) => {
     const item = monitor.getItem();
 
@@ -33,9 +34,12 @@ const TimebasedQueryEditorDropzone = ({
     if (moved) {
       const { conditionIdx, resultIdx } = item;
 
+      //@ts-ignore
       onRemoveTimebasedNode(conditionIdx, resultIdx, moved);
+      //@ts-ignore
       onDropNode(item.node, moved);
     } else {
+      //@ts-ignore
       onDropNode(item, false);
     }
   };
@@ -50,7 +54,9 @@ const TimebasedQueryEditorDropzone = ({
 export default connect(
   () => ({}),
   dispatch => ({
+    //@ts-ignore
     onRemoveTimebasedNode: (conditionIdx, resultIdx, moved) =>
       dispatch(removeTimebasedNode(conditionIdx, resultIdx, moved))
   })
+  //@ts-ignore
 )(TimebasedQueryEditorDropzone);

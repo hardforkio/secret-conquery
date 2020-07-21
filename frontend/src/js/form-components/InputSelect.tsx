@@ -1,5 +1,6 @@
 import React from "react";
 import T from "i18n-react";
+// @ts-ignore
 import type { FieldPropsType } from "redux-form";
 
 import ReactSelect from "./ReactSelect";
@@ -29,8 +30,10 @@ const InputSelect = ({
   selectProps,
   tooltip
 }: PropsType) => {
+  // @ts-ignore
   const selected = options && options.filter(v => v.value === input.value);
   const defaultValue =
+    // @ts-ignore
     options && options.filter(v => v.value === input.defaultValue);
 
   return (
@@ -52,6 +55,7 @@ const InputSelect = ({
         value={selected}
         defaultValue={defaultValue}
         options={options}
+        // @ts-ignore
         onChange={field =>
           field ? input.onChange(field.value) : input.onChange(null)
         }

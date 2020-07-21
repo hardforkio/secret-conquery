@@ -56,12 +56,14 @@ const ModalContentComponent: React.FC<ContentPropsT> = ({
   children,
   onClose
 }) => {
+  // @ts-ignore
   ModalContentComponent.handleClickOutside = onClose;
 
   return <Content>{children}</Content>;
 };
 
 const ModalContent = onClickOutside(ModalContentComponent, {
+  // @ts-ignore
   handleClickOutside: () => ModalContentComponent.handleClickOutside
 });
 // -----------------------------------------------

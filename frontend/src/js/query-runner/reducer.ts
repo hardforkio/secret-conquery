@@ -35,18 +35,29 @@ export default function createQueryRunnerReducer(type: string) {
 
   // Example1: START_STANDARD_QUERY_START
   // Example2: START_TIMEBASED_QUERY_START
+  // @ts-ignore
   const START_QUERY_START = actionTypes[`START_${capitalType}_QUERY_START`];
+  // @ts-ignore
   const START_QUERY_SUCCESS = actionTypes[`START_${capitalType}_QUERY_SUCCESS`];
+  // @ts-ignore
   const START_QUERY_ERROR = actionTypes[`START_${capitalType}_QUERY_ERROR`];
+  // @ts-ignore
   const STOP_QUERY_START = actionTypes[`STOP_${capitalType}_QUERY_START`];
+  // @ts-ignore
   const STOP_QUERY_SUCCESS = actionTypes[`STOP_${capitalType}_QUERY_SUCCESS`];
+  // @ts-ignore
   const STOP_QUERY_ERROR = actionTypes[`STOP_${capitalType}_QUERY_ERROR`];
+  // @ts-ignore
   const QUERY_RESULT_START = actionTypes[`QUERY_${capitalType}_RESULT_START`];
+  // @ts-ignore
   const QUERY_RESULT_RESET = actionTypes[`QUERY_${capitalType}_RESULT_RESET`];
   const QUERY_RESULT_SUCCESS =
+    // @ts-ignore
     actionTypes[`QUERY_${capitalType}_RESULT_SUCCESS`];
+  // @ts-ignore
   const QUERY_RESULT_ERROR = actionTypes[`QUERY_${capitalType}_RESULT_ERROR`];
 
+  // @ts-ignore
   const getQueryResult = (data, datasetId) => {
     if (data.status === "CANCELED")
       return {
@@ -71,6 +82,7 @@ export default function createQueryRunnerReducer(type: string) {
     state: QueryRunnerStateT = initialState,
     action: Record<string, any>
   ): QueryRunnerStateT => {
+    // @ts-ignore
     switch (action.type) {
       // To start a query
       case START_QUERY_START:
@@ -83,6 +95,7 @@ export default function createQueryRunnerReducer(type: string) {
       case START_QUERY_SUCCESS:
         return {
           ...state,
+          // @ts-ignore
           runningQuery: action.payload.data.id,
           queryRunning: true,
           stopQuery: {},
@@ -93,6 +106,7 @@ export default function createQueryRunnerReducer(type: string) {
           ...state,
           stopQuery: {},
           startQuery: {
+            // @ts-ignore
             error: action.payload.message || action.payload.status
           }
         };
@@ -112,6 +126,7 @@ export default function createQueryRunnerReducer(type: string) {
         return {
           ...state,
           startQuery: {},
+          // @ts-ignore
           stopQuery: { error: action.payload.message || action.payload.status }
         };
 
@@ -121,12 +136,14 @@ export default function createQueryRunnerReducer(type: string) {
       case QUERY_RESULT_RESET:
         return { ...state, queryResult: { loading: false } };
       case QUERY_RESULT_SUCCESS:
+        // @ts-ignore
         const { data, datasetId } = action.payload;
 
         const queryResult = getQueryResult(data, datasetId);
 
         return {
           ...state,
+          // @ts-ignore
           queryResult,
           runningQuery: null,
           queryRunning: false
@@ -139,6 +156,7 @@ export default function createQueryRunnerReducer(type: string) {
           queryResult: {
             loading: false,
             error:
+              // @ts-ignore
               action.payload.message || T.translate("queryRunner.queryFailed")
           }
         };

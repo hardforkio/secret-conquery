@@ -37,6 +37,7 @@ const QueryNodeActions = (props: PropsType) => {
     <Actions>
       <StyledIconButton
         icon="times"
+        // @ts-ignore
         onClick={e => {
           e.stopPropagation();
           props.onDeleteNode();
@@ -48,6 +49,7 @@ const QueryNodeActions = (props: PropsType) => {
             red
             regular
             icon="calendar"
+            // @ts-ignore
             onClick={e => {
               e.stopPropagation();
               props.onToggleTimestamps();
@@ -57,7 +59,12 @@ const QueryNodeActions = (props: PropsType) => {
       )}
       {!props.error && !!props.previousQueryLoading && (
         <WithTooltip text={T.translate("queryEditor.loadingPreviousQuery")}>
-          <StyledFaIcon noFrame icon="spinner" />
+          // @ts-ignore
+          <StyledFaIcon
+            //@ts-ignore
+            noFrame
+            icon="spinner"
+          />
         </WithTooltip>
       )}
       {!props.error && props.isExpandable && !props.previousQueryLoading && (
@@ -65,6 +72,7 @@ const QueryNodeActions = (props: PropsType) => {
           <StyledIconButton
             noFrame
             icon="expand-arrows-alt"
+            // @ts-ignore
             onClick={e => {
               e.stopPropagation();
               props.onExpandClick();

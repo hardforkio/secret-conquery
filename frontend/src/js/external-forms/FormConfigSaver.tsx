@@ -165,6 +165,8 @@ const FormConfigSaver: React.FC<PropsT> = ({ datasetId }) => {
     setIsLoading(false);
   }
 
+  //@ts-ignore
+
   function onDropConfig(props: any, monitor: any) {
     const dragItem = monitor.getItem();
 

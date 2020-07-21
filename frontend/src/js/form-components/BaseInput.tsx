@@ -17,9 +17,10 @@ const Root = styled("div")`
 
 const Input = styled("input")`
   min-width: 170px;
-  padding: ${({ large }) =>
-    large ? "10px 30px 10px 14px" : "8px 30px 8px 10px"};
-  font-size: ${({ theme, large }) => (large ? theme.font.lg : theme.font.sm)};
+  padding: ${//@ts-ignore
+  ({ large }) => (large ? "10px 30px 10px 14px" : "8px 30px 8px 10px")};
+  font-size: ${//@ts-ignore
+  ({ theme, large }) => (large ? theme.font.lg : theme.font.sm)};
   border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
@@ -60,6 +61,7 @@ const BaseInput = (props: PropsType) => {
   const inputProps = props.inputProps || {};
   const { pattern } = props.inputProps || {};
 
+  // @ts-ignore
   const handleKeyPress = event => {
     if (!pattern) return;
 
@@ -88,6 +90,7 @@ const BaseInput = (props: PropsType) => {
         <CurrencyInput
           currencyConfig={props.currencyConfig}
           placeholder={props.placeholder}
+          // @ts-ignore
           value={props.value}
           onChange={safeOnChange}
         />
@@ -98,6 +101,7 @@ const BaseInput = (props: PropsType) => {
           onChange={e => safeOnChange(e.target.value)}
           onKeyPress={e => handleKeyPress(e)}
           value={props.value || ""}
+          // @ts-ignore
           large={props.large}
           {...inputProps}
         />
@@ -106,9 +110,12 @@ const BaseInput = (props: PropsType) => {
         <ClearZone
           tiny
           icon="times"
+          // @ts-ignore
           tabIndex="-1"
           large={props.large}
+          // @ts-ignore
           title={T.translate("common.clearValue")}
+          // @ts-ignore
           aria-label={T.translate("common.clearValue")}
           onClick={() => props.onChange(null)}
         />

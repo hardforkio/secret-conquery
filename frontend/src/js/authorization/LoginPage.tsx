@@ -29,7 +29,8 @@ const Wrap = styled("div")`
 
 const Logo = styled("div")`
   width: ${({ theme }) => theme.img.logoWidth};
-  height: ${({ theme }) => theme.img.logoHeight || "35px"};
+  height: ${//@ts-ignore
+  ({ theme }) => theme.img.logoHeight || "35px"};
   background-image: url(${({ theme }) => theme.img.logo});
   background-repeat: no-repeat;
   background-position-y: 50%;
@@ -82,6 +83,8 @@ const LoginPage = () => {
 
   const redirectToApp = () => dispatch(push("/"));
 
+  //@ts-ignore
+
   async function onSubmit(e) {
     e.preventDefault();
 
@@ -108,10 +111,17 @@ const LoginPage = () => {
       <Wrap>
         <Logo />
         <Headline>{T.translate("login.headline")}</Headline>
-        {!!error && <SxErrorMessage message={T.translate("login.error")} />}
+        {!!error && (
+          <SxErrorMessage
+            //@ts-ignore
+            message={T.translate("login.error")}
+          />
+        )}
         <Form onSubmit={onSubmit}>
           <SxInputText
             inputType="text"
+            //@ts-ignore
+
             label={T.translate("login.username")}
             large
             input={{
@@ -124,6 +134,8 @@ const LoginPage = () => {
           />
           <SxInputText
             inputType="password"
+            //@ts-ignore
+
             label={T.translate("login.password")}
             large
             input={{
@@ -134,7 +146,12 @@ const LoginPage = () => {
               disabled: loading
             }}
           />
-          <SxPrimaryButton disabled={!user || !password} large type="submit">
+          <SxPrimaryButton
+            //@ts-ignore
+            disabled={!user || !password}
+            large
+            type="submit"
+          >
             <SxFaIcon large white icon={loading ? "spinner" : "check"} />
             {T.translate("login.submit")}
           </SxPrimaryButton>

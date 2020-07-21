@@ -11,6 +11,7 @@ const ResetAllFiltersButton = styled("div")`
   white-space: nowrap;
 `;
 
+// @ts-ignore
 export default ({ node, onResetAllFilters }) => {
   if (!nodeHasActiveFilters(node)) return null;
 

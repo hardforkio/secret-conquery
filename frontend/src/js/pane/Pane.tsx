@@ -5,6 +5,8 @@ import PaneTabNavigation from "./PaneTabNavigation";
 type PropsType = {
   right?: boolean;
   left?: boolean;
+  //@ts-ignore
+
   children?: React.Node;
 };
 
@@ -12,7 +14,8 @@ const Root = styled("div")`
   width: 100%;
   height: 100%;
 
-  padding: ${({ left, right }) => (left || right ? "50px 0 10px" : "0")};
+  padding: ${//@ts-ignore
+  ({ left, right }) => (left || right ? "50px 0 10px" : "0")};
 `;
 
 const Container = styled("div")`
@@ -27,7 +30,11 @@ const Pane = (props: PropsType) => {
   const paneType = props.left ? "left" : "right";
 
   return (
-    <Root left={props.left} right={props.right}>
+    <Root
+      //@ts-ignore
+      left={props.left}
+      right={props.right}
+    >
       <Container>
         <PaneTabNavigation paneType={paneType} />
         <Container className="pane__body">{props.children}</Container>

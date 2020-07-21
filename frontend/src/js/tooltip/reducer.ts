@@ -37,6 +37,7 @@ const initialState = {
   }
 };
 
+// @ts-ignore
 const setAdditionalInfos = (state, action) => {
   if (state.toggleAdditionalInfos)
     return {
@@ -60,6 +61,7 @@ const tooltip = (
   state: TooltipStateT = initialState,
   action: Record<string, any>
 ): TooltipStateT => {
+  // @ts-ignore
   switch (action.type) {
     case DISPLAY_ADDITIONAL_INFOS:
       return setAdditionalInfos(state, action);

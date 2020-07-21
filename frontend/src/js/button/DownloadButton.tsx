@@ -7,10 +7,12 @@ import IconButton from "./IconButton";
 type PropsType = {
   url: string;
   className?: string;
+  // @ts-ignore
   children?: React.Node;
   ending: string;
 };
 
+// @ts-ignore
 function getIcon(ending: string) {
   return "download";
 
@@ -39,11 +41,14 @@ const DownloadButton = ({
   const icon = getIcon(ending);
 
   return (
+    /* eslint-disable */
     <a href={href} className={className}>
-      <IconButton icon={icon} {...restProps}>
+      < // @ts-ignore
+        IconButton icon={icon} {...restProps}>
         {children}
       </IconButton>
     </a>
+    /* eslint-enable */
   );
 };
 

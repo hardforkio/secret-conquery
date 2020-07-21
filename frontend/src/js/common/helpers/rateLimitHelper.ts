@@ -113,6 +113,7 @@ class Deque {
   }
 }
 
+//@ts-ignore
 class ReleaseEmitter extends EventEmitter {}
 
 function isFn(x: any) {
@@ -127,6 +128,7 @@ export class Sema {
   nrTokens: number;
   free: Deque;
   waiting: Deque;
+  //@ts-ignore
   releaseEmitter: EventEmitter;
   noTokens: boolean;
   pauseFn: () => void;
@@ -156,10 +158,13 @@ export class Sema {
     this.waiting = new Deque(capacity);
     this.releaseEmitter = new ReleaseEmitter();
     this.noTokens = initFn === defaultInit;
+    //@ts-ignore
     this.pauseFn = pauseFn;
+    //@ts-ignore
     this.resumeFn = resumeFn;
     this.paused = false;
 
+    //@ts-ignore
     this.releaseEmitter.on("release", token => {
       const p = this.waiting.shift();
       if (p) {

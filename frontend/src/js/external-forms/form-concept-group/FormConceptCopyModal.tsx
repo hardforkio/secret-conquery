@@ -49,11 +49,14 @@ const FormConceptCopyModal = ({
   onClose
 }: PropsT) => {
   const locale = getLocale();
+  //@ts-ignore
   const formValues = useSelector(state => selectActiveFormValues(state));
   const visibleConceptListFields = useVisibleConceptListFields();
 
   const conceptListFieldOptions = visibleConceptListFields
+    //@ts-ignore
     .filter(field => field.name !== targetFieldname)
+    //@ts-ignore
     .map(field => ({
       label: field.label[locale],
       value: field.name
@@ -71,6 +74,7 @@ const FormConceptCopyModal = ({
 
   React.useEffect(() => {
     const values = formValues[selectedOption];
+    //@ts-ignore
     const initiallyChecked = values.reduce((checkedValues, value, i) => {
       checkedValues[i] = false;
       return checkedValues;
@@ -80,15 +84,18 @@ const FormConceptCopyModal = ({
   }, [formValues, selectedOption]);
 
   const allConceptsSelected = Object.keys(valuesChecked).every(
+    //@ts-ignore
     key => valuesChecked[key]
   );
 
   const isAcceptDisabled = Object.keys(valuesChecked).every(
+    //@ts-ignore
     key => !valuesChecked[key]
   );
 
   function idxHasConcepts(idx: number) {
     const values = formValues[selectedOption];
+    //@ts-ignore
     const concepts = values[idx].concepts.filter(cpt => !!cpt);
 
     return concepts.length > 0;
@@ -96,6 +103,7 @@ const FormConceptCopyModal = ({
 
   function getLabelFromIdx(idx: number) {
     const values = formValues[selectedOption];
+    //@ts-ignore
     const concepts = values[idx].concepts.filter(cpt => !!cpt);
 
     if (concepts.length === 0) return "-";
@@ -106,8 +114,10 @@ const FormConceptCopyModal = ({
     );
   }
 
+  //@ts-ignore
   function onToggleAllConcepts(checked: boolean) {
     const allChecked = Object.keys(valuesChecked).reduce((all, key) => {
+      //@ts-ignore
       all[key] = allConceptsSelected ? false : true;
 
       return all;
@@ -127,6 +137,7 @@ const FormConceptCopyModal = ({
 
   function onSubmit() {
     const selectedValues = Object.keys(valuesChecked)
+      //@ts-ignore
       .filter(key => valuesChecked[key])
       .map(key => formValues[selectedOption][key]);
 
@@ -150,24 +161,34 @@ const FormConceptCopyModal = ({
         input={{ value: allConceptsSelected, onChange: onToggleAllConcepts }}
       />
       <Options>
-        {Object.keys(valuesChecked).map((idx, i) =>
-          idxHasConcepts ? (
-            <SxInputCheckbox
-              key={idx}
-              label={getLabelFromIdx(idx)}
-              input={{
-                value: valuesChecked[idx],
-                onChange: (checked: boolean) => onToggleConcept(idx, checked)
-              }}
-            />
-          ) : null
-        )}
+        {
+          //@ts-ignore
+          Object.keys(valuesChecked).map((idx, i) =>
+            //@ts-ignore
+            idxHasConcepts ? (
+              <SxInputCheckbox
+                key={idx}
+                //@ts-ignore
+                label={getLabelFromIdx(idx)}
+                input={{
+                  //@ts-ignore
+                  value: valuesChecked[idx],
+                  //@ts-ignore
+                  onChange: (checked: boolean) => onToggleConcept(idx, checked)
+                }}
+              />
+            ) : null
+          )
+        }
       </Options>
       <Buttons>
         <BasicButton onClick={onClose}>
           {T.translate("common.cancel")}
         </BasicButton>
-        <PrimaryButton onClick={onSubmit} disabled={isAcceptDisabled}>
+        <PrimaryButton
+          onClick={onSubmit} //@ts-ignore
+          disabled={isAcceptDisabled}
+        >
           {T.translate("externalForms.copyModal.accept")}
         </PrimaryButton>
       </Buttons>

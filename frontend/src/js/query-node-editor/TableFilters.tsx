@@ -64,6 +64,7 @@ const TableFilters = (props: PropsType) => {
                     clearable: filter.value !== filter.defaultValue,
                     defaultValue: filter.defaultValue,
                     value: filter.value,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   label={filter.label}
@@ -78,40 +79,58 @@ const TableFilters = (props: PropsType) => {
                   input={{
                     value: filter.value,
                     defaultValue: filter.defaultValue,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   label={filter.label}
                   options={filter.options}
                   disabled={props.excludeTable}
+                  // @ts-ignore
                   allowDropFile={!!filter.allowDropFile}
                 />
               );
+            // @ts-ignore
             case BIG_MULTI_SELECT:
               return (
                 <ResolvableMultiSelect
+                  // @ts-ignore
                   context={{ ...props.context, filterId: filter.id }}
                   input={{
+                    // @ts-ignore
                     value: filter.value,
+                    // @ts-ignore
                     defaultValue: filter.defaultValue,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
+                  // @ts-ignore
                   label={filter.label}
                   options={
+                    // @ts-ignore
                     filter.options ||
                     (props.suggestions &&
+                      // @ts-ignore
                       props.suggestions[filterIdx] &&
+                      // @ts-ignore
                       props.suggestions[filterIdx].options)
                   }
                   disabled={!!props.excludeTable}
+                  // @ts-ignore
                   allowDropFile={!!filter.allowDropFile}
                   isLoading={
+                    // @ts-ignore
                     filter.isLoading ||
                     (props.suggestions &&
+                      // @ts-ignore
                       props.suggestions[filterIdx] &&
+                      // @ts-ignore
                       props.suggestions[filterIdx].isLoading)
                   }
+                  // @ts-ignore
                   startLoadingThreshold={filter.threshold || 1}
+                  // @ts-ignore
                   onLoad={prefix =>
+                    // @ts-ignore
                     props.onLoadFilterSuggestions(filterIdx, filter.id, prefix)
                   }
                 />
@@ -122,7 +141,9 @@ const TableFilters = (props: PropsType) => {
                   inputType="number"
                   input={{
                     value: filter.value,
+                    // @ts-ignore
                     defaultValue: filter.defaultValue,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   limits={{ min: filter.min, max: filter.max }}
@@ -130,6 +151,7 @@ const TableFilters = (props: PropsType) => {
                   label={filter.label}
                   mode={filter.mode || "range"}
                   disabled={!!props.excludeTable}
+                  // @ts-ignore
                   onSwitchMode={mode =>
                     props.onSwitchFilterMode(filterIdx, mode)
                   }
@@ -143,7 +165,9 @@ const TableFilters = (props: PropsType) => {
                   inputType="number"
                   input={{
                     value: filter.value,
+                    // @ts-ignore
                     defaultValue: filter.defaultValue,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   limits={{ min: filter.min, max: filter.max }}
@@ -152,6 +176,7 @@ const TableFilters = (props: PropsType) => {
                   mode={filter.mode || "range"}
                   stepSize={filter.precision || 0.1}
                   disabled={!!props.excludeTable}
+                  // @ts-ignore
                   onSwitchMode={mode =>
                     props.onSwitchFilterMode(filterIdx, mode)
                   }
@@ -166,12 +191,14 @@ const TableFilters = (props: PropsType) => {
                   valueType={MONEY_RANGE}
                   input={{
                     value: filter.value,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   unit={filter.unit}
                   label={filter.label}
                   mode={filter.mode || "range"}
                   disabled={!!props.excludeTable}
+                  // @ts-ignore
                   onSwitchMode={mode =>
                     props.onSwitchFilterMode(filterIdx, mode)
                   }
@@ -179,16 +206,22 @@ const TableFilters = (props: PropsType) => {
                   currencyConfig={props.currencyConfig}
                 />
               );
+            // @ts-ignore
             case STRING:
               return (
                 <InputText
                   inputType="text"
+                  // @ts-ignore
                   input={{
+                    // @ts-ignore
                     value: filter.value || "",
+                    // @ts-ignore
                     defaultValue: filter.defaultValue,
+                    // @ts-ignore
                     onChange: value => props.onSetFilterValue(filterIdx, value)
                   }}
                   placeholder="-"
+                  // @ts-ignore
                   label={filter.label}
                 />
               );

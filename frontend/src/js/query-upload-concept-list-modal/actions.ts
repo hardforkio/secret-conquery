@@ -3,6 +3,8 @@ import {
   resetUploadConceptListModal
 } from "../upload-concept-list-modal/actions";
 import { MODAL_OPEN, MODAL_CLOSE, MODAL_ACCEPT } from "./actionTypes";
+// @ts-ignore
+import React from "react";
 
 const openModal = (andIdx = null) => ({
   type: MODAL_OPEN,
@@ -10,8 +12,11 @@ const openModal = (andIdx = null) => ({
 });
 
 export const openQueryUploadConceptListModal = (
+  // @ts-ignore
   andIdx,
+  // @ts-ignore
   file
+  // @ts-ignore
 ) => async dispatch => {
   // Need to wait until file is processed.
   // Because if file is empty, modal would close automatically
@@ -24,14 +29,19 @@ const closeModal = () => ({
   type: MODAL_CLOSE
 });
 
+// @ts-ignore
 export const closeQueryUploadConceptListModal = () => dispatch => {
   return dispatch([closeModal(), resetUploadConceptListModal()]);
 };
 
 export const acceptQueryUploadConceptListModal = (
+  // @ts-ignore
   andIdx,
+  // @ts-ignore
   label,
+  // @ts-ignore
   rootConcepts,
+  // @ts-ignore
   resolvedConcepts
 ) => {
   return {

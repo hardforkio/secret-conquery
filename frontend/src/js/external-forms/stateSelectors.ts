@@ -5,6 +5,7 @@ import { FormContextStateT } from "./reducer";
 import { getLocale } from "../localization";
 import type { Form } from "js/api/form-types";
 
+//@ts-ignore
 const selectFormField = (state, formName, fieldName) => {
   if (
     !state ||
@@ -17,27 +18,36 @@ const selectFormField = (state, formName, fieldName) => {
   return state[formName].values[fieldName];
 };
 
+//@ts-ignore
 export const selectEditedConceptPosition = (state, formName, fieldName) => {
   const formField = selectFormField(state, formName, fieldName) || [];
 
   const selectedConcepts = formField
     .reduce(
+      //@ts-ignore
       (acc, group, andIdx) => [
         ...acc,
+        //@ts-ignore
         ...group.concepts.map((concept, orIdx) => ({ andIdx, orIdx, concept }))
       ],
       []
     )
+    //@ts-ignore
     .filter(({ concept }) => concept && concept.isEditing)
+    //@ts-ignore
     .map(({ andIdx, orIdx }) => ({ andIdx, orIdx }));
 
   return selectedConcepts.length ? selectedConcepts[0] : null;
 };
 
 export const selectEditedConcept = (
+  //@ts-ignore
   state,
+  //@ts-ignore
   formName,
+  //@ts-ignore
   fieldName,
+  //@ts-ignore
   { andIdx, orIdx },
   blacklistedTables: string[],
   whitelistedTables: string[]
@@ -55,8 +65,11 @@ export const selectSuggestions = (
 ) => {
   return (
     state.suggestions &&
+    //@ts-ignore
     state.suggestions[fieldName] &&
+    //@ts-ignore
     state.suggestions[fieldName][andIdx] &&
+    //@ts-ignore
     state.suggestions[fieldName][andIdx][orIdx]
   );
 };
@@ -71,8 +84,10 @@ export const selectActiveFormValues = (state: StateT): Record<string, any> => {
   const reduxForm = selectReduxForm(state);
   const activeForm = selectActiveFormType(state);
 
+  //@ts-ignore
   return reduxForm && activeForm && !!reduxForm[activeForm]
-    ? reduxForm[activeForm].values
+    ? //@ts-ignore
+      reduxForm[activeForm].values
     : {};
 };
 
@@ -111,18 +126,24 @@ export const selectRunningQuery = (state: StateT) => {
   return queryRunner ? queryRunner.runningQuery : null;
 };
 
+//@ts-ignore
 function getVisibleConceptListFields(config, values) {
   const topLevelFields = config.fields.filter(
+    //@ts-ignore
     field => field.type === "CONCEPT_LIST"
   );
+  //@ts-ignore
   const tabFields = config.fields.filter(field => field.type === "TABS");
 
+  //@ts-ignore
   const fieldsWithinVisibleTabs = tabFields.reduce((fields, tabField) => {
     const activeTabName = values[tabField.name];
+    //@ts-ignore
     const activeTab = tabField.tabs.find(tab => tab.name === activeTabName);
 
     const activeTabConceltListFields = activeTab
-      ? getVisibleConceptListFields(activeTab)
+      ? //@ts-ignore
+        getVisibleConceptListFields(activeTab)
       : [];
 
     return [...fields, ...activeTabConceltListFields];
@@ -132,7 +153,9 @@ function getVisibleConceptListFields(config, values) {
 }
 
 export const useVisibleConceptListFields = () => {
+  //@ts-ignore
   const config = useSelector(state => selectFormConfig(state));
+  //@ts-ignore
   const values = useSelector(state => selectActiveFormValues(state));
 
   if (!config) return false;
@@ -141,17 +164,25 @@ export const useVisibleConceptListFields = () => {
 };
 
 export const useAllowExtendedCopying = (targetFieldname: string) => {
+  //@ts-ignore
   const values = useSelector(state => selectActiveFormValues(state));
+  //@ts-ignore
   const otherConceptListFields = useVisibleConceptListFields().filter(
+    //@ts-ignore
     field => field.name !== targetFieldname
   );
 
   // Need to have min 2 fields to copy from one to another
   if (otherConceptListFields.length < 1) return false;
 
+  //@ts-ignore
   const fieldHasFilledConcept = field =>
     !!values[field.name] &&
-    values[field.name].some(value => value.concepts.some(concept => !!concept));
+    //@ts-ignore
+    values[field.name].some(value =>
+      //@ts-ignore
+      value.concepts.some(concept => !!concept)
+    );
 
   return otherConceptListFields.some(fieldHasFilledConcept);
 };

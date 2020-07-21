@@ -5,8 +5,10 @@ const updateFormFilterProperty = (
   action: Record<string, any>,
   property: Record<string, any>
 ): Record<string, any> => {
+  //@ts-ignore
   const { andIdx, orIdx, filterIdx, tableIdx, fieldName } = action.payload;
 
+  //@ts-ignore
   const fieldContent = state[fieldName];
   const andContent = fieldContent && fieldContent[andIdx];
   const orContent = andContent && andContent[orIdx];
@@ -45,24 +47,34 @@ const loadFormFilterSuggestionsSuccess = (
   state: Record<string, any>,
   action: Record<string, any>
 ): Record<string, any> => {
+  //@ts-ignore
   const { andIdx, orIdx, filterIdx, tableIdx, fieldName } = action.payload;
   const previousOptions =
+    //@ts-ignore
     (state[fieldName] &&
+      //@ts-ignore
       state[fieldName][andIdx] &&
+      //@ts-ignore
       state[fieldName][andIdx][orIdx] &&
+      //@ts-ignore
       state[fieldName][andIdx][orIdx][tableIdx] &&
+      //@ts-ignore
       state[fieldName][andIdx][orIdx][tableIdx][filterIdx] &&
+      //@ts-ignore
       state[fieldName][andIdx][orIdx][tableIdx][filterIdx].options) ||
     [];
 
   return updateFormFilterProperty(state, action, {
     isLoading: false,
+    //@ts-ignore
     options: action.payload.suggestions
       // Combine with previous suggestions
       .concat(previousOptions)
       // Remove duplicate items
       .reduce(
+        //@ts-ignore
         (options, currentOption) =>
+          //@ts-ignore
           options.find(x => x.value === currentOption.value)
             ? options
             : [...options, currentOption],
@@ -101,7 +113,9 @@ export const createFormSuggestionsReducer = (
     state: FormSuggestionsStateT = {},
     action: Record<string, any>
   ): FormSuggestionsStateT => {
+    //@ts-ignore
     if (reducerHandlers[action.type])
+      //@ts-ignore
       return reducerHandlers[action.type](state, action);
 
     return state;

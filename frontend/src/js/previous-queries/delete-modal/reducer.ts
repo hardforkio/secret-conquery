@@ -5,6 +5,7 @@ import {
 
 const initialState = {};
 
+// @ts-ignore
 const deletePreviousQueryModal = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_PREVIOUS_QUERY_MODAL_OPEN:

@@ -1,3 +1,4 @@
+//@ts-ignore
 import type { Dispatch } from "redux-thunk";
 
 import { createActionTypes } from "./actionTypes";
@@ -11,13 +12,21 @@ export const createFormSuggestionActions = (
   const actionTypes = createActionTypes(formType, fieldName);
 
   const loadFormFilterSuggestionsStart = (
+    //@ts-ignore
     formName,
+    //@ts-ignore
     fieldName,
+    //@ts-ignore
     andIdx,
+    //@ts-ignore
     orIdx,
+    //@ts-ignore
     tableIdx,
+    //@ts-ignore
     conceptId,
+    //@ts-ignore
     filterIdx,
+    //@ts-ignore
     prefix
   ) => ({
     type: actionTypes.LOAD_FILTER_SUGGESTIONS_START,
@@ -34,13 +43,21 @@ export const createFormSuggestionActions = (
   });
 
   const loadFormFilterSuggestionsSuccess = (
+    //@ts-ignore
     suggestions,
+    //@ts-ignore
     formName,
+    //@ts-ignore
     fieldName,
+    //@ts-ignore
     andIdx,
+    //@ts-ignore
     orIdx,
+    //@ts-ignore
     tableIdx,
+    //@ts-ignore
     filterIdx
+    //@ts-ignore
   ) => ({
     type: actionTypes.LOAD_FILTER_SUGGESTIONS_SUCCESS,
     payload: {
@@ -55,13 +72,21 @@ export const createFormSuggestionActions = (
   });
 
   const loadFormFilterSuggestionsError = (
+    //@ts-ignore
     error,
+    //@ts-ignore
     formName,
+    //@ts-ignore
     fieldName,
+    //@ts-ignore
     andIdx,
+    //@ts-ignore
     orIdx,
+    //@ts-ignore
     tableIdx,
+    //@ts-ignore
     filterIdx
+    //@ts-ignore
   ) => ({
     type: actionTypes.LOAD_FILTER_SUGGESTIONS_ERROR,
     payload: {
@@ -76,16 +101,27 @@ export const createFormSuggestionActions = (
   });
 
   const loadFormFilterSuggestions = (
+    //@ts-ignore
     formName,
+    //@ts-ignore
     fieldName,
+    //@ts-ignore
     datasetId,
+    //@ts-ignore
     conceptId,
+    //@ts-ignore
     tableId,
+    //@ts-ignore
     filterId,
+    //@ts-ignore
     prefix,
+    //@ts-ignore
     tableIdx,
+    //@ts-ignore
     filterIdx,
+    //@ts-ignore
     andIdx,
+    //@ts-ignore
     orIdx
   ) => {
     return (dispatch: Dispatch) => {
