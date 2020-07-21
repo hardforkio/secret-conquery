@@ -605,10 +605,7 @@ const findPreviousQueries = (state, action) => {
         }));
     })
     .filter(group => group.length > 0);
-  console.log(state)
-  console.log(queries)
-  console.log([].concat.apply([], queries))
-  return [].concat.apply([], queries);
+  return [].concat(...queries);
 };
 
 const updatePreviousQueries = (state, action, attributes) => {
