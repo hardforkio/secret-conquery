@@ -186,7 +186,6 @@ const FormConfig: React.FC<PropsT> = ({
   };
 
   //@ts-ignore
-
   const [collectedProps, drag] = useDrag({
     item: dragItem,
     isDragging: monitor => monitor.isDragging()

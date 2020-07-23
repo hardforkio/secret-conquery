@@ -100,7 +100,7 @@ const LoginPage = () => {
         return;
       }
     } catch (e) {
-      setError(true);
+      setError(e);
     }
 
     setLoading(false);
@@ -115,6 +115,7 @@ const LoginPage = () => {
           <SxErrorMessage
             //@ts-ignore
             message={T.translate("login.error")}
+            //message={error.message}
           />
         )}
         <Form onSubmit={onSubmit}>

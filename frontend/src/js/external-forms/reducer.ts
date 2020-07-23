@@ -18,7 +18,7 @@ import {
 import { collectAllFields } from "./helper";
 
 //@ts-ignore
-import type { Forms, Form } from "./config-types";
+import type { Form } from "./config-types";
 
 function collectConceptListFieldNames(config: Form) {
   const fieldNames = collectAllFields(config.fields)

@@ -29,8 +29,6 @@ import type {
   FormConfigT,
   BaseFormConfigT
 } from "js/external-forms/form-configs/reducer";
-// @ts-ignore
-import React from "react";
 
 const PROTECTED_PREFIX = "/api";
 

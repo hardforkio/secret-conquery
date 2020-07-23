@@ -1,7 +1,4 @@
 //@ts-ignore
-import React from "react";
-
-//@ts-ignore
 export const allConditionsFilled = timebasedQuery =>
   timebasedQuery.conditions.every(
     //@ts-ignore

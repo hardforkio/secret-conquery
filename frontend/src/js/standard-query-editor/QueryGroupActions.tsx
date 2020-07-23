@@ -4,9 +4,6 @@ import css from "@emotion/css";
 import T from "i18n-react";
 import IconButton from "../button/IconButton";
 import { Icon } from "../icon/FaIcon";
-//@ts-ignore
-
-import QueryNodeActions from "./QueryNodeActions";
 
 const Actions = styled("div")`
   margin: 0 0 6px;
