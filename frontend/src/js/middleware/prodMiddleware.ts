@@ -3,8 +3,6 @@ import thunk from "redux-thunk";
 import multi from "redux-multi";
 import { routerMiddleware } from "react-router-redux";
 import { createUnauthorizedErrorMiddleware } from "../authorization/middleware";
-//@ts-ignore
-import React from "react";
 
 //@ts-ignore
 export default function (browserHistory) {

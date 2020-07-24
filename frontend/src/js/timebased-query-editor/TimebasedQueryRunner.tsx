@@ -4,8 +4,6 @@ import actions from "../app/actions";
 import QueryRunner from "../query-runner/QueryRunner";
 
 import { allConditionsFilled } from "./helpers";
-//@ts-ignore
-import React from "react";
 
 //@ts-ignore
 const { startTimebasedQuery, stopTimebasedQuery } = actions;

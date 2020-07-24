@@ -14,8 +14,6 @@ import {
   INIT,
   RESET
 } from "./actionTypes";
-// @ts-ignore
-import React from "react";
 
 export const resolveConceptsStart = () => ({ type: RESOLVE_CONCEPTS_START });
 export const resolveConceptsSuccess = (

@@ -3,8 +3,6 @@ import {
   resetUploadConceptListModal
 } from "../upload-concept-list-modal/actions";
 import { MODAL_OPEN, MODAL_CLOSE, MODAL_ACCEPT } from "./actionTypes";
-// @ts-ignore
-import React from "react";
 
 const openModal = (andIdx = null) => ({
   type: MODAL_OPEN,

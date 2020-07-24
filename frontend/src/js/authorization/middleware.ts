@@ -1,7 +1,5 @@
 import { push } from "react-router-redux";
 import { isLoginDisabled } from "../environment";
-//@ts-ignore
-import React from "react";
 
 export function createUnauthorizedErrorMiddleware() {
   const loginDisabled = isLoginDisabled();

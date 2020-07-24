@@ -7,8 +7,6 @@ import { tablesWithDefaults } from "../model/table";
 import { selectsWithDefaults } from "../model/select";
 
 import { findConcepts } from "./search";
-//@ts-ignore
-import * as React from "react";
 
 // Globally store the huge (1-5 MB) trees for read only
 // - keeps the redux store free from huge data
