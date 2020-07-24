@@ -65,7 +65,7 @@ type PropsType = {
   rightTabs: TabT[];
 };
 
-const CustomHTML5toTouch = {
+export const CustomHTML5toTouch = {
   backends: [
     {
       backend: HTML5Backend
