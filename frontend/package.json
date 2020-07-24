@@ -123,6 +123,7 @@
     "react-scripts": "^3.4.1",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1",
+    "storybook-addon-emotion-theme": "^2.1.1",
     "timekeeper": "^2.0.0",
     "ts-loader": "^6.2.2",
     "ts-node": "^8.8.1",

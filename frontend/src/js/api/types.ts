@@ -20,7 +20,7 @@ export type SelectOptionsT = SelectOptionT[];
 
 // Example: { min: "2019-01-01", max: "2019-12-31" }
 // @ts-ignore
-export type DateRangeT = ?{ min?: string; max?: string };
+export type DateRangeT = { min: string; max: string };
 
 export interface CurrencyConfigT {
   prefix: string;

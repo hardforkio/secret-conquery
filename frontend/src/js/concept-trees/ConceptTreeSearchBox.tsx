@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "@emotion/styled";
+import styled from "@emotion/styled/macro";
 import T from "i18n-react";
 import { connect } from "react-redux";
 
