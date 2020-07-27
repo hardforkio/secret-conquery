@@ -16,7 +16,9 @@
     "heroku-postbuild": "yarn run build",
     "lint": "eslint --ext .ts --ext .tsx src/",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "serve": "ts-node mock-api/server"
+    "serve": "ts-node mock-api/server",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "homepage": "/app/static",
   "dependencies": {
@@ -37,6 +39,7 @@
     "lodash.difference": "^4.5.0",
     "mustache": "^2.3.0",
     "node-sass": "^4.12.0",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-animated-dots": "^1.0.0",
     "react-dnd": "^9.4.0",
@@ -68,6 +71,11 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^5.3.19",
     "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.19.0",
     "@types/classnames": "^2.2.10",
@@ -82,6 +90,7 @@
     "@types/node-sass": "^4.11.1",
     "@types/papaparse": "^5.0.4",
     "@types/prettier": "^2.0.2",
+    "@types/ramda": "^0.27.11",
     "@types/react": "^16.9.25",
     "@types/react-dnd-multi-backend": "^4.0.1",
     "@types/react-dom": "^16.9.5",
