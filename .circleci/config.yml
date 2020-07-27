@@ -21,7 +21,7 @@ jobs:
           app-dir: ~/project/frontend
           cache-path: ~/project/frontend/node_modules
       - run: yarn test
-  lint-and-typecheck:
+  lint:
     <<: *defaults
     steps:
       - checkout:
@@ -34,10 +34,23 @@ jobs:
           app-dir: ~/project/frontend
           cache-path: ~/project/frontend/node_modules
       - run: yarn lint
+  typecheck:
+    <<: *defaults
+    steps:
+      - checkout:
+          path: ~/project
+      - run:
+          name: install python
+          command: sudo apt update && sudo apt install python-minimal
+      - node/install-packages:
+          pkg-manager: yarn
+          app-dir: ~/project/frontend
+          cache-path: ~/project/frontend/node_modules
       - run: yarn typecheck
 
 workflows:
   build-and-test:
     jobs:
       - test
-      - lint-and-typecheck
+      - lint
+      - typecheck
