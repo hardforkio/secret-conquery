@@ -33,7 +33,6 @@ const renderRoot = (tabs: Record<string, any>, theme: Theme) => {
       basename: basename()
     });
   //@ts-ignore
-
   store = store || makeStore(initialState, browserHistory, tabs);
 
   ReactDOM.render(

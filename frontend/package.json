@@ -18,7 +18,9 @@
     "heroku-postbuild": "yarn run build",
     "lint": "eslint --ext .ts --ext .tsx src/",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "serve": "ts-node mock-api/server"
+    "serve": "ts-node mock-api/server",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.0.0-next.12",
@@ -71,6 +73,11 @@
     "serverless-http": "^2.5.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^5.3.19",
     "@babel/core": "^7.10.5",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
