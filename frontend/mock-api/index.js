@@ -1,11 +1,10 @@
 const path = require("path");
 const version = require("../package.json").version;
-const EXPORT_FORM_CONFIG = require("./forms/export-form.json");
+const EXPORT_FORM_CONFIG = require("./functions/api/forms/export-form.json");
 const mockAuthMiddleware = require("./mockAuthMiddleware");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 // Taken from:
 // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
@@ -113,7 +112,9 @@ function mountApi(app) {
     req,
     res
   ) {
-    res.sendFile(path.join(__dirname, `./results/${req.params.filename}`));
+    res.sendFile(
+      path.join(__dirname, "functions/api", `./results/${req.params.filename}`)
+    );
   });
 
   /*
@@ -123,14 +124,20 @@ function mountApi(app) {
     req,
     res
   ) {
-    res.sendFile(path.join(__dirname, "./concepts.json"));
+    res.sendFile(path.join(__dirname, "functions/api", "./concepts.json"));
   });
 
   app.get(
     "/api/datasets/:datasetId/concepts/:id",
     mockAuthMiddleware,
     function response(req, res) {
-      res.sendFile(path.join(__dirname, `./concepts/${req.params.id}.json`));
+      res.sendFile(
+        path.join(
+          __dirname,
+          "functions/api",
+          `./concepts/${req.params.id}.json`
+        )
+      );
     }
   );
 
@@ -185,7 +192,9 @@ function mountApi(app) {
     mockAuthMiddleware,
     function response(req, res) {
       setTimeout(() => {
-        res.sendFile(path.join(__dirname, "./stored-queries/25.json"));
+        res.sendFile(
+          path.join(__dirname, "functions/api", "./stored-queries/25.json")
+        );
       }, LONG_DELAY);
     }
   );
@@ -250,7 +259,7 @@ function mountApi(app) {
         const countriesRequested = req.params.filterId === "production_country";
 
         const storedValues = countriesRequested
-          ? require("./autocomplete/countries")
+          ? require("./functions/api/autocomplete/countries")
           : [
               "1008508208",
               "1015841172",
@@ -320,7 +329,7 @@ function mountApi(app) {
 
         if (req.params.filterId !== "production_country") return null;
 
-        const countries = require("./autocomplete/countries");
+        const countries = require("./functions/api/autocomplete/countries");
         const unknownCodes = values.filter(val => !countries.includes(val));
         const resolvedValues = values.filter(val => countries.includes(val));
 
@@ -339,7 +348,7 @@ function mountApi(app) {
   app.get("/api/config/frontend", mockAuthMiddleware, (req, res) => {
     res.setHeader("Content-Type", "application/json");
 
-    const config = require("./config.json");
+    const config = require("./functions/api/config.json");
 
     config.version = version;
 
@@ -459,7 +468,9 @@ function mountApi(app) {
     mockAuthMiddleware,
     function response(req, res) {
       setTimeout(() => {
-        res.sendFile(path.join(__dirname, "./form-configs/testconf.json"));
+        res.sendFile(
+          path.join(__dirname, "functions/api", "./form-configs/testconf.json")
+        );
       }, LONG_DELAY);
     }
   );
