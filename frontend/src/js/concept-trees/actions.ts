@@ -79,6 +79,7 @@ export const loadTree = (datasetId: DatasetIdT, treeId: ConceptIdT) => {
 
     // If the datasetId changed in the mean time, don't load the tree
     if (datasetId !== getDatasetId()) {
+      // eslint-disable-next-line no-console
       console.log(`${datasetId} not matching, not loading ${treeId}`);
       semaphore.release();
       return;

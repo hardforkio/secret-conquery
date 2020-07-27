@@ -113,6 +113,7 @@ export const getConceptsByIdsWithTablesAndSelects = (
   // There should only be one exact root node that has table information
   // If it's more or less than one, something went wrong
   if (!rootConceptId) {
+    // eslint-disable-next-line no-console
     console.error("No root concept ID found");
     return null;
   }
