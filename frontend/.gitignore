@@ -21,3 +21,4 @@ package-lock.json
 *.tgz
 
 app/api/dnd/**/_*.*
+storybook-static

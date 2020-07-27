@@ -27,6 +27,7 @@ export async function getFileRows(file: File) {
   const rows = cleanFileContent(text);
 
   if (rows.length === 0) {
+    // eslint-disable-next-line no-console
     console.error("An empty file was dropped");
   }
 
