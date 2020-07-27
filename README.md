@@ -1,3 +1,11 @@
+## Log of work by Hardfork
+
+- We silenced all TypeScript errors with @ts-ignore. Fixing these errors is out of scope of the task at hand but we need TypeScript to work correctly to catch and fix errors during our own work on the codebase. Now we can block a PR from being merged if a new error comes up due to our code changes.
+- We added CI to enforce our very strict linting rules, passing of tests and error free compilage of the TypeScript code
+- We added CD to deploy not only an always up do date version of the app under conquery.hardfork.io but also to get staging deployments for each pull request. This is on order for others to check the acceptance criteria for a PR without having to checkout and build locally.
+- We added a Storybook to be able to work on components in isolation to speed up development cycle and ease debugging. Obviously we added CD for this storybook which can be found on storybook.hardfork.io. A staging deployment of this storybook will also happen for each PR.
+
+
 # Conquery
 *fast & efficient analysis*
 
