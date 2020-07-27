@@ -21,8 +21,8 @@
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "typeRoots" : ["./typings","./node_modules/@types"]
   },
-  "include": ["src", "node_modules/**/*/*.d.ts"],
-  "exclude": ["node_modules", "public", ".cache", ".idea", "src/ignored/*"],
+  "include": ["src"]
 }

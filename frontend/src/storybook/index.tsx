@@ -15,6 +15,7 @@ import translationsDe from "../localization/de.json";
 import { de } from "date-fns/locale";
 import { AnyAction } from "redux";
 import * as R from "ramda";
+import { BackendFactory } from "dnd-core";
 
 initializeLocalization("de", de, translationsDe);
 
@@ -34,7 +35,10 @@ export const StoryWrapper: React.FC<StoryWrapperProps> = ({
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <DndProvider backend={MultiBackend} options={CustomHTML5toTouch}>
+        <DndProvider
+          backend={(MultiBackend as unknown) as BackendFactory}
+          options={CustomHTML5toTouch}
+        >
           {children}
         </DndProvider>
       </ThemeProvider>

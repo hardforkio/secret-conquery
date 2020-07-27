@@ -90,19 +90,13 @@ type PropsType = {
   onEditClick: Function;
   onToggleTimestamps: Function;
   onExpandClick: Function;
-  // @ts-ignore
-  connectDragSource: Function;
   andIdx: number;
   orIdx: number;
-  // @ts-ignore
   connectDragSource: ConnectDragSource;
 };
 
 // Has to be a class because of https://github.com/react-dnd/react-dnd/issues/530
-class QueryNode extends React.Component {
-  // @ts-ignore
-  props: PropsType;
-
+class QueryNode extends React.Component<PropsType> {
   render() {
     const {
       node,
