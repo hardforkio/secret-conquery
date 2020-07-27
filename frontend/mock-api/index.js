@@ -443,7 +443,7 @@ function mountApi(app) {
           "interesting"
         ];
 
-        for (let i = 55600; i < 85600; i++) {
+        for (let i = 55600; i < 58600; i++) {
           configs.push({
             id: i,
             label: "Saved Config",
