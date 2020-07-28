@@ -11,7 +11,6 @@ import MultiBackend, {
   TouchTransition
 } from "react-dnd-multi-backend";
 // import HTML5toTouch from "react-dnd-multi-backend/lib/HTML5toTouch";
-import SplitPane from "react-split-pane";
 import { withRouter } from "react-router";
 
 import Tooltip from "../tooltip/Tooltip";
@@ -20,6 +19,7 @@ import ActivateTooltip from "../tooltip/ActivateTooltip";
 import type { TabT } from "../pane/types";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
+import { ContentLayout } from "../ContentLayout";
 
 // ADDING TO react-split-pane STYLES
 // Because otherwise, vertical panes don't expand properly in Safari
@@ -84,25 +84,12 @@ const Content = ({ displayTooltip, rightTabs }: PropsType) => {
   return (
     <DndProvider backend={MultiBackend} options={CustomHTML5toTouch}>
       <Root>
-        <SplitPane
-          split="vertical"
-          allowResize={displayTooltip}
-          minSize={displayTooltip ? 200 : 30}
-          maxSize={600}
-          defaultSize={displayTooltip ? "18%" : 30}
-          className={!displayTooltip ? "SplitPane--tooltip-fixed" : ""}
-        >
-          {displayTooltip ? <Tooltip /> : <ActivateTooltip />}
-          <SplitPane
-            split="vertical"
-            minSize={350}
-            maxSize={-420}
-            defaultSize="39%"
-          >
-            <LeftPane />
-            <RightPane tabs={rightTabs} />
-          </SplitPane>
-        </SplitPane>
+        <ContentLayout
+          info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
+          editor={<RightPane tabs={rightTabs} />}
+          tools={<LeftPane />}
+        />
+
         <Preview generator={generatePreview} />
       </Root>
     </DndProvider>
