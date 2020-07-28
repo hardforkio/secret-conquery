@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 // Also, set up the drag and drop context
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -20,22 +19,6 @@ import type { TabT } from "../pane/types";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 import { ContentLayout } from "../ContentLayout";
-
-// ADDING TO react-split-pane STYLES
-// Because otherwise, vertical panes don't expand properly in Safari
-const reactSplitPaneSafariFix = css`
-  .vertical {
-    height: 100%;
-  }
-`;
-
-const Root = styled("div")`
-  width: 100%;
-  height: 100%;
-  position: relative;
-
-  ${reactSplitPaneSafariFix};
-`;
 
 const PreviewItem = styled("div")`
   background-color: ${({ theme }) => theme.col.grayVeryLight};
@@ -84,15 +67,13 @@ export const CustomHTML5toTouch = {
 const Content = ({ displayTooltip, rightTabs }: PropsType) => {
   return (
     <DndProvider backend={MultiBackend} options={CustomHTML5toTouch}>
-      <Root>
-        <ContentLayout
-          info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
-          editor={<RightPane tabs={rightTabs} />}
-          tools={<LeftPane />}
-        />
+      <ContentLayout
+        info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
+        editor={<RightPane tabs={rightTabs} />}
+        tools={<LeftPane />}
+      />
 
-        <Preview generator={generatePreview} />
-      </Root>
+      <Preview generator={generatePreview} />
     </DndProvider>
   );
 };

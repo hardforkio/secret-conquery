@@ -14,7 +14,7 @@ export const ContentLayout: React.FC<ContentLayoutProps> = ({
   tools
 }) => (
   <div>
-    <Row className={"no-gutters"}>
+    <Row noGutters>
       <Col xs={12} md={12} lg={5} className="border-bottom border-right">
         {editor}
       </Col>
