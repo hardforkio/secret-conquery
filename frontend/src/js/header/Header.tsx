@@ -14,26 +14,6 @@ const Root = styled("header")`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  // Fix, so content can expand to 100% and scroll
-  position: absolute;
-  z-index: 3;
-  width: 100%;
-  top: 0;
-  left: 0;
-`;
-
-const OverflowHidden = styled("div")`
-  overflow: hidden;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Spacer = styled("span")`
-  margin: 0 10px;
-  height: 20px;
 `;
 
 const Logo = styled("div")`
@@ -62,11 +42,9 @@ class Header extends React.Component<PropsType> {
   render() {
     return (
       <Root>
-        <OverflowHidden>
-          <Logo title={this.props.version} />
-          <Spacer />
-          <Headline>{T.translate("headline")}</Headline>
-        </OverflowHidden>
+        <Logo title={this.props.version} />
+        <Headline>{T.translate("headline")}</Headline>
+
         <DatasetSelector />
       </Root>
     );

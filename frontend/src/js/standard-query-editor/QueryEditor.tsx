@@ -13,14 +13,11 @@ type PropsType = {
 };
 
 const Root = styled("div")`
-  flex-grow: 1;
-  height: 100%;
-  overflow: auto;
   padding: 0 10px 10px 10px;
 `;
 
 export const QueryEditor = (props: PropsType) => (
-  <Root>
+  <Root className="flex-grow-1">
     <Query selectedDatasetId={props.selectedDatasetId} />
     <StandardQueryNodeEditor
       // @ts-ignore

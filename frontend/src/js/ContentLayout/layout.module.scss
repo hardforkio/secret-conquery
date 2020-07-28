@@ -1,0 +1,73 @@
+.outer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex-grow: 2;
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: stretch;
+}
+
+@media screen and (orientation: portrait) {
+    .content {
+        flex-direction: column;
+    }
+}
+
+.topBar {
+
+}
+
+.editor {
+    flex-grow: 2;
+    height: 70%;
+}
+
+@media screen and (orientation: landscape) {
+    .editor {
+        height: 100%;
+        width: 67%;
+    }
+}
+
+
+.toolSection {
+    height: 30%;
+    flex-direction: row;
+    display: flex;
+    align-content: stretch;
+}
+
+@media screen and (orientation: landscape) {
+    .toolSection {
+        height: 100%;
+        width: 33%;
+        flex-direction: column;
+    }
+}
+
+.tools {
+    flex-basis: 70%;
+}
+
+@media screen and (orientation: landscape) {
+    .tools {
+        height: 70%;
+    }
+}
+
+.info {
+    flex-basis: 30%;
+}
+@media screen and (orientation: landscape) {
+    .info {
+        height: 30%;
+    }
+}
+

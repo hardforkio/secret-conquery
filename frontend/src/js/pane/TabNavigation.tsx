@@ -3,30 +3,13 @@ import styled from "@emotion/styled";
 import T from "i18n-react";
 import type { TabType } from "./reducer";
 
-const Root = styled("div")`
-  margin-bottom: 10px;
+const DivWithBottomBorder = styled("div")`
   border-bottom: 1px solid ${({ theme }) => theme.col.grayLight};
-  padding: 0 20px;
-  background-color: white;
-  display: flex;
-  overflow: hidden:
-  align-items: flex-start;
 `;
 
-const Headline = styled("h2")<{ active: boolean }>`
-  font-size: ${({ theme }) => theme.font.sm};
-  margin-bottom: 0;
-  margin-top: 5px;
-  padding: 0 12px;
-  letter-spacing: 1px;
-  line-height: 38px;
-  text-transform: uppercase;
-  flex-shrink: 0;
-
+const Headline = styled("span")<{ active: boolean }>`
   transition: color ${({ theme }) => theme.transitionTime},
     border-bottom ${({ theme }) => theme.transitionTime};
-  cursor: pointer;
-  margin-right: 15px;
   color: ${({ theme, active }) =>
     active ? theme.col.blueGrayDark : theme.col.gray};
   border-bottom: 3px solid
@@ -49,19 +32,26 @@ interface PropsT {
 
 const TabNavigation: React.FC<PropsT> = props => {
   return (
-    <Root>
+    <DivWithBottomBorder className="d-flex bg-white px-2">
       {Object.values(props.tabs).map(({ label, key }) => (
-        <Headline
-          key={key}
-          active={props.activeTab === key}
-          onClick={() => {
+        <a
+          className="py-2 text-truncate px-1"
+          href="#"
+          onClick={event => {
+            event.preventDefault();
             if (key !== props.activeTab) props.onClickTab(key);
           }}
         >
-          {T.translate(label)}
-        </Headline>
+          <Headline
+            className={"text-uppercase text-center"}
+            key={key}
+            active={props.activeTab === key}
+          >
+            {T.translate(label)}
+          </Headline>
+        </a>
       ))}
-    </Root>
+    </DivWithBottomBorder>
   );
 };
 

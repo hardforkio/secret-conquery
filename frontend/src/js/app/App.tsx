@@ -1,29 +1,14 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React, { FunctionComponent } from "react";
 
 import { useStartup } from "../startup/useStartup";
 import Header from "../header/Header";
 import SnackMessage from "../snack-message/SnackMessage";
 import Content from "./Content";
 
-const Root = styled("div")`
-  height: 100vh;
-  width: 100%;
-  position: relative;
-`;
-
-//@ts-ignore
-
-const App = props => {
+const App: FunctionComponent<any> = props => {
   useStartup();
 
-  return (
-    <Root>
-      <Header />
-      <Content {...props} />
-      <SnackMessage />
-    </Root>
-  );
+  return <>{[<Header />, <Content {...props} />, <SnackMessage />]}</>;
 };
 
 export default App;
