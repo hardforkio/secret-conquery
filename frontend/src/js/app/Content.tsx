@@ -54,6 +54,7 @@ const PreviewItem = styled("div")`
 //@ts-ignore
 
 const generatePreview = (type, item, style) => {
+  // eslint-disable-next-line no-console
   console.log("PREVIEW RENDERED", item.width, item.height, style);
   //@ts-ignore
 

@@ -41,5 +41,4 @@ const environment = {
 };
 
 const tabs = [StandardQueryEditorTab, TimebasedQueryEditorTab, FormsTab];
-console.log(tabs);
 conquery(environment, tabs, theme);
