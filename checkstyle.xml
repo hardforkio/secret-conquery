@@ -4,7 +4,7 @@
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
 
-    <property name="text" value="warning"/>
+    <property name="severity" value="warning"/>
 
     <module name="TreeWalker">
         <property name="tabWidth" value="4"/>
@@ -14,18 +14,18 @@
             <property name="format" value='^[\t]* '/>
             <property name="message" value="Indent must use tab characters"/>
             <property name="ignoreComments" value="true"/>
-            <property name="text" value="error"/>
+            <property name="severity" value="error"/>
         </module>
         <module name="RegexpSinglelineJava">
             <property name="format" value='^import jersey\.repackaged'/>
             <property name="message" value="Don't use repackaged libraries"/>
             <property name="ignoreComments" value="true"/>
-            <property name="text" value="error"/>
+            <property name="severity" value="error"/>
         </module>
         <module name="RegexpSinglelineJava">
             <property name="format" value='^[\t]*  +\*'/>
             <property name="message" value="Comment indent must use tab characters"/>
-            <property name="text" value="error"/>
+            <property name="severity" value="error"/>
         </module>
         <module name="RegexpSinglelineJava">
             <property name="format" value='\S\s+$'/>
@@ -43,7 +43,7 @@
 
         <module name="RegexpSinglelineJava">
             <property name="format" value="System\.out\."/>
-            <property name="text" value="error"/>
+            <property name="severity" value="error"/>
         </module>
 
 
@@ -150,7 +150,7 @@
             <property name="format" value='@author'/>
             <property name="message" value="author tags are forbidden"/>
             <property name="ignoreComments" value="false"/>
-            <property name="text" value="error"/>
+            <property name="severity" value="error"/>
         </module>
 
         <module name="NonEmptyAtclauseDescription"/>
