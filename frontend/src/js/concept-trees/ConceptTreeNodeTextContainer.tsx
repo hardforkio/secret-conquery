@@ -5,7 +5,6 @@ import { DragSource } from "react-dnd";
 import AdditionalInfoHoverable from "../tooltip/AdditionalInfoHoverable";
 import { isEmpty } from "../common/helpers";
 import * as dndTypes from "../common/constants/dndTypes";
-
 import type { AdditionalInfoHoverableNodeType } from "../tooltip/AdditionalInfoHoverable";
 import type { DraggedNodeType } from "../standard-query-editor/types";
 import type { SearchT } from "./reducer";
@@ -21,7 +20,7 @@ type PropsType = {
   open: boolean;
   depth: number;
   active?: boolean;
-  onTextClick?: Function;
+  onTextClick?: () => void;
   createQueryElement: () => DraggedNodeType;
   connectDragSource: Function;
   search?: SearchT;
@@ -40,24 +39,16 @@ function getResultCount(search, node) {
 }
 
 // Has to be a class because of https://github.com/react-dnd/react-dnd/issues/530
-class ConceptTreeNodeTextContainer extends React.Component {
+class ConceptTreeNodeTextContainer extends React.Component<PropsType> {
   render() {
     const {
-      //@ts-ignore
       node,
-      //@ts-ignore
       depth,
-      //@ts-ignore
       search,
-      //@ts-ignore
       active,
-      //@ts-ignore
       open,
-      //@ts-ignore
       connectDragSource,
-      //@ts-ignore
       onTextClick,
-      //@ts-ignore
       isStructFolder
     } = this.props;
 
@@ -77,7 +68,7 @@ class ConceptTreeNodeTextContainer extends React.Component {
         depth={depth}
         description={node.description}
         resultCount={resultCount}
-        searchWords={search.words}
+        searchWords={search && search.words}
         hasChildren={hasChildren}
         isOpen={open}
         isStructFolder={isStructFolder || active === false}

@@ -17,7 +17,6 @@ const Root = styled("div")`
 `;
 
 const Text = styled("p")`
-  user-select: none;
   border-radius: ${({ theme }) => theme.borderRadius};
   margin: 0;
   padding: 0 10px;

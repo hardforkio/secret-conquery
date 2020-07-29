@@ -1,15 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "@emotion/styled";
-// Also, set up the drag and drop context
 import { DndProvider } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
-import TouchBackend from "react-dnd-touch-backend";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { TouchBackend } from "react-dnd-touch-backend";
 import MultiBackend, {
+  TouchTransition,
   Preview,
-  TouchTransition
+  usePreview
 } from "react-dnd-multi-backend";
-// import HTML5toTouch from "react-dnd-multi-backend/lib/HTML5toTouch";
 import { withRouter } from "react-router";
 
 import Tooltip from "../tooltip/Tooltip";
@@ -19,9 +18,16 @@ import type { TabT } from "../pane/types";
 import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 import { ContentLayout } from "../ContentLayout";
+import { BackendFactory } from "dnd-core";
+
+interface PreviewItemProps {
+  theme?: any;
+  width: string;
+  height: string;
+}
 
 const PreviewItem = styled("div")`
-  background-color: ${({ theme }) => theme.col.grayVeryLight};
+  background-color: ${({ theme }: PreviewItemProps) => theme.col.grayVeryLight};
   opacity: 0.9;
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -36,12 +42,16 @@ const PreviewItem = styled("div")`
 // Consider upgrading react-dnd BUT somehow try to keep IE11 compatibility
 //@ts-ignore
 
-const generatePreview = (type, item, style) => {
-  // eslint-disable-next-line no-console
-  console.log("PREVIEW RENDERED", item.width, item.height, style);
-  //@ts-ignore
-
-  return <PreviewItem width={item.width} height={item.height} style={style} />;
+const DragPreview = () => {
+  const { item, style, display } = usePreview();
+  if (!display) {
+    return null;
+  }
+  return (
+    <PreviewItem width={item.width} height={item.height} style={style}>
+      {item.label}
+    </PreviewItem>
+  );
 };
 
 type PropsType = {
@@ -57,23 +67,30 @@ export const CustomHTML5toTouch = {
     {
       backend: TouchBackend,
       transition: TouchTransition,
-      options: { enableMouseEvents: true }, // Note that you can call your backends with options
-      preview: true,
-      skipDispatchOnTransition: true
+      options: {
+        delayTouchStart: 100, //This enables touch to scroll and touch and hold to drag.
+        ignoreContextMenu: true
+      },
+      preview: true
     }
   ]
 };
 
 const Content = ({ displayTooltip, rightTabs }: PropsType) => {
   return (
-    <DndProvider backend={MultiBackend} options={CustomHTML5toTouch}>
+    <DndProvider
+      backend={(MultiBackend as unknown) as BackendFactory}
+      options={CustomHTML5toTouch}
+    >
       <ContentLayout
         info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
         editor={<RightPane tabs={rightTabs} />}
         tools={<LeftPane />}
       />
 
-      <Preview generator={generatePreview} />
+      <Preview>
+        <DragPreview />
+      </Preview>
     </DndProvider>
   );
 };
