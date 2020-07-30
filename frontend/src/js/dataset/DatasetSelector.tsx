@@ -15,7 +15,7 @@ import type { DatasetType } from "./reducer";
 import { selectDataset } from "./actions";
 
 const Root = styled("div")`
-  min-width: 300px;
+  flex-grow: 1;
   padding: 0px 0 0 20px;
   color: ${({ theme }) => theme.col.black};
 `;
@@ -36,25 +36,29 @@ const DatasetSelector = (props: PropsType) => {
   const selected = options.filter(set => selectedDatasetId === set.value);
 
   return (
-    <Root>
-      <ReactSelect
-        name="dataset-selector"
-        value={error ? -1 : selected}
-        //@ts-ignore
+    <Root className="d-flex flex-grow-1 align-items-center">
+      {/*TODO: translate and style me. Without this the dropdown makes little sense to the user.*/}
+      <div className={"px-2"}>Dataset:</div>
+      <div className="flex-grow-1">
+        <ReactSelect
+          name="dataset-selector"
+          value={error ? -1 : selected}
+          //@ts-ignore
 
-        onChange={value =>
-          !isEmpty(value)
-            ? selectDataset(value.value, selectedDatasetId)
-            : selectDataset(null, selectedDatasetId)
-        }
-        placeholder={
-          error
-            ? T.translate("datasetSelector.error")
-            : T.translate("reactSelect.placeholder")
-        }
-        isDisabled={!!error}
-        options={options}
-      />
+          onChange={value =>
+            !isEmpty(value)
+              ? selectDataset(value.value, selectedDatasetId)
+              : selectDataset(null, selectedDatasetId)
+          }
+          placeholder={
+            error
+              ? T.translate("datasetSelector.error")
+              : T.translate("reactSelect.placeholder")
+          }
+          isDisabled={!!error}
+          options={options}
+        />
+      </div>
     </Root>
   );
 };

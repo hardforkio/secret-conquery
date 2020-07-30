@@ -1,58 +1,56 @@
 .outer {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 100%;
 }
 
 .content {
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    height: 0; //This is a dirty hack to enable flex behaviour for Safari on iOS.
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 0; //This is a dirty hack to enable flex behaviour for Safari on iOS.
 }
 
 .menu {
-    overflow: auto;
-    flex-grow: 0;
+  flex-grow: 0;
 }
 
 .editor {
-    flex-basis: 70%;
-    overflow: auto;
+  flex-basis: 70%;
+  overflow: auto;
 }
 
 .toolSection {
-    flex-direction: row;
-    display: flex;
-    overflow: auto;
-    flex-basis: 30%;
+  flex-direction: row;
+  display: flex;
+  overflow: auto;
+  flex-basis: 30%;
 }
 
 
 .info {
-    flex-basis: 30%;
-    overflow: auto;
+  flex-basis: 30%;
+  overflow: auto;
 }
 
 .tools {
-    flex-basis: 70%;
-    overflow: auto;
+  flex-basis: 70%;
+  overflow: auto;
 }
 
 
-
 @media screen and (orientation: landscape) {
-    .content {
-        flex-direction: row;
-    }
-    .toolSection {
-        flex-direction: column;
-        flex-basis: 30%;
-        overflow: initial;
-    }
-    .info {
-        flex-basis: auto;
-    }
+  .content {
+    flex-direction: row;
+  }
+  .toolSection {
+    flex-direction: column;
+    flex-basis: 30%;
+    overflow: initial;
+  }
+  .info {
+    flex-basis: auto;
+  }
 }
