@@ -18,9 +18,6 @@ import type { AdditionalInfosType } from "./reducer";
 import TooltipEntries from "./TooltipEntries";
 
 const Root = styled("div")`
-  width: 100%;
-  height: 100%;
-  padding: 50px 0 10px;
   position: relative;
   display: flex;
   flex-direction: column;
