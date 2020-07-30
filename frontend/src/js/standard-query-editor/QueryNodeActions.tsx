@@ -59,7 +59,6 @@ const QueryNodeActions = (props: PropsType) => {
       )}
       {!props.error && !!props.previousQueryLoading && (
         <WithTooltip text={T.translate("queryEditor.loadingPreviousQuery")}>
-          // @ts-ignore
           <StyledFaIcon
             //@ts-ignore
             noFrame
