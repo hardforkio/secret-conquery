@@ -1,14 +1,16 @@
 const path = require("path");
 const version = require("../package.json").version;
-const EXPORT_FORM_CONFIG = require("./forms/export-form.json");
+const EXPORT_FORM_CONFIG = require("./functions/api/forms/export-form.json");
 const mockAuthMiddleware = require("./mockAuthMiddleware");
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 // Taken from:
 // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
     array[i] = array[j];
     array[j] = temp;
   }
@@ -16,7 +18,7 @@ function shuffleArray(array) {
 }
 
 const ERROR = JSON.stringify({
-  message: "Could not process the request",
+  message: "Could not process the request"
 });
 
 const LONG_DELAY = 500;
@@ -24,7 +26,7 @@ const SHORT_DELAY = 300;
 const NO_DELAY = 10;
 
 // Simulate API
-module.exports = function (app, port) {
+function mountApi(app) {
   /*
     QUERIES
   */
@@ -78,7 +80,7 @@ module.exports = function (app, port) {
               id: 1,
               status: "DONE",
               numberOfResults: 5,
-              resultUrl: `/api/results/results.csv`,
+              resultUrl: `/api/results/results.csv`
             })
           );
       }, LONG_DELAY);
@@ -97,8 +99,8 @@ module.exports = function (app, port) {
         { id: "empty-set", label: "Empty Dataset" },
         {
           id: "another-empty-set",
-          label: "Another empty dataset with a long name",
-        },
+          label: "Another empty dataset with a long name"
+        }
       ])
     );
   });
@@ -110,7 +112,9 @@ module.exports = function (app, port) {
     req,
     res
   ) {
-    res.sendFile(path.join(__dirname, `./results/${req.params.filename}`));
+    res.sendFile(
+      path.join(__dirname, "functions/api", `./results/${req.params.filename}`)
+    );
   });
 
   /*
@@ -120,14 +124,20 @@ module.exports = function (app, port) {
     req,
     res
   ) {
-    res.sendFile(path.join(__dirname, "./concepts.json"));
+    res.sendFile(path.join(__dirname, "functions/api", "./concepts.json"));
   });
 
   app.get(
     "/api/datasets/:datasetId/concepts/:id",
     mockAuthMiddleware,
     function response(req, res) {
-      res.sendFile(path.join(__dirname, `./concepts/${req.params.id}.json`));
+      res.sendFile(
+        path.join(
+          __dirname,
+          "functions/api",
+          `./concepts/${req.params.id}.json`
+        )
+      );
     }
   );
 
@@ -149,10 +159,10 @@ module.exports = function (app, port) {
           "group 1",
           "important",
           "jk",
-          "interesting",
+          "interesting"
         ];
 
-        for (var i = 25600; i < 35600; i++) {
+        for (let i = 25600; i < 35600; i++) {
           const notExecuted = Math.random() < 0.1;
 
           ids.push({
@@ -168,7 +178,7 @@ module.exports = function (app, port) {
             own: Math.random() < 0.1,
             shared: Math.random() < 0.8,
             resultUrl: notExecuted ? null : `/api/results/results.csv`,
-            ownerName: "System",
+            ownerName: "System"
           });
         }
 
@@ -182,7 +192,9 @@ module.exports = function (app, port) {
     mockAuthMiddleware,
     function response(req, res) {
       setTimeout(() => {
-        res.sendFile(path.join(__dirname, "./stored-queries/25.json"));
+        res.sendFile(
+          path.join(__dirname, "functions/api", "./stored-queries/25.json")
+        );
       }, LONG_DELAY);
     }
   );
@@ -229,7 +241,7 @@ module.exports = function (app, port) {
         res.send(
           JSON.stringify({
             successful: 1 + Math.floor(Math.random() * 200),
-            unsuccessful: 586,
+            unsuccessful: 586
           })
         );
       }, LONG_DELAY);
@@ -247,7 +259,7 @@ module.exports = function (app, port) {
         const countriesRequested = req.params.filterId === "production_country";
 
         const storedValues = countriesRequested
-          ? require("./autocomplete/countries")
+          ? require("./functions/api/autocomplete/countries")
           : [
               "1008508208",
               "1015841172",
@@ -258,16 +270,16 @@ module.exports = function (app, port) {
               "1000326535",
               "1014150881",
               "1017126347",
-              "1008445564",
+              "1008445564"
             ];
 
         const suggestions = storedValues
           .map((v, id) => ({
             label: v,
             value: id,
-            templateValues: { company: "Columbia Pictures Corporation" },
+            templateValues: { company: "Columbia Pictures Corporation" }
           }))
-          .filter((v) => v.label.toLowerCase().startsWith(text));
+          .filter(v => v.label.toLowerCase().startsWith(text));
 
         res.send(JSON.stringify(suggestions));
       }, LONG_DELAY);
@@ -285,7 +297,7 @@ module.exports = function (app, port) {
 
         res.send({
           unknownCodes: concepts.slice(5),
-          resolvedConcepts: concepts.slice(1),
+          resolvedConcepts: concepts.slice(1)
         });
       }, LONG_DELAY);
     }
@@ -299,7 +311,7 @@ module.exports = function (app, port) {
 
     res.send({
       version: version,
-      isDevelopment: process.env.NODE_ENV !== "production",
+      isDevelopment: process.env.NODE_ENV !== "production"
     });
   });
 
@@ -317,17 +329,17 @@ module.exports = function (app, port) {
 
         if (req.params.filterId !== "production_country") return null;
 
-        const countries = require("./autocomplete/countries");
-        const unknownCodes = values.filter((val) => !countries.includes(val));
-        const resolvedValues = values.filter((val) => countries.includes(val));
+        const countries = require("./functions/api/autocomplete/countries");
+        const unknownCodes = values.filter(val => !countries.includes(val));
+        const resolvedValues = values.filter(val => countries.includes(val));
 
         res.send({
           unknownCodes: unknownCodes,
           resolvedFilter: {
             tableId: req.params.tableId,
             filterId: req.params.filterId,
-            value: resolvedValues.map((val) => ({ label: val, value: val })),
-          },
+            value: resolvedValues.map(val => ({ label: val, value: val }))
+          }
         });
       }, LONG_DELAY);
     }
@@ -336,7 +348,7 @@ module.exports = function (app, port) {
   app.get("/api/config/frontend", mockAuthMiddleware, (req, res) => {
     res.setHeader("Content-Type", "application/json");
 
-    const config = require("./config.json");
+    const config = require("./functions/api/config.json");
 
     config.version = version;
 
@@ -351,13 +363,13 @@ module.exports = function (app, port) {
 
       if (user === "test" && password === "test") {
         res.send({
-          access_token: "VALID",
+          access_token: "VALID"
         });
       } else {
         res.status(422);
         res.send(
           JSON.stringify({
-            message: "Login failed",
+            message: "Login failed"
           })
         );
       }
@@ -374,10 +386,10 @@ module.exports = function (app, port) {
           domains: ["datasets"],
           abilities: ["read", "download", "preserve_id"],
           targets: ["imdb"],
-          creationTime: "2020-01-23T09:52:31.3318485",
-        },
+          creationTime: "2020-01-23T09:52:31.3318485"
+        }
       ],
-      groups: [],
+      groups: []
     });
   });
 
@@ -390,7 +402,7 @@ module.exports = function (app, port) {
         res.status(201);
         res.send(
           JSON.stringify({
-            id: 56000 + Math.floor(Math.random() * 200),
+            id: 56000 + Math.floor(Math.random() * 200)
           })
         );
       }, LONG_DELAY);
@@ -409,12 +421,12 @@ module.exports = function (app, port) {
         if (dice < 0.5) {
           return {
             formType: "EXPORT_FORM",
-            values: {},
+            values: {}
           };
         } else {
           return {
             formType: "Other form",
-            values: {},
+            values: {}
           };
         }
       }
@@ -428,10 +440,10 @@ module.exports = function (app, port) {
           "group 1",
           "important",
           "jk",
-          "interesting",
+          "interesting"
         ];
 
-        for (var i = 55600; i < 85600; i++) {
+        for (let i = 55600; i < 58600; i++) {
           configs.push({
             id: i,
             label: "Saved Config",
@@ -442,7 +454,7 @@ module.exports = function (app, port) {
             own: Math.random() < 0.1,
             shared: Math.random() < 0.8,
             ownerName: "System",
-            ...getFormConfigAttributes(),
+            ...getFormConfigAttributes()
           });
         }
 
@@ -456,7 +468,9 @@ module.exports = function (app, port) {
     mockAuthMiddleware,
     function response(req, res) {
       setTimeout(() => {
-        res.sendFile(path.join(__dirname, "./form-configs/testconf.json"));
+        res.sendFile(
+          path.join(__dirname, "functions/api", "./form-configs/testconf.json")
+        );
       }, LONG_DELAY);
     }
   );
@@ -481,4 +495,16 @@ module.exports = function (app, port) {
       }, LONG_DELAY);
     }
   );
+}
+
+const createApi = () => {
+  const app = express();
+  app.use(cors());
+  // body parser must be set up before routes are attached
+  app.use(bodyParser.json());
+
+  mountApi(app);
+  return app;
 };
+
+module.exports = createApi;
