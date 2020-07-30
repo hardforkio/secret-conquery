@@ -1,9 +1,11 @@
+# PLEASE CHECK THE OTHER README FOR MORE DOCS BY HARDFORK!
+
 # conquery-frontend
 ## Usage:
 **Disclaimer: the entire usage section is guesswork.**
 
 The user of this software will mostly likely be [ingef](https://www.ingef.de/), a data science business that primarily targets public sector health insurenca companies in germany.
-They already use it to provide self service data analysis for their customers. ![Sales Pitch Here](https://www.ingef.de/gesundheitsforschung/self-service-analytics/)
+They already use it to provide self service data analysis for their customers. [Sales Pitch Here](https://www.ingef.de/gesundheitsforschung/self-service-analytics/)
 
 Most likely, the database that this App will eventually run against, is the one described in this paper: 
 [Influence of thyroid hormone therapy on the fracture rate — A claims data cohort study](https://www.sciencedirect.com/science/article/abs/pii/S8756328216300564)
