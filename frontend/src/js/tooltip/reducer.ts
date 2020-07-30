@@ -1,5 +1,4 @@
 import {
-  TOGGLE_DISPLAY_TOOLTIP,
   DISPLAY_ADDITIONAL_INFOS,
   TOGGLE_ADDITIONAL_INFOS
 } from "./actionTypes";
@@ -19,13 +18,11 @@ export type AdditionalInfosType = {
 };
 
 export type TooltipStateT = {
-  displayTooltip: boolean;
   toggleAdditionalInfos: boolean;
   additionalInfos: AdditionalInfosType;
 };
 
 const initialState = {
-  displayTooltip: true,
   toggleAdditionalInfos: false,
   additionalInfos: {
     label: null,
@@ -69,11 +66,6 @@ const tooltip = (
       return {
         ...state,
         toggleAdditionalInfos: !state.toggleAdditionalInfos
-      };
-    case TOGGLE_DISPLAY_TOOLTIP:
-      return {
-        ...state,
-        displayTooltip: !state.displayTooltip
       };
     default:
       return state;
