@@ -14,13 +14,6 @@ const Root = styled("header")`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  // Fix, so content can expand to 100% and scroll
-  position: absolute;
-  z-index: 3;
-  width: 100%;
-  top: 0;
-  left: 0;
 `;
 
 const OverflowHidden = styled("div")`
