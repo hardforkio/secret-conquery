@@ -49,19 +49,22 @@ interface PropsT {
 
 const TabNavigation: React.FC<PropsT> = props => {
   return (
-    <Root>
-      {Object.values(props.tabs).map(({ label, key }) => (
-        <Headline
-          key={key}
-          active={props.activeTab === key}
-          onClick={() => {
-            if (key !== props.activeTab) props.onClickTab(key);
-          }}
-        >
-          {T.translate(label)}
-        </Headline>
-      ))}
-    </Root>
+    <div>
+      {/* The wrapping div is important. Otherwise the navigation bar will be squeezed only on Safari iOS */}
+      <Root>
+        {Object.values(props.tabs).map(({ label, key }) => (
+          <Headline
+            key={key}
+            active={props.activeTab === key}
+            onClick={() => {
+              if (key !== props.activeTab) props.onClickTab(key);
+            }}
+          >
+            {T.translate(label)}
+          </Headline>
+        ))}
+      </Root>
+    </div>
   );
 };
 

@@ -24,10 +24,13 @@ const LeftPane = () => {
         //@ts-ignore
         <ConceptTreeSearchBox datasetId={selectedDatasetId} />
       )}
-      <ConceptTreeList
-        //@ts-ignore
-        datasetId={selectedDatasetId}
-      />
+      <div className="overflow-auto">
+        <ConceptTreeList
+          //@ts-ignore
+          datasetId={selectedDatasetId}
+        />
+      </div>
+
       {activeTab === "previousQueries" && (
         <PreviousQueriesTab
           //@ts-ignore
