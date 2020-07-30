@@ -5,11 +5,49 @@ import T from "i18n-react";
 import BasicButton from "../button/BasicButton";
 import FaIcon from "../icon/FaIcon";
 
+//@ts-ignore
+function getIcon(loading, running) {
+  return loading ? "spinner" : running ? "stop" : "play";
+}
+
 type PropsType = {
   isStartStopLoading: boolean;
   isQueryRunning: boolean;
   disabled: boolean;
   onClick: Function;
+};
+
+// A button that is prefixed by an icon
+const QueryRunnerButton = ({
+  onClick,
+  isStartStopLoading,
+  isQueryRunning,
+  disabled
+}: PropsType) => {
+  const label = isQueryRunning
+    ? T.translate("queryRunner.stop")
+    : T.translate("queryRunner.start");
+
+  const icon = getIcon(isStartStopLoading, isQueryRunning);
+
+  return (
+    <div className="my-2">
+      <StyledBasicButton
+        type="button"
+        //@ts-ignore
+        onClick={onClick}
+        disabled={disabled}
+      >
+        <Left
+          //@ts-ignore
+          running={isQueryRunning}
+        >
+          <FaIcon white={!isQueryRunning} icon={icon} />
+        </Left>
+        <Label>{label}</Label>
+      </StyledBasicButton>
+    </div>
+  );
 };
 
 const Left = styled("span")`
@@ -36,7 +74,6 @@ const StyledBasicButton = styled(BasicButton)`
   outline: none;
   border: 1px solid ${({ theme }) => theme.col.blueGrayDark};
   border-radius: ${({ theme }) => theme.borderRadius};
-  overflow: hidden;
   padding: 0;
   margin: 0;
   font-size: ${({ theme }) => theme.font.sm};
@@ -50,37 +87,5 @@ const StyledBasicButton = styled(BasicButton)`
     }
   }
 `;
-
-//@ts-ignore
-function getIcon(loading, running) {
-  return loading ? "spinner" : running ? "stop" : "play";
-}
-
-// A button that is prefixed by an icon
-const QueryRunnerButton = ({
-  onClick,
-  isStartStopLoading,
-  isQueryRunning,
-  disabled
-}: PropsType) => {
-  const label = isQueryRunning
-    ? T.translate("queryRunner.stop")
-    : T.translate("queryRunner.start");
-
-  const icon = getIcon(isStartStopLoading, isQueryRunning);
-
-  return (
-    //@ts-ignore
-    <StyledBasicButton type="button" onClick={onClick} disabled={disabled}>
-      <Left
-        //@ts-ignore
-        running={isQueryRunning}
-      >
-        <FaIcon white={!isQueryRunning} icon={icon} />
-      </Left>
-      <Label>{label}</Label>
-    </StyledBasicButton>
-  );
-};
 
 export default QueryRunnerButton;
