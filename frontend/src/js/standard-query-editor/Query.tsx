@@ -49,10 +49,6 @@ type PropsT = {
   dateRange: Record<string, any>;
 };
 
-const Container = styled("div")`
-  height: 100%;
-`;
-
 const Groups = styled("div")`
   display: flex;
   flex-direction: row;
@@ -70,7 +66,7 @@ const QueryGroupConnector = styled("p")`
 
 const Query = (props: PropsT) => {
   return (
-    <Container>
+    <div className="flex-grow-1">
       {props.isEmptyQuery ? (
         <QueryEditorDropzone
           isInitial
@@ -126,7 +122,7 @@ const Query = (props: PropsT) => {
             )}
         </Groups>
       )}
-    </Container>
+    </div>
   );
 };
 

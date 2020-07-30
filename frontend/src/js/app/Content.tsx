@@ -19,6 +19,7 @@ import LeftPane from "./LeftPane";
 import RightPane from "./RightPane";
 import { ContentLayout } from "../ContentLayout";
 import { BackendFactory } from "dnd-core";
+import Header from "../header/Header";
 
 interface PreviewItemProps {
   theme?: any;
@@ -83,6 +84,7 @@ const Content = ({ displayTooltip, rightTabs }: PropsType) => {
       options={CustomHTML5toTouch}
     >
       <ContentLayout
+        menu={<Header />}
         info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
         editor={<RightPane tabs={rightTabs} />}
         tools={<LeftPane />}
