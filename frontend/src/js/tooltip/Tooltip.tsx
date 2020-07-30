@@ -13,18 +13,11 @@ import IconButton from "../button/IconButton";
 import FaIcon from "../icon/FaIcon";
 import type { SearchT } from "../concept-trees/reducer";
 
-import ActivateTooltip from "./ActivateTooltip";
-import {
-  toggleDisplayTooltip as toggleTooltip,
-  toggleAdditionalInfos as toggleInfos
-} from "./actions";
+import { toggleAdditionalInfos as toggleInfos } from "./actions";
 import type { AdditionalInfosType } from "./reducer";
 import TooltipEntries from "./TooltipEntries";
 
 const Root = styled("div")`
-  width: 100%;
-  height: 100%;
-  padding: 50px 0 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -127,31 +120,17 @@ const InfoHeadline = styled("h4")`
   line-height: 1.3;
 `;
 
-const StyledIconButton = styled(IconButton)`
-  position: absolute;
-  top: 58px;
-  right: 0;
-  border-right: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-`;
-
 type PropsType = {
   additionalInfos: AdditionalInfosType;
-  displayTooltip: boolean;
   toggleAdditionalInfos: boolean;
-  onToggleDisplayTooltip: Function;
   onToggleAdditionalInfos: Function;
   search: SearchT;
 };
 
 const Tooltip = (props: PropsType) => {
-  if (!props.displayTooltip) return <ActivateTooltip />;
-
   const {
     additionalInfos,
     toggleAdditionalInfos,
-    onToggleDisplayTooltip,
     onToggleAdditionalInfos
   } = props;
 
@@ -184,14 +163,6 @@ const Tooltip = (props: PropsType) => {
 
   return (
     <Root>
-      <StyledIconButton
-        small
-        frame
-        //@ts-ignore
-
-        onClick={onToggleDisplayTooltip}
-        icon="angle-left"
-      />
       <Header>{T.translate("tooltip.headline")}</Header>
       <Content>
         <TooltipEntries
@@ -244,14 +215,12 @@ const Tooltip = (props: PropsType) => {
 const mapStateToProps = state => {
   return {
     additionalInfos: state.tooltip.additionalInfos,
-    displayTooltip: state.tooltip.displayTooltip,
     toggleAdditionalInfos: state.tooltip.toggleAdditionalInfos,
     search: state.conceptTrees.search
   };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onToggleDisplayTooltip: () => dispatch(toggleTooltip()),
   onToggleAdditionalInfos: () => dispatch(toggleInfos())
 });
 

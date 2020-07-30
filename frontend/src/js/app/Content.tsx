@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import styled from "@emotion/styled";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -9,10 +8,9 @@ import MultiBackend, {
   Preview,
   usePreview
 } from "react-dnd-multi-backend";
-import { withRouter } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router";
 
 import Tooltip from "../tooltip/Tooltip";
-import ActivateTooltip from "../tooltip/ActivateTooltip";
 
 import type { TabT } from "../pane/types";
 import LeftPane from "./LeftPane";
@@ -55,10 +53,9 @@ const DragPreview = () => {
   );
 };
 
-type PropsType = {
-  displayTooltip: boolean;
+interface ContentProps extends RouteComponentProps {
   rightTabs: TabT[];
-};
+}
 
 export const CustomHTML5toTouch = {
   backends: [
@@ -77,7 +74,7 @@ export const CustomHTML5toTouch = {
   ]
 };
 
-const Content = ({ displayTooltip, rightTabs }: PropsType) => {
+const Content: React.FC<ContentProps> = ({ rightTabs }) => {
   return (
     <DndProvider
       backend={(MultiBackend as unknown) as BackendFactory}
@@ -85,7 +82,7 @@ const Content = ({ displayTooltip, rightTabs }: PropsType) => {
     >
       <ContentLayout
         menu={<Header />}
-        info={displayTooltip ? <Tooltip /> : <ActivateTooltip />}
+        info={<Tooltip />}
         editor={<RightPane tabs={rightTabs} />}
         tools={<LeftPane />}
       />
@@ -97,13 +94,4 @@ const Content = ({ displayTooltip, rightTabs }: PropsType) => {
   );
 };
 
-//@ts-ignore
-
-const mapStateToProps = (state, ownProps) => ({
-  displayTooltip: state.tooltip.displayTooltip
-});
-
-const ConnectedContent = connect(mapStateToProps)(Content);
-
-// export default withRouter(DragDropContext(HTML5Backend)(ConnectedContent));
-export default withRouter(ConnectedContent);
+export default withRouter(Content);

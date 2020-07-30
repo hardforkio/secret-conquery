@@ -20,15 +20,6 @@ type PropsType = {
   stopQuery: Function;
 };
 
-const Root = styled("div")`
-  flex-shrink: 0;
-  padding: 10px 20px 0 10px;
-  border-top: 1px solid ${({ theme }) => theme.col.grayLight};
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
-
 const Left = styled("div")`
   flex-grow: 1;
 `;
@@ -62,7 +53,7 @@ const QueryRunner = (props: PropsType) => {
     (queryRunner.startQuery.loading || queryRunner.stopQuery.loading);
 
   return (
-    <Root>
+    <div className="d-flex flex-row align-items-center px-2 border-top">
       <Hotkeys
         keyName="shift+enter"
         onKeyDown={() => {
@@ -105,7 +96,7 @@ const QueryRunner = (props: PropsType) => {
             />
           )}
       </Right>
-    </Root>
+    </div>
   );
 };
 

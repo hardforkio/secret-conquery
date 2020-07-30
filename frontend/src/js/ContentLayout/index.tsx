@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "./layout.module.scss";
 import Div100vh from "react-div-100vh";
+import cn from "classnames";
 
 type ContentLayoutProps = {
   info: React.ReactNode;
@@ -20,10 +21,10 @@ export const ContentLayout: React.FC<ContentLayoutProps> = ({
     <div className={styles.outer}>
       <div className={styles.menu}>{menu}</div>
       <div className={styles.content}>
-        <div className={styles.editor}>{editor}</div>
+        <div className={cn(styles.editor, "border")}>{editor}</div>
         <div className={styles.toolSection}>
-          <div className={styles.tools}>{tools}</div>
-          <div className={styles.info}>{info}</div>
+          <div className={cn(styles.tools, "border")}>{tools}</div>
+          <div className={cn(styles.info, "border")}>{info}</div>
         </div>
       </div>
     </div>
