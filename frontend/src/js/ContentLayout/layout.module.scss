@@ -18,7 +18,7 @@
 }
 
 .editor {
-  flex-basis: 70%;
+  flex-basis: 60%;
   overflow: auto;
 }
 
@@ -52,5 +52,8 @@
   }
   .info {
     flex-basis: auto;
+  }
+  .editor {
+    flex-basis: 70%;
   }
 }
