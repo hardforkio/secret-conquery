@@ -7,7 +7,11 @@ import Content from "./Content";
 const App: FunctionComponent<any> = props => {
   useStartup();
 
-  return <>{[<Content {...props} />, <SnackMessage />]}</>;
+  return (
+    <div className="position-relative">
+      {[<Content {...props} />, <SnackMessage />]}
+    </div>
+  );
 };
 
 export default App;
