@@ -3,8 +3,8 @@ Please check touch behaviour only on a real tablet. See below.
 
 ## Deployments
 
-- [Version fixed by Hardfork](https://conquery.hardfork.io) (redeploys automatically on every commit to `master`)
-- [Version prior to work by Hardfork](https://deliverable.conquery.hardfork.io) (redeploys automatically on every commit to `deliverable`)
+- [Version fixed by Hardfork](https://conquery.hardfork.io) (redeploys automatically on every commit to `deliverable`)
+- [Version prior to work by Hardfork](https://original.conquery.hardfork.io) (redeploys automatically on every commit to `original`)
 - Staging deployments automatically for each PR, see PRs, check "netlify"
 
 ## Log of work by Hardfork
