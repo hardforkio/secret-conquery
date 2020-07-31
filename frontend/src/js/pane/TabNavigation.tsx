@@ -9,7 +9,6 @@ const Root = styled("div")`
   padding: 0 20px;
   background-color: white;
   display: flex;
-  overflow: hidden:
   align-items: flex-start;
 `;
 
@@ -21,7 +20,6 @@ const Headline = styled("h2")<{ active: boolean }>`
   letter-spacing: 1px;
   line-height: 38px;
   text-transform: uppercase;
-  flex-shrink: 0;
 
   transition: color ${({ theme }) => theme.transitionTime},
     border-bottom ${({ theme }) => theme.transitionTime};
@@ -54,6 +52,7 @@ const TabNavigation: React.FC<PropsT> = props => {
       <Root>
         {Object.values(props.tabs).map(({ label, key }) => (
           <Headline
+            className="text-truncate"
             key={key}
             active={props.activeTab === key}
             onClick={() => {
