@@ -3,6 +3,7 @@ import T from "i18n-react";
 import styled from "@emotion/styled";
 import { connect } from "react-redux";
 import DatasetSelector from "../dataset/DatasetSelector";
+import { Col, Row } from "reactstrap";
 
 const Root = styled("header")`
   background-color: ${({ theme }) => theme.col.graySuperLight};
@@ -34,15 +35,27 @@ type PropsType = {
 class Header extends React.Component<PropsType> {
   render() {
     return (
-      <Root className="align-items-center d-flex w-100 justify-content-between p-2">
-        <div className="d-none d-sm-flex align-items-center">
-          <Logo title={this.props.version} />
+      <Row
+        noGutters
+        tag={Root}
+        className="align-items-center d-flex w-100 justify-content-between p-2"
+      >
+        <Col xs={0} sm={6} className="align-items-center d-flex">
+          <div className="d-none d-sm-block">
+            <Logo title={this.props.version} />
+          </div>
           <div className="d-none d-md-block">
             <Headline className="px-2 my-0">{T.translate("headline")}</Headline>
           </div>
-        </div>
-        <DatasetSelector />
-      </Root>
+        </Col>
+        <Col
+          sm={{ size: 6 }}
+          md={{ size: 4, offset: 2 }}
+          lg={{ size: 3, offset: 3 }}
+        >
+          <DatasetSelector />
+        </Col>
+      </Row>
     );
   }
 }
