@@ -118,7 +118,7 @@ const QueryEditorDropzone: React.FC<PropsT> = ({
             <TextInitial>
               <h2>{T.translate("dropzone.explanation")}</h2>
               <Row>
-                <ArrowRight icon="arrow-right" />
+                <ArrowRight className="d-none d-lg-block" icon="arrow-right" />
                 <div>
                   <p>{T.translate("dropzone.drop")}</p>
                   <ul>
