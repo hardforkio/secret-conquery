@@ -30,7 +30,7 @@ not using emotionjs and also remove / change some styles done with emotionjs. Th
  scope for the challenge and reduced our QA to devices with the lowest resolution of 768px. Also we do not see users 
  analyze large datasets of public health insurers on their mobile phones. Looks like a privacy issue to us.
 - The app (especially drag and drop) does not work in the "tablet emulation" in Chrome. That is in order. It works on the actual mobile device. **You have to test it with a real device.** In our opinion it is not in order to create more code and weird workarounds to make these previews work more nicely. The touch emulation in Chrome on desktop is simply broken.
-- The ratio between the editor pane and the tools pane might be worth discussing. Currently, it is 70/30. Maybe 60/40 is better. If one wants a different ratio, this can be set to other values quickly in future iterations. Same holds of other ratios. 
+- The ratio between the editor pane and the tools pane might be worth discussing. Currently, it is 70/30 in landscape and 60/40 in portrait. If one wants a different ratio, this can be set to other values quickly in future iterations. Same holds of other ratios. 
 
 **Work done to prepare the codebase and enable productive software development**
 - [#2](https://github.com/hardforkio/secret-conquery/pull/2), [#4](https://github.com/hardforkio/secret-conquery/pull/4), [#35](https://github.com/hardforkio/secret-conquery/pull/35): We added CI to enforce our very strict linting rules, passing of tests and error free compilage of the
