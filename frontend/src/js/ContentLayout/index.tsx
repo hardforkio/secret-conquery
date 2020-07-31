@@ -18,7 +18,7 @@ export const ContentLayout: React.FC<ContentLayoutProps> = ({
   tools
 }) => (
   <Div100vh>
-    <div className={styles.outer}>
+    <div className={cn(styles.outer, "position-relative")}>
       <div className={styles.menu}>{menu}</div>
       <div className={styles.content}>
         <div className={cn(styles.editor, "border")}>{editor}</div>
