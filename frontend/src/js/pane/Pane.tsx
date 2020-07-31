@@ -15,7 +15,7 @@ const Pane = (props: PropsType) => {
   return (
     <div className="h-100 d-flex flex-column">
       <PaneTabNavigation paneType={paneType} />
-      <div className="flex-grow-1 overflow-auto d-flex flex-column">
+      <div className="flex-grow-1 overflow-auto d-flex flex-column position-relative">
         {props.children}
       </div>
     </div>
